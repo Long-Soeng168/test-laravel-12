@@ -16,7 +16,7 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 
 const formSchema = z.object({
-    name_7152925923: z.unknown(),
+    name_7152925923: z.boolean(),
     name_6688636024: z.string(),
     name_9932906773: z.string().min(1),
     name_8103330897: z.string(),
