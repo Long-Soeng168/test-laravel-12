@@ -54,7 +54,7 @@ export function MyProgress() {
         </div>
 
         <div className="mt-6">
-            <button className="bg-gradient text-white px-6 py-2 rounded-full font-semibold text-lg">Learn More</button>
+            <button className="bg-gradient bg-gradient-hover hover:cursor-pointer text-white px-6 py-2 rounded-full text-lg">Learn More</button>
         </div>
     </div>
   )
