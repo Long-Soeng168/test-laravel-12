@@ -8,8 +8,8 @@ import { Search } from 'lucide-react';
 
 const welcome = () => {
     return (
-        <div >
-            <div className="mx-auto mt-5 max-w-screen-2xl px-10 md:px-20">
+        <div>
+            <div className="hidden lg:block mx-auto mt-5 max-w-screen-2xl px-10 md:px-20">
                 {/* Header  */}
                 <div className="flex items-center justify-between gap-5">
                     <div className="flex-1/2">
@@ -18,20 +18,20 @@ const welcome = () => {
                     <div>
                         <div className="grid grid-cols-3 justify-end gap-5">
                             <div className="flex items-center justify-end gap-2">
-                                <img src="assets/images/location.png" className="h-10 w-10"></img>
+                                <img src="assets/images/location.png" className="h-7 w-7"></img>
                                 <p className="text-sm">
                                     <strong className="text-base">Address</strong> <br /> AP-1151, Aphivath BLV, Dermkor, Chongva, Chroy Changva.
                                     Phnom Penh, Cambodia
                                 </p>
                             </div>
                             <div className="flex items-center justify-end gap-2">
-                                <img src="assets/images/message.png" className="h-10 w-10"></img>
+                                <img src="assets/images/mail.png" className="h-7 w-7"></img>
                                 <p className="text-sm">
                                     <strong className="text-base">E-Mail</strong> <br /> Vectorasoft@gmail.com
                                 </p>
                             </div>
                             <div className="flex items-center justify-end gap-2">
-                                <img src="assets/images/phone.png" className="h-10 w-10"></img>
+                                <img src="assets/images/call.png" className="h-7 w-7"></img>
                                 <p className="text-sm">
                                     <strong className="text-base">Phone</strong> <br /> + 855 12346789
                                 </p>
@@ -42,10 +42,10 @@ const welcome = () => {
                 {/*End Header  */}
             </div>
             {/* Navbar */}
-            <div className="bg-gradient mt-5">
+            <div className="bg-gradient lg:mt-5">
                 <div className="mx-auto flex h-16 max-w-screen-2xl justify-between px-10 md:px-20">
                     <div className="flex items-center">
-                        <div className="hidden md:flex md:space-x-8">
+                        <div className="hidden lg:flex md:space-x-8">
                             <a href="#" className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-white">
                                 Home
                             </a>
@@ -220,7 +220,7 @@ const welcome = () => {
             {/*My Project */}
 
             {/* Testmonial */}
-            <div className="py-2 sm:py-10">
+            <div>
                 <div className="bg-blue-100 py-2 sm:py-10 dark:bg-blue-900">
                     <div className="container mx-auto px-4">
                         <h2 className="mb-2 text-center sm:mb-4 dark:text-white">Testimonial</h2>
@@ -273,21 +273,21 @@ const welcome = () => {
 
             {/* Partner */}
             <div className="bg-gradient">
-                <div className="mx-auto grid max-w-screen-2xl grid-cols-2 items-center justify  gap-8 px-10 text-gray-500 sm:grid-cols-3 sm:gap-12 md:px-20 lg:grid-cols-5 dark:text-gray-400">
+                <div className="justify mx-auto grid max-w-screen-2xl grid-cols-2 items-center gap-8 px-10 text-gray-500 sm:grid-cols-3 sm:gap-12 md:px-20 lg:grid-cols-5 dark:text-gray-400">
                     <a href="#" className="flex h-32 w-32 items-center justify-center p-2">
-                        <img src="assets/images/1.png" alt="Logo 1"  />
+                        <img src="assets/images/1.png" alt="Logo 1" />
                     </a>
                     <a href="#" className="flex h-32 w-32 items-center justify-center p-2">
-                        <img src="assets/images/2.png" alt="Logo 2"  />
+                        <img src="assets/images/2.png" alt="Logo 2" />
                     </a>
                     <a href="#" className="flex h-32 w-32 items-center justify-center p-2">
-                        <img src="assets/images/3.png" alt="Logo 3"  />
+                        <img src="assets/images/3.png" alt="Logo 3" />
                     </a>
                     <a href="#" className="flex h-32 w-32 items-center justify-center p-2">
-                        <img src="assets/images/4.png" alt="Logo 4"  />
+                        <img src="assets/images/4.png" alt="Logo 4" />
                     </a>
                     <a href="#" className="flex h-32 w-32 items-center justify-center p-2">
-                        <img src="assets/images/5.png" alt="Logo 5"  />
+                        <img src="assets/images/5.png" alt="Logo 5" />
                     </a>
                 </div>
             </div>
@@ -295,69 +295,113 @@ const welcome = () => {
             {/*End Partner */}
 
             {/* Footer */}
-            <footer className="bg-gradient-to-b from-blue-100 to-white py-10">
-  <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-    <div>
-      <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-        <img src="assets/images/logo.png" alt="Logo" className="h-8 mr-2"/>
-      </h2>
-      <p className="text-gray-600 mt-3">Vectorasoft is a leading provider of business and educational software solutions, dedicated to transforming the way organizations operate.</p>
-      <div className="flex space-x-3 mt-4">
-        <a href="#" className="p-2 bg-white rounded-full hover:bg-gray-300"><img src='assets/images/facebook.png' className='w-5 h-5' /></a>
-        <a href="#" className="p-2 bg-white rounded-full hover:bg-gray-300"><img src='assets/images/linkedin.png' className='w-5 h-5' /></a>
-        <a href="#" className="p-2 bg-white rounded-full hover:bg-gray-300"><img src='assets/images/telegram.png' className='w-5 h-5' /></a>
-      </div>
-    </div>
+            <footer className="bg-gradient-to-b from-blue-100 to-white pt-10 pb-5">
+                <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-8 px-10 md:grid-cols-4 md:px-20">
+                    <div>
+                        <h2 className="flex items-center text-2xl font-bold text-gray-900">
+                            <img src="assets/images/logo.png" alt="Logo" className="mr-2 h-8" />
+                        </h2>
+                        <p className="mt-3 text-gray-600">
+                            Vectorasoft is a leading provider of business and educational software solutions, dedicated to transforming the way
+                            organizations operate.
+                        </p>
+                        <div className="mt-4 flex space-x-3">
+                            <a href="#" className="rounded-full bg-white p-4 hover:bg-gray-100">
+                                <img src="assets/images/facebook.png" className="h-5 w-5" />
+                            </a>
+                            <a href="#" className="rounded-full bg-white p-4 hover:bg-gray-100">
+                                <img src="assets/images/linkedin.png" className="h-5 w-5" />
+                            </a>
+                            <a href="#" className="rounded-full bg-white p-4 hover:bg-gray-100">
+                                <img src="assets/images/telegram.png" className="h-5 w-5" />
+                            </a>
+                        </div>
+                    </div>
 
-    <div>
-      <h3 className="text-xl font-semibold text-gray-900">IT Services</h3>
-      <ul className="mt-4 space-y-2 text-gray-600">
-        <li><a href="#" className="hover:text-blue-600">Software Development</a></li>
-        <li><a href="#" className="hover:text-blue-600">Web Development</a></li>
-        <li><a href="#" className="hover:text-blue-600">Analytic Solutions</a></li>
-        <li><a href="#" className="hover:text-blue-600">Cloud and DevOps</a></li>
-        <li><a href="#" className="hover:text-blue-600">Product Design</a></li>
-      </ul>
-    </div>
+                    <div>
+                        <h3 className="text-xl font-semibold text-gray-900">IT Services</h3>
+                        <ul className="mt-4 space-y-4 text-gray-600">
+                            <li>
+                                <a href="#" className="hover:text-blue-600">
+                                    Delivery Management System
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:text-blue-600">
+                                    HR Management System
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:text-blue-600">
+                                    Loan Management System
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:text-blue-600">
+                                    School Management System
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
-    <div>
-      <h3 className="text-xl font-semibold text-gray-900">Contact Info</h3>
-      <ul className="mt-4 space-y-2 text-gray-600">
-        <li><i className="fas fa-map-marker-alt text-blue-600"></i> 374 FA Tower, William S Blvd, IL, USA</li>
-        <li><i className="fas fa-phone text-blue-600"></i> (+880) 155-69569</li>
-        <li><i className="fas fa-envelope text-blue-600"></i> info@yourmail.com</li>
-        <li><i className="fas fa-clock text-blue-600"></i> Opening Hours: 10:00 - 18:00</li>
-      </ul>
-    </div>
+                    <div>
+                        <h3 className="text-xl font-semibold text-gray-900">Contact Info</h3>
+                        <ul className="mt-4 space-y-2 text-gray-600">
+                            <li className='flex gap-4 items-center mt-4'>
+                                <i className="fas fa-map-marker-alt text-blue-600">
+                                </i>
+                                    <img src='assets/images/location.png' className='w-7 h-7' />
+                                AP-1151, Aphivath BLV, Dermkor, Chongva, Chroy Changva. Phnom Penh, Cambodia
+                            </li>
+                            <li className='flex gap-4 items-center mt-5'>
+                                <i className="fas fa-phone text-blue-600"></i> <img src='assets/images/call.png' className='w-7 h-7' /> 012 528 131
+                            </li>
+                            <li className='flex gap-4 items-center mt-5'>
+                                <i className="fas fa-envelope text-blue-600"></i> <img src='assets/images/mail.png' className='w-7 h-7' /> vectorasoft@gmail.com
+                            </li>
+                            <li className='flex gap-4 items-center mt-5'>
+                                <i className="fas fa-clock text-blue-600"></i> <img src='assets/images/clock.png' className='w-7 h-7' /> Opening Hours: 8:00 - 5:00
+                            </li>
+                        </ul>
+                    </div>
 
-    <div>
-      <h3 className="text-xl font-semibold text-gray-900">Newsletter</h3>
-      <p className="text-gray-600 mt-3">Subscribe to get the latest updates.</p>
-      <div className="mt-4 flex">
-        <input type="email" placeholder="Your email address" className="w-full px-4 py-2 border rounded-l-lg"/>
-        <button className="bg-gradient text-white px-4 py-2 rounded-r-lg"><img src='assets/images/telegram.png' className='w-5 h-5' /></button>
-      </div>
-    </div>
-  </div>
+                    <div>
+                        <h3 className="text-xl font-semibold text-gray-900">Newsletter</h3>
+                        <p className="mt-3 text-gray-600">Subscribe to get the latest updates.</p>
+                        <div className="absolute mt-4 flex">
+                            <input type="email" placeholder="Your email address" className="w-full rounded-full border bg-white px-4 py-2" />
+                            <button className="bg-gradient relative -left-10 rounded-full px-4 py-2 text-white hover:cursor-pointer">
+                                <img src="assets/images/paper.png" className="h-5 w-5" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-  <div className="text-center text-gray-600 mt-8 border-t pt-4">
-    <p>&copy; 2025 Copyright @Vectorasoft | Designed by Vectorasoft
-
-</p>
-    <div className="mt-3 flex justify-center space-x-4">
-      <a href="#" className="hover:text-blue-600">Home</a>
-      <span>•</span>
-      <a href="#" className="hover:text-blue-600">About</a>
-      <span>•</span>
-      <a href="#" className="hover:text-blue-600">Services</a>
-      <span>•</span>
-      <a href="#" className="hover:text-blue-600">Blogs</a>
-      <span>•</span>
-      <a href="#" className="hover:text-blue-600">Contect</a>
-
-    </div>
-  </div>
-</footer>
+                <div className="mx-auto mt-8 flex max-w-screen-2xl justify-between border-t px-10 pt-4 text-center text-gray-600 md:px-20">
+                    <p>&copy; 2025 Copyright @Vectorasoft | Designed by Vectorasoft</p>
+                    <div className="mt-3 flex justify-center space-x-4">
+                        <a href="#" className="hover:text-blue-600">
+                            Home
+                        </a>
+                        <span>•</span>
+                        <a href="#" className="hover:text-blue-600">
+                            About
+                        </a>
+                        <span>•</span>
+                        <a href="#" className="hover:text-blue-600">
+                            Services
+                        </a>
+                        <span>•</span>
+                        <a href="#" className="hover:text-blue-600">
+                            Blogs
+                        </a>
+                        <span>•</span>
+                        <a href="#" className="hover:text-blue-600">
+                            Contect
+                        </a>
+                    </div>
+                </div>
+            </footer>
 
             {/*End Footer */}
         </div>
