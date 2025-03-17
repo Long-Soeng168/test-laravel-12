@@ -9,6 +9,9 @@ Route::get('/', function () {
 Route::get('/blog', function () {
     return Inertia::render('blog');
 })->name('blog');
+Route::get('/contact', function () {
+    return Inertia::render('contact');
+})->name('contact');
 Route::get('/normalblade', function () {
     return view('normalblade');
 })->name('normalblade');

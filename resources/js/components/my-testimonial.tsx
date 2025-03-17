@@ -33,11 +33,11 @@ export function MyTestimonial() {
     ];
 
     return (
-        <Carousel className="mx-auto  max-w-screen-2xl px-10 md:px-20">
+        <Carousel className="mx-auto  max-w-screen-2xl px-4 sm:px-10 md:px-20">
             <CarouselContent className="-ml-1 ">
                 {image.map((item) => (
-                    <CarouselItem key={item.id} className="pl-6 md:basis-1/2 lg:basis-1/3 ">
-                        <div className="mx-auto flex max-w-xl flex-col overflow-hidden rounded">
+                    <CarouselItem key={item.id} className="md:pl-6 md:basis-1/2 lg:basis-1/3 ">
+                        <div className="mx-auto flex max-w-xl flex-col overflow-hidden rounded-md">
                             <div>
                                 <img
                                     className="w-full  object-cover aspect-square hover:scale-110 transition-all duration-500"
@@ -45,7 +45,7 @@ export function MyTestimonial() {
                                     alt="image"
                                 />
                             </div>
-                            <div className="relative m-10 -mt-16 bg-white px-10 pt-5 pb-16">
+                            <div className="relative m-10 -mt-16 bg-white px-4 sm:px-10 pt-5 pb-16">
                                 <p
                                     className="mb-2 inline-block text-lg font-semibold transition duration-500 ease-in-out hover:text-indigo-600"
                                 >
@@ -62,8 +62,8 @@ export function MyTestimonial() {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className='left-4' />
+            <CarouselNext className='right-4' />
         </Carousel>
     );
 }

@@ -8,7 +8,7 @@ import { AlignRight, Search } from 'lucide-react';
 
 const blog = () => {
     return (
-        <div className="mb-10">
+        <div>
             <div className="mx-auto mt-5 hidden max-w-screen-2xl px-10 md:px-20 lg:block">
                 {/* Header  */}
                 <div className="flex items-center justify-between gap-5">
@@ -134,205 +134,73 @@ const blog = () => {
             <MyBlogSlide />
             {/* End Slide */}
             {/* content */}
-            <div className="mx-auto max-w-screen-2xl px-4 sm:px-10 md:px-20">
-                <div className='flex flex-col-reverse lg:flex-row gap-15 mt-10'>
-                    {/* Card */}
-                    <div className="flex-1 space-y-10">
-                        {/*Card 1 */}
-                        <div className="overflow-hidden rounded-2xl  bg-white shadow-lg">
-                            {/* Image Section */}
-
-                            <div className="relative p-4">
-                                <img src="assets/images/imageBlog1.png" alt="Blog Image" className="aspect-video w-full object-cover rounded-md" />
-                                <span className="bg-gradient bg-gradient-hover absolute right-8 bottom-8 rounded-full px-3 py-1 text-sm text-white shadow-md">
-                                    Application Testing
-                                </span>
-                            </div>
-
-                            {/* Content Section */}
-                            <div className="p-6">
-                                <h2 className="text-2xl font-bold text-gray-900">Open Source Job Report Show More Openings Fewer</h2>
-
-                                {/* Meta Information */}
-                                <div className="mt-3 flex items-center space-x-4 text-sm text-gray-500">
-                                    <div className="flex items-center">
-                                        <img src="assets/images/calendar.png" className="mr-1 h-4 w-4" />
-                                        <span>January 10, 2020</span>
+            <div className="mx-auto max-w-screen-2xl px-4 sm:px-10 md:px-20 mt-10">
+                <div className="justify-cente flex min-h-screen items-center">
+                    <div className="flex flex-col lg:flex-row w-full overflow-hidden">
+                        {/* Left Section */}
+                        <div className="bg-gradient w-full lg:w-1/3 rounded-md p-8 text-white">
+                            <h2 className="mt-2 text-2xl font-bold">Contact Us</h2>
+                            <div className="mt-6 space-y-4">
+                                <div className="flex items-center space-x-3">
+                                    <img src="assets/images/mail.png" className="h-7 w-7" />
+                                    <div>
+                                        <p className="font-semibold">Email:</p>
+                                        <p>vectorasoft@gmail.com</p>
                                     </div>
-                                    {/* <div className="flex items-center">
-                                        <img src="assets/images/user-icon.png" className="mr-1 h-4 w-4" />
-                                        <span>admin</span>
-                                    </div> */}
                                 </div>
-
-                                {/* Description */}
-                                <p className="mt-3 text-gray-600">
-                                    We denounce with righteous indignation and dislike men who are so beguiled and demo realized by the charms of
-                                    pleasure of the moment, so blinded by desire, that...
-                                </p>
-
-                                {/* Read More Link */}
-                                <div className="mt-4">
-                                    <a href="#" className="flex items-center font-semibold text-blue-600 hover:underline">
-                                        Continue Reading <span className="ml-2">→</span>
-                                    </a>
+                                <div className="flex items-center space-x-3">
+                                    <img src="assets/images/call.png" className="h-7 w-7" />
+                                    <div>
+                                        <p className="font-semibold">Phone:</p>
+                                        <p>012 528 131</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center space-x-3">
+                                    <img src="assets/images/location (4).png" className="h-7 w-7" />
+                                    <div>
+                                        <p className="font-semibold">Address:</p>
+                                        <p>AP-1151, Aphivath BLV, Dermkor, Chongva, Chroy Changva. Phnom Penh, Cambodia</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        {/*end Card 1 */}
-                        {/*Card 2 */}
-                        <div className="overflow-hidden rounded-2xl  bg-white shadow-lg">
-                            {/* Image Section */}
 
-                            <div className="relative p-4">
-                                <img src="assets/images/imageBlog2.png" alt="Blog Image" className="aspect-video w-full object-cover rounded-md" />
-                                <span className="bg-gradient bg-gradient-hover absolute right-8 bottom-8 rounded-full px-3 py-1 text-sm text-white shadow-md">
-                                    Application Testing
-                                </span>
-                            </div>
-
-                            {/* Content Section */}
-                            <div className="p-6">
-                                <h2 className="text-2xl font-bold text-gray-900">Open Source Job Report Show More Openings Fewer</h2>
-
-                                {/* Meta Information */}
-                                <div className="mt-3 flex items-center space-x-4 text-sm text-gray-500">
-                                    <div className="flex items-center">
-                                        <img src="assets/images/calendar.png" className="mr-1 h-4 w-4" />
-                                        <span>January 10, 2020</span>
-                                    </div>
-                                    {/* <div className="flex items-center">
-                                        <img src="assets/images/user-icon.png" className="mr-1 h-4 w-4" />
-                                        <span>admin</span>
-                                    </div> */}
-                                </div>
-
-                                {/* Description */}
-                                <p className="mt-3 text-gray-600">
-                                    We denounce with righteous indignation and dislike men who are so beguiled and demo realized by the charms of
-                                    pleasure of the moment, so blinded by desire, that...
-                                </p>
-
-                                {/* Read More Link */}
-                                <div className="mt-4">
-                                    <a href="#" className="flex items-center font-semibold text-blue-600 hover:underline">
-                                        Continue Reading <span className="ml-2">→</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        {/*end Card 2 */}
-                        {/*Card 2 */}
-                        <div className="overflow-hidden rounded-2xl  bg-white shadow-lg">
-                            {/* Image Section */}
-
-                            <div className="relative p-4">
-                                <img src="assets/images/imageBlog3.png" alt="Blog Image" className="aspect-video w-full object-cover rounded-md" />
-                                <span className="bg-gradient bg-gradient-hover absolute right-8 bottom-8 rounded-full px-3 py-1 text-sm text-white shadow-md">
-                                    Application Testing
-                                </span>
-                            </div>
-
-                            {/* Content Section */}
-                            <div className="p-6">
-                                <h2 className="text-2xl font-bold text-gray-900">Open Source Job Report Show More Openings Fewer</h2>
-
-                                {/* Meta Information */}
-                                <div className="mt-3 flex items-center space-x-4 text-sm text-gray-500">
-                                    <div className="flex items-center">
-                                        <img src="assets/images/calendar.png" className="mr-1 h-4 w-4" />
-                                        <span>January 10, 2020</span>
-                                    </div>
-                                    {/* <div className="flex items-center">
-                                        <img src="assets/images/user-icon.png" className="mr-1 h-4 w-4" />
-                                        <span>admin</span>
-                                    </div> */}
-                                </div>
-
-                                {/* Description */}
-                                <p className="mt-3 text-gray-600">
-                                    We denounce with righteous indignation and dislike men who are so beguiled and demo realized by the charms of
-                                    pleasure of the moment, so blinded by desire, that...
-                                </p>
-
-                                {/* Read More Link */}
-                                <div className="mt-4">
-                                    <a href="#" className="flex items-center font-semibold text-blue-600 hover:underline">
-                                        Continue Reading <span className="ml-2">→</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        {/*end Card 2 */}
-                    </div>
-                    {/*End Card */}
-                    {/* Right Contect */}
-                        <div className="max-w-full lg:mx-auto lg:max-w-sm space-y-15">
-                            {/* Search Box */}
-                            <div className="rounded-xl bg-white p-4 shadow-lg">
-                                <div className="relative">
+                        {/* Right Section */}
+                        <div className="w-full lg:w-2/3 py-8 lg:p-8">
+                            <h4 className="text-sm text-blue-900 uppercase">Get in Touch</h4>
+                            <h2 className="mt-1 text-2xl font-bold">Fill The Form Below</h2>
+                            <form className="mt-6 space-y-4">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <input type="text" placeholder="Name" className="w-full rounded bg-gray-100 p-3 outline-none" />
+                                    <input type="email" placeholder="E-Mail" className="w-full rounded bg-gray-100 p-3 outline-none" />
                                     <input
                                         type="text"
-                                        placeholder="Searching..."
-                                        className="w-full rounded-lg border border-gray-300 py-2 pr-10 pl-4 outline-none focus:border-blue-900 focus:ring focus:ring-blue-900"
+                                        placeholder="Phone Number"
+                                        className="col-span-2 w-full rounded bg-gray-100 p-3 outline-none"
                                     />
-                                    <span className="absolute top-1/2 right-3 -translate-y-1/2 transform text-gray-400"><Search/></span>
                                 </div>
-                            </div>
-
-                            {/* Latest Posts Section */}
-                            <div className="rounded-xl bg-white p-4 shadow-lg">
-                                <h3 className="text-lg font-semibold text-gray-900">Latest Posts</h3>
-                                <div className="my-2 w-12 border-b-4 border-blue-900"></div>
-
-                                <div className="space-y-4">
-                                    {[
-                                        'Pen Source Job Report Show More Openings Fewer',
-                                        'Tech Products That Makes Its Easier to Stay at Home',
-                                        'Necessity May Give Us Your Best Virtual Court System',
-                                        'Servo Project Joins The Linux Foundation Fold Desco',
-                                    ].map((post, index) => (
-
-                                        <div key={index} className="flex items-center space-x-3 space-y-3">
-
-                                            <img src="assets/images/imageBlog2.png" alt="Thumbnail" className="h-14 w-14 rounded-lg object-cover" />
-                                            <div>
-                                                <p className="text-sm font-medium text-gray-800">{post}</p>
-                                                <span className="flex items-center text-xs text-gray-500">📅 January 21, 2020</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Categories Section */}
-                            <div className="rounded-xl bg-white p-4 shadow-lg">
-                                <h3 className="text-lg font-semibold text-gray-900">Categories</h3>
-                                <div className="my-2 w-12 border-b-4 border-blue-900"></div>
-
-                                <ul className="space-y-4 text-gray-800">
-                                    {[
-                                        'Application Testing',
-                                        'Artificial Intelligence',
-                                        'Digital Technology',
-                                        'IT Services',
-                                        'Software Development',
-                                        'Web Development',
-                                    ].map((category, index) => (
-                                        <li key={index} className="cursor-pointer border-b border-gray-200 pb-2 last:border-none hover:text-blue-600">
-                                            {category}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                <textarea placeholder="Your message Here" className="min-h-32 w-full rounded bg-gray-100 p-3 outline-none"></textarea>
+                                <button className="bg-gradient rounded-full px-6 py-3 font-semibold text-white">Submit Now</button>
+                            </form>
                         </div>
-                    {/*End Right Contect */}
+                    </div>
                 </div>
             </div>
             {/*End content */}
 
-             {/* Footer */}
-             <footer className="bg-gradient-to-b from-blue-100 to-white mt-10 pt-10 pb-5">
+            <div className="flex items-center justify-center">
+                <div className="w-full rounded-lg">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5909802997454!2d104.922343!3d11.5355045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310950da4db34301%3A0x61232833a62cac36!2sRoyal%20University%20Of%20Law%20And%20Economics!5e0!3m2!1sen!2s!4v1710332324552!5m2!1sen!2s"
+                        className="h-[500px] w-full rounded-lg border border-gray-300"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
+            </div>
+
+            {/* Footer */}
+            <footer className="bg-gradient-to-b from-blue-100 to-white pt-10 pb-5">
                 <div className="mx-auto max-w-screen-2xl px-5 md:px-10">
                     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                         {/* Logo & Description */}
@@ -436,7 +304,7 @@ const blog = () => {
                                 Services
                             </a>
                             <span>•</span>
-                            <a href="#" className="text-blue-600 underline underline-offset-4 offset-2">
+                            <a href="#" className="offset-2 text-blue-600 underline underline-offset-4">
                                 Blogs
                             </a>
                             <span>•</span>
