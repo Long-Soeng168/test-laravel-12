@@ -8,13 +8,13 @@ const MyMenu = () => {
                 Home
             </Link>
             <Link
-                href="#"
+                href="/about"
                 className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300"
             >
                 About
             </Link>
             <Link
-                href="#"
+                href="/services"
                 className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300"
             >
                 Services

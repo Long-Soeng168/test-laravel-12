@@ -65,7 +65,7 @@ const MyBlog = () => {
 
                         {/* Read More Link */}
                         <div className="mt-4">
-                            <a href="#" className="flex items-center font-semibold text-blue-600 hover:underline">
+                            <a href={`/detail/${item.id}`} className="flex items-center font-semibold text-blue-600 hover:underline">
                                 Continue Reading <span className="ml-2">→</span>
                             </a>
                         </div>

@@ -41,13 +41,15 @@ export const AnimatedTestimonials = ({
     return Math.floor(Math.random() * 21) - 10;
   };
   return (
-    <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 md:px-20 antialiased font-sans py-20">
+    <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 md:px-20 antialiased font-sans py-20 overflow-hidden">
+
       <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
           <div className="relative h-[400px] w-full">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
+                className="absolute inset-0 origin-bottom overflow-hidden"
                   key={testimonial.src}
                   initial={{
                     opacity: 0,
@@ -75,7 +77,7 @@ export const AnimatedTestimonials = ({
                     duration: 0.4,
                     ease: "easeInOut",
                   }}
-                  className="absolute inset-0 origin-bottom"
+                  className="absolute inset-0 origin-bottom "
                 >
                   <img
                     src={testimonial.src}
