@@ -1,4 +1,3 @@
-import { CalendarCheck } from "lucide-react";
 
 const MyBlog = () => {
     const image = [
@@ -14,7 +13,7 @@ const MyBlog = () => {
             title: 'It Services',
             short: 'Tech Products That Makes Its Easier to Stay at Home',
             des: 'We denounce with righteous indige nation and dislike men who are so beguiled...',
-            src: 'assets/images/image1.png',
+            src: 'assets/images/imageBlog1.png',
             post:' 20 December 2020',
             id: 2,
         },
@@ -30,34 +29,49 @@ const MyBlog = () => {
     ];
 
     return (
-        <div className="max-w-screen-2xl mx-auto px-10 md:px-20">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 md:px-20">
             <div className="grid gap-8 p-2 sm:grid-cols-2 lg:grid-cols-3 xl:p-5">
                 {image?.map((item)=>(
-                    <a href="#" key={item.id} className="group relative flex flex-col justify-between rounded border bg-white shadow-md transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105 shadow-primary-400/50">
-                    <div className="relative">
-                        <div className="relative aspect-square w-full">
-                            <img
-                                className="w-full h-full rounded object-cover"
-                                src={item.src}
-                                alt="Writey A.I"
-                            />
-                            <div className="absolute right-0 bottom-0 left-0 bg-gradient to-gray-500 p-4 text-white">
-                                <h2 className="text-xl font-semibold">{item.title}</h2>
-                                <div className="flex items-center gap-2 mt-2"><CalendarCheck color="white"/> <h2 className="text-sm">{item.post}</h2></div>
-                            </div>
-                        </div>
+                    <div key={item.id} className="overflow-hidden rounded-2xl  bg-white shadow-lg">
+                    {/* Image Section */}
+
+                    <div className="relative p-4">
+                        <img src={item.src} alt="Blog Image" className="aspect-video w-full object-cover rounded-md" />
+                        <span className="bg-gradient bg-gradient-hover absolute right-8 bottom-8 rounded-full px-3 py-1 text-sm text-white shadow-md">
+                            {item.title}
+                        </span>
                     </div>
-                    <div className="flex flex-col justify-between gap-3 px-4 py-2">
-                        <p className="text-2xl text-black">
-                        {item.short}
-                        </p>
-                        <p className="flex flex-wrap items-center justify-start gap-2 text-sm line-clamp-2">
+
+                    {/* Content Section */}
+                    <div className="p-6">
+                        <h2 className="text-2xl font-bold text-gray-900">{item.short}</h2>
+
+                        {/* Meta Information */}
+                        <div className="mt-3 flex items-center space-x-4 text-sm text-gray-500">
+                            <div className="flex items-center">
+                                <img src="assets/images/calendar.png" className="mr-1 h-4 w-4" />
+                                <span>January 10, 2020</span>
+                            </div>
+                            {/* <div className="flex items-center">
+                                <img src="assets/images/user-icon.png" className="mr-1 h-4 w-4" />
+                                <span>admin</span>
+                            </div> */}
+                        </div>
+
+                        {/* Description */}
+                        <p className="mt-3 text-gray-600">
                         {item.des}
                         </p>
-                        <a href="#" className="font-bold text-blue-900 hover:underline"> Read More </a>
 
+                        {/* Read More Link */}
+                        <div className="mt-4">
+                            <a href={`/detail/${item.id}`} className="flex items-center font-semibold text-blue-600 hover:underline">
+                                Continue Reading <span className="ml-2">→</span>
+                            </a>
+                        </div>
                     </div>
-                </a>
+                </div>
+
                 ))}
 
             </div>

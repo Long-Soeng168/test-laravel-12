@@ -29,10 +29,10 @@ export function MyContentInProject() {
     ];
 
     return (
-        <Carousel className="mx-auto w-full max-w-screen-2xl px-10 md:px-20">
-            <CarouselContent className="-ml-1">
+        <Carousel className="w-full  sm:px-10 md:px-20">
+            <CarouselContent className="">
                 {image.map((item) => (
-                    <CarouselItem key={item.id} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3">
                         <div className="w-full group/card">
                             <div className="relative mx-auto flex h-96 cursor-pointer flex-col justify-end overflow-hidden rounded-md bg-black p-4 shadow-xl">
                                 <img
@@ -53,8 +53,8 @@ export function MyContentInProject() {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className='left-0 md:left-20'/>
+            <CarouselNext className='right-0 md:right-20'/>
         </Carousel>
     );
 }

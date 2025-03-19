@@ -1,5 +1,3 @@
-"use client";
-
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
@@ -43,13 +41,15 @@ export const AnimatedTestimonials = ({
     return Math.floor(Math.random() * 21) - 10;
   };
   return (
-    <div className="max-w-screen-2xl mx-auto px-20 antialiased font-sans py-20">
-      <div className="relative grid grid-cols-1 md:grid-cols-2  gap-10">
+    <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 md:px-20 antialiased font-sans py-20 overflow-hidden">
+
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
           <div className="relative h-[400px] w-full">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
+                className="absolute inset-0 origin-bottom overflow-hidden"
                   key={testimonial.src}
                   initial={{
                     opacity: 0,
@@ -63,8 +63,8 @@ export const AnimatedTestimonials = ({
                     z: isActive(index) ? 0 : -100,
                     rotate: isActive(index) ? 0 : randomRotateY(),
                     zIndex: isActive(index)
-                      ? 999
-                      : testimonials.length + 2 - index,
+                      ? 49
+                      : 48 - index,
                     y: isActive(index) ? [0, -80, 0] : 0,
                   }}
                   exit={{
@@ -77,21 +77,19 @@ export const AnimatedTestimonials = ({
                     duration: 0.4,
                     ease: "easeInOut",
                   }}
-                  className="absolute inset-0 origin-bottom"
+                  className="absolute inset-0 origin-bottom "
                 >
                   <img
                     src={testimonial.src}
                     alt={testimonial.name}
-
                     draggable={false}
-                    className="h-full w-full rounded-3xl object-cover object-center"
+                    className="h-full w-full overflow-hidden rounded-3xl object-cover object-center"
                   />
                 </motion.div>
               ))}
             </AnimatePresence>
-
           </div>
-          <div className="flex justify-center mt-10 gap-4 pt-12 md:pt-0">
+          <div className="flex justify-center md:mt-10 gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}
               className="h-7 w-7 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center group/button"
@@ -108,9 +106,7 @@ export const AnimatedTestimonials = ({
         </div>
         <div className="flex justify-between flex-col py-4">
           <MyProgress />
-
         </div>
-
       </div>
     </div>
   );
