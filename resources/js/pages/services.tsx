@@ -1,24 +1,27 @@
-import { MyAboutComponent } from '@/components/my-about-component';
-import MyBlog from '@/components/my-blog';
 import MyMenu from '@/components/my-menu';
-import { MyProject } from '@/components/my-project';
 import { MySearch } from '@/components/my-search';
-import { MySlide } from '@/components/my-slide';
-import { MyTestimonial } from '@/components/my-testimonial';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Link } from '@inertiajs/react';
 import { AlignRight, Search } from 'lucide-react';
 
-const welcome = () => {
-    
+const services = () => {
+    const skills = [
+        { name: 'SOFTWARE DEVELOPMENT', percentage: 92 },
+        { name: 'WEB DEVELOPMENT', percentage: 80 },
+        { name: 'SEO ANALYSIS', percentage: 95 },
+        { name: 'CYBER SECURITY', percentage: 78 },
+    ];
+
     return (
-        <div>
+        <>
             <div className="mx-auto mt-5 hidden max-w-screen-2xl px-10 md:px-20 lg:block">
                 {/* Header  */}
                 <div className="flex items-center justify-between gap-5">
-                    <div className="flex-1/2">
+                    <Link href="/" className="flex-1/2">
                         <img src="assets/images/logo.png" className="w-36"></img>
-                    </div>
+                    </Link>
                     <div>
                         <div className="grid grid-cols-3 justify-end gap-5">
                             <div className="flex items-center justify-end gap-2">
@@ -103,17 +106,14 @@ const welcome = () => {
                             <SheetContent side="left" className="bg-gradient">
                                 <h1 className="mt-5 text-center text-xl text-white">Menu</h1>
                                 <div className="flex flex-col space-y-8 p-4">
-                                    <a href="/" className="offset-2 text-sm font-medium text-white underline underline-offset-4">
+                                    <a href="/" className="offset-2 text-sm font-medium text-white hover:border-blue-900 hover:underline">
                                         Home
                                     </a>
-                                    <a
-                                        href="#"
-                                        className="offset-2 text-sm font-medium text-white underline-offset-4 hover:border-blue-900 hover:underline"
-                                    >
+                                    <a href="/about" className="offset-2 border-blue-900 text-sm font-medium text-white underline underline-offset-4">
                                         About
                                     </a>
                                     <a
-                                        href="#"
+                                        href="/services"
                                         className="offset-2 text-sm font-medium text-white underline-offset-4 hover:border-blue-900 hover:underline"
                                     >
                                         Services
@@ -137,150 +137,110 @@ const welcome = () => {
                 </div>
             </div>
             {/*End Navbar */}
+            <section className="relative pb-0.5 bg-white overflow-hidden text-white">
+                <div className="absolute inset-0 bg-white opacity-50"></div>
+                <div
+                    className="absolute inset-0 aspect-[19/6] bg-cover bg-center"
+                    style={{ backgroundImage: "url('assets/images/contact.png')" }}
+                ></div>
 
-            {/* Slide */}
-            <MySlide />
-            {/*End Slide */}
-
-            {/* About */}
-            <MyAboutComponent />
-            {/*End About */}
-
-            {/* Service */}
-            <div>
-                <div className="bg-blue-100 py-2 sm:py-10 dark:bg-blue-900">
-                    <div className="container mx-auto px-4">
-                        <h2 className="mb-2 text-center sm:mb-4 dark:text-white">Services</h2>
-                        <p className="text-center text-2xl font-bold text-gray-700 sm:text-3xl dark:text-gray-200">Our Best Project</p>
-                    </div>
+                <div className="relative z-10 mx-auto aspect-[19/6] px-4 md:py-32">
+                    <div className="min-h-8">{/* <p className="text-center text-5xl font-bold">About</p> */}</div>
                 </div>
 
-                <div className="relative w-full overflow-hidden leading-none dark:bg-gray-800">
-                    <svg
-                        className="relative block h-[60px] w-[101%] md:h-[150px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1200 120"
-                        preserveAspectRatio="none"
-                    >
+                {/* Decorative Element */}
+                <div className="absolute right-0 bottom-0 left-0">
+                    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
-                            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                            className="fill-blue-100 dark:fill-blue-900"
-                        ></path>
+                            d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+                            fill="white"
+                        />
                     </svg>
                 </div>
+            </section>
 
-                <div className="mx-auto max-w-screen-2xl bg-white px-4 sm:px-10 pt-12 sm:pt-11 md:px-20 dark:bg-gray-800">
-                    <div className="container mx-auto">
-                        <div className="h-full">
-                            <div className="grid gap-14 md:grid-cols-2 md:gap-16">
-                                {[
-                                    {
-                                        title: 'Delivery Management System',
-                                        src: 'assets/images/delivery.png',
-                                        description:
-                                            'is a software tool that streamlines the delivery process by managing orders, optimizing routes, and providing real-time tracking.',
-                                    },
-                                    {
-                                        title: 'HR Management System',
-                                        src: 'assets/images/hr.png',
-                                        description:
-                                            'is a software solution that automates and streamlines various human resource functions. It helps manage employee data, recruitment, payroll, performance evaluations, and benefits administration.',
-                                    },
-                                    {
-                                        title: 'Loan Management System',
-                                        src: 'assets/images/loan.png',
-                                        description:
-                                            'is a software solution designed to manage the lifecycle of loans from origination to repayment. It automates processes such as application processing, credit assessment, disbursement, and collections.',
-                                    },
-                                    {
-                                        title: 'School Management System',
-                                        src: 'assets/images/education.png',
-                                        description:
-                                            'is a software solution designed to manage the school, teachers, students, total fee that students will pay for school.',
-                                    },
-                                ].map((item, index) => (
-                                    <div key={index} className="rounded-xl bg-white p-6 text-center shadow hover:shadow-xl">
-                                        <div className="bg-gradient mx-auto flex h-20 w-20 -translate-y-16 transform items-center justify-center rounded-full hover:shadow-lg hover:shadow-teal-500/40">
-                                            <img src={item.src} alt="icon" className="h-full w-full" />
-                                        </div>
-                                        <h1 className="text-darken mb-3 text-xl font-medium lg:px-14">{item.title}</h1>
-                                        <p className="px-4 text-gray-500">{item.description}</p>
+
+            {/* Hero section */}
+
+            {/* Hero section */}
+            <div className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-10 md:px-20">
+                <div className="mx-auto flex flex-col items-center justify-between gap-10 px-6 lg:flex-row lg:px-20">
+                    <div className="mt-8 w-full text-center lg:mt-0 lg:w-1/2 lg:text-left">
+                        <div className="flex items-center justify-center gap-4 lg:justify-start">
+                            <hr className="h-2 w-10 bg-blue-900" />
+                            <span className="rounded-full bg-blue-100 px-4 py-2 text-sm text-blue-600 uppercase">Service</span>
+                        </div>
+                        <h2 className="mt-8 text-2xl font-bold text-gray-800 sm:text-3xl lg:text-4xl">
+                            We Help to Implement Your Ideas into Automation
+                        </h2>
+                        <p className="mt-6 text-sm text-gray-600 sm:text-base">
+                            We donec pulvinar magna id leoersi pellentesque impered dignissim rhoncus euismod euismod eros vitae best consulting &
+                            financial services theme .
+                        </p>
+                        <p className="mt-4 text-sm text-gray-600 sm:text-base">
+                            Business ipsum dolor sit amet nsectetur cing elit. Suspe ndisse suscipit sagittis leo sit met entum is not estibulum
+                            dignity sim posuere cubilia durae. Leo sit met entum cubilia crae. At vero eos accusamus et iusto odio dignissimos
+                            provident nam libero tempore, cum soluta.
+                        </p>
+                        <a
+                            href="/contact"
+                            className="bg-gradient bg-gradient-hover mt-6 inline-block rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md transition-all sm:text-base"
+                        >
+                            Contact Us
+                        </a>
+                    </div>
+
+                    {/* Image Section */}
+                    <div className="relative flex w-full justify-center lg:w-1/2">
+                        <div className="relative aspect-square w-3/4 overflow-hidden rounded-full shadow-2xl sm:w-1/2 md:w-2/3 lg:w-full">
+                            <img src="assets/images/image1.png" alt="Teamwork" className="aspect-square w-full rounded-full object-cover" />
+                        </div>
+                        {/* Decorative Elements */}
+                        <div className="absolute -bottom-4 -left-6 h-12 w-12 rounded-full bg-blue-300 opacity-50 sm:h-16 sm:w-16"></div>
+                        <div className="absolute right-4 -bottom-6 h-12 w-12 rounded-full bg-blue-300 opacity-30 sm:h-16 sm:w-16"></div>
+                        <div className="absolute -left-6 h-12 w-12 rounded-full bg-blue-300 opacity-50 sm:h-16 sm:w-16"></div>
+                        <div className="absolute right-4 h-12 w-12 rounded-full bg-blue-300 opacity-30 sm:h-16 sm:w-16"></div>
+                    </div>
+                    {/* Content Section */}
+                </div>
+            </div>
+            {/*End Hero section */}
+            <div className=" bg-gray-100 mt-10">
+                <div className="mx-auto max-w-screen-2xl px-4 sm:px-10 md:px-20 flex flex-col gap-10 items-center justify-between rounded-2xl  p-8 md:flex-row">
+                    {/* Left Section: Illustration */}
+                    <div className="flex w-full justify-center md:w-1/2">
+                        <img src="assets/images/imageBlog1.png" alt="Business Illustration" className="aspect-video" />
+                    </div>
+
+                    {/* Right Section: Content */}
+                    <div className="w-full text-left md:w-1/2">
+                        <div className="flex items-center gap-4">
+                            <hr className="h-2 w-15 bg-blue-900" />
+                            <h2 className="text-sm text-blue-900 uppercase">Why Choose Us</h2>
+                        </div>
+                        {/* <span className="text-sm font-semibold text-blue-600 uppercase">Why Choose Us</span> */}
+                        <h2 className="mt-2 text-2xl font-bold text-gray-900">We Are Increasing Business Success With Technology</h2>
+                        <p className="mt-2 text-gray-600">
+                            Over 25 years working in IT services developing software applications and mobile apps for clients all over the world.
+                        </p>
+
+                        {/* Skill Progress Bars */}
+                        <div className="mt-6 space-y-4">
+                            {skills.map((skill, index) => (
+                                <div key={index}>
+                                    <div className="flex justify-between text-sm font-medium text-gray-800">
+                                        <span>{skill.name}</span>
+                                        <span>{skill.percentage}%</span>
                                     </div>
-                                ))}
-                            </div>
+                                    <Progress value={skill.percentage} className="mt-1 h-2 bg-gray-200" />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-
-                {/* <div className="mx-auto mt-5 max-w-screen-2xl px-10 md:px-20">
-                <div className="text-center">
-                    <h1 className="text-sm text-blue-900 uppercase">Services</h1>
-                    <p className="mt-4 text-3xl font-bold">Our Best Project</p>
-                    <div className="bg-gradient-line mx-auto my-20 h-px w-full max-w-6xl"></div>
-                    <div className="bg-gradient-line mx-auto my-20 h-px w-full max-w-6xl"></div>
-                    <div className="bg-gradient-line mx-auto my-4 h-px w-full max-w-xl py-1"></div>
-                </div>
-            </div> */}
             </div>
-            {/*End Service */}
 
-            {/* Project */}
-            <MyProject />
-            {/*My Project */}
-
-            {/* Testmonial */}
-            <div>
-                <div className="bg-blue-100 py-2 sm:py-10 dark:bg-blue-900">
-                    <div className="container mx-auto px-4">
-                        <h2 className="mb-2 text-center sm:mb-4 dark:text-white">Testimonial</h2>
-                        <p className="text-center text-2xl font-bold text-gray-700 sm:text-3xl dark:text-gray-200">What Saying Our Customers</p>
-                    </div>
-                </div>
-
-                <div className="relative w-full overflow-hidden leading-none dark:bg-gray-800">
-                    <svg
-                        className="relative block h-[60px] w-[101%] md:h-[150px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1200 120"
-                        preserveAspectRatio="none"
-                    >
-                        <path
-                            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                            className="fill-blue-100 dark:fill-blue-900"
-                        ></path>
-                    </svg>
-                </div>
-                <MyTestimonial />
-            </div>
-            {/*end Testmonial */}
-
-            {/* Blog */}
-            <div className="py-2 sm:py-10">
-                <div className="bg-blue-100 py-2 sm:py-10 dark:bg-blue-900">
-                    <div className="container mx-auto px-4">
-                        <h2 className="mb-2 text-center sm:mb-4 dark:text-white">Blogs</h2>
-                        <p className="text-center text-2xl font-bold text-gray-700 sm:text-3xl dark:text-gray-200">Read Our Latest Tips & Tricks</p>
-                    </div>
-                </div>
-
-                <div className="relative w-full overflow-hidden leading-none dark:bg-gray-800">
-                    <svg
-                        className="relative block h-[60px] w-[101%] md:h-[150px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1200 120"
-                        preserveAspectRatio="none"
-                    >
-                        <path
-                            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                            className="fill-blue-100 dark:fill-blue-900"
-                        ></path>
-                    </svg>
-                </div>
-                <MyBlog />
-            </div>
-            {/*End Blog */}
-
-            {/* Partner */}
+             {/* Partner */}
             <div className="bg-gradient">
                 <div className="mx-auto max-w-screen-2xl px-10 md:px-20">
                     {/* Scrollable container for small screens */}
@@ -303,12 +263,9 @@ const welcome = () => {
                     </div>
                 </div>
             </div>
-
-            {/*End Partner */}
-
             {/* Footer */}
             <footer className="bg-gradient-to-b from-blue-100 to-white pt-10 pb-5">
-                <div className="mx-auto max-w-screen-2xl px-5 sm:px-10 md:px-20">
+                <div className="mx-auto max-w-screen-2xl px-5 md:px-10">
                     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                         {/* Logo & Description */}
                         <div>
@@ -399,23 +356,23 @@ const welcome = () => {
                     <div className="mt-8 flex flex-col items-center justify-between border-t pt-4 text-center text-gray-600 sm:flex-row">
                         <p>&copy; 2025 Vectorasoft | Designed by Vectorasoft</p>
                         <div className="mt-3 flex flex-wrap justify-center space-x-4 sm:mt-0">
-                            <a href="#" className="text-blue-600 underline underline-offset-4 offset-2">
+                            <a href="/" className="hover:text-blue-600">
                                 Home
                             </a>
                             <span>•</span>
-                            <a href="#" className="hover:text-blue-600">
+                            <a href="/about" className="hover:text-blue-600">
                                 About
                             </a>
                             <span>•</span>
-                            <a href="#" className="hover:text-blue-600">
+                            <a href="/services" className="hover:text-blue-600">
                                 Services
                             </a>
                             <span>•</span>
-                            <a href="#" className="hover:text-blue-600">
+                            <a href="/blog" className="hover:text-blue-600">
                                 Blogs
                             </a>
                             <span>•</span>
-                            <a href="#" className="hover:text-blue-600">
+                            <a href="/contact" className="hover:text-blue-600">
                                 Contact
                             </a>
                         </div>
@@ -423,8 +380,8 @@ const welcome = () => {
                 </div>
             </footer>
             {/*End Footer */}
-        </div>
+        </>
     );
 };
 
-export default welcome;
+export default services;

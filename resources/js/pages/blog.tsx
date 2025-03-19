@@ -267,7 +267,7 @@ const blog = () => {
                     </div>
                     {/*End Card */}
                     {/* Right Contect */}
-                        <div className="max-w-full lg:mx-auto lg:max-w-sm space-y-15">
+                    <div className="max-w-full lg:mx-auto lg:max-w-sm space-y-15">
                             {/* Search Box */}
                             <div className="rounded-xl bg-white p-4 shadow-lg">
                                 <div className="relative">
@@ -325,7 +325,7 @@ const blog = () => {
                                     ))}
                                 </ul>
                             </div>
-                        </div>
+                    </div>
                     {/*End Right Contect */}
                 </div>
             </div>
@@ -333,7 +333,7 @@ const blog = () => {
 
              {/* Footer */}
              <footer className="bg-gradient-to-b from-blue-100 to-white mt-10 pt-10 pb-5">
-                <div className="mx-auto max-w-screen-2xl px-5 md:px-10">
+                <div className="mx-auto max-w-screen-2xl px-5 sm:px-10 md:px-20">
                     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                         {/* Logo & Description */}
                         <div>

@@ -1,4 +1,3 @@
-import { MyBlogSlide } from '@/components/my-blog-slide';
 import MyMenu from '@/components/my-menu';
 import { MySearch } from '@/components/my-search';
 import { Button } from '@/components/ui/button';
@@ -131,7 +130,28 @@ const blog = () => {
             </div>
             {/*End Navbar */}
             {/* Slide */}
-            <MyBlogSlide />
+            <section className="relative pb-0.5 bg-white overflow-hidden text-white">
+                <div className="absolute inset-0 bg-white opacity-50"></div>
+                <div
+                    className="absolute inset-0 aspect-[19/6] bg-cover bg-center"
+                    style={{ backgroundImage: "url('assets/images/image copy.png')" }}
+                ></div>
+
+                <div className="relative z-10 mx-auto aspect-[19/6] px-4 md:py-32">
+                    <div className="min-h-8">{/* <p className="text-center text-5xl font-bold">About</p> */}</div>
+                </div>
+
+                {/* Decorative Element */}
+                <div className="absolute right-0 bottom-0 left-0">
+                    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+                            fill="white"
+                        />
+                    </svg>
+                </div>
+            </section>
+
             {/* End Slide */}
             {/* content */}
             <div className="mx-auto max-w-screen-2xl px-4 sm:px-10 md:px-20 mt-10">

@@ -1,4 +1,5 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Link } from '@inertiajs/react';
 
 export function MyTestimonial() {
     const image = [
@@ -34,10 +35,10 @@ export function MyTestimonial() {
 
     return (
         <Carousel className="mx-auto  max-w-screen-2xl px-4 sm:px-10 md:px-20">
-            <CarouselContent className="-ml-1 ">
+            <CarouselContent >
                 {image.map((item) => (
-                    <CarouselItem key={item.id} className="md:pl-6 md:basis-1/2 lg:basis-1/3 ">
-                        <div className="mx-auto flex max-w-xl flex-col overflow-hidden rounded-md">
+                    <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3 ">
+                        <Link href={`/detail/${1}`} key={item.id} className="mx-auto flex max-w-xl flex-col overflow-hidden rounded-md">
                             <div>
                                 <img
                                     className="w-full  object-cover aspect-square hover:scale-110 transition-all duration-500"
@@ -58,12 +59,12 @@ export function MyTestimonial() {
                                 {item.des}
                                 </p>
                             </div>
-                        </div>
+                        </Link>
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious className='left-4' />
-            <CarouselNext className='right-4' />
+            <CarouselPrevious className='left-7 md:left-20' />
+            <CarouselNext className='right-4 md:right-20' />
         </Carousel>
     );
 }

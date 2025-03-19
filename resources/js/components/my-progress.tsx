@@ -1,8 +1,13 @@
-"use client"
+import { Progress } from "./ui/progress";
 
-import * as React from "react"
 
 export function MyProgress() {
+    const skills = [
+        { name: 'SOFTWARE DEVELOPMENT', percentage: 92 },
+        { name: 'WEB DEVELOPMENT', percentage: 80 },
+        { name: 'SEO ANALYSIS', percentage: 95 },
+        { name: 'CYBER SECURITY', percentage: 78 },
+    ];
 
   return (
     <div className="max-w-2xl mx-auto bg-white ">
@@ -15,42 +20,18 @@ export function MyProgress() {
         <p className="text-gray-600 mt-3">Over 25 years working in IT services developing software applications and mobile apps for clients all over the world.</p>
 
         <div className="mt-6 space-y-5">
-            <div>
-                <div className="flex justify-between mb-1">
-                    <span className="text-gray-700">Software Development</span>
-                    <span className="font-bold">92%</span>
-                </div>
-                <div className="w-full bg-gray-300 h-2">
-                    <div className="bg-blue-900 h-2 " style={{ width: '92%' }}></div>
-                </div>
-            </div>
-            <div>
-                <div className="flex justify-between mb-1">
-                    <span className="text-gray-700">Cyber Security</span>
-                    <span className="font-bold">80%</span>
-                </div>
-                <div className="w-full bg-gray-300 h-2">
-                    <div className="bg-blue-900 h-2 " style={{ width: '80%' }}></div>
-                </div>
-            </div>
-            <div>
-                <div className="flex justify-between mb-1">
-                    <span className="text-gray-700">Artificial Intelligence</span>
-                    <span className="font-bold">95%</span>
-                </div>
-                <div className="w-full bg-gray-300 h-2">
-                    <div className="bg-blue-900 h-2 " style={{ width: '95%' }}></div>
-                </div>
-            </div>
-            <div>
-                <div className="flex justify-between mb-1">
-                    <span className="text-gray-700">Web Development</span>
-                    <span className="font-bold">78%</span>
-                </div>
-                <div className="w-full bg-gray-300 h-2">
-                    <div className="bg-blue-900 h-2 " style={{ width: '78%' }}></div>
-                </div>
-            </div>
+             {/* Skill Progress Bars */}
+             <div className="mt-6 space-y-4">
+                        {skills.map((skill, index) => (
+                            <div key={index}>
+                                <div className="flex justify-between text-sm font-medium text-gray-800">
+                                    <span>{skill.name}</span>
+                                    <span>{skill.percentage}%</span>
+                                </div>
+                                <Progress value={skill.percentage} className="mt-1 h-2 bg-gray-200" />
+                            </div>
+                        ))}
+                    </div>
         </div>
 
         <div className="mt-6">

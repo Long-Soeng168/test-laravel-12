@@ -1,41 +1,36 @@
-import { MyAboutComponent } from '@/components/my-about-component';
-import MyBlog from '@/components/my-blog';
 import MyMenu from '@/components/my-menu';
-import { MyProject } from '@/components/my-project';
 import { MySearch } from '@/components/my-search';
-import { MySlide } from '@/components/my-slide';
-import { MyTestimonial } from '@/components/my-testimonial';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { TracingBeam } from '@/components/ui/tracing-beam';
 import { AlignRight, Search } from 'lucide-react';
 
-const welcome = () => {
-    
+const detail = ({ id }: { id: string }) => {
     return (
-        <div>
+        <>
             <div className="mx-auto mt-5 hidden max-w-screen-2xl px-10 md:px-20 lg:block">
                 {/* Header  */}
                 <div className="flex items-center justify-between gap-5">
                     <div className="flex-1/2">
-                        <img src="assets/images/logo.png" className="w-36"></img>
+                        <img src="/assets/images/logo.png" className="w-36"></img>
                     </div>
                     <div>
                         <div className="grid grid-cols-3 justify-end gap-5">
                             <div className="flex items-center justify-end gap-2">
-                                <img src="assets/images/location.png" className="h-7 w-7"></img>
+                                <img src="/assets/images/location.png" className="h-7 w-7"></img>
                                 <p className="text-sm">
                                     <strong className="text-base">Address</strong> <br /> AP-1151, Aphivath BLV, Dermkor, Chongva, Chroy Changva.
                                     Phnom Penh, Cambodia
                                 </p>
                             </div>
                             <div className="flex items-center justify-end gap-2">
-                                <img src="assets/images/mail.png" className="h-7 w-7"></img>
+                                <img src="/assets/images/mail.png" className="h-7 w-7"></img>
                                 <p className="text-sm">
                                     <strong className="text-base">E-Mail</strong> <br /> Vectorasoft@gmail.com
                                 </p>
                             </div>
                             <div className="flex items-center justify-end gap-2">
-                                <img src="assets/images/call.png" className="h-7 w-7"></img>
+                                <img src="/assets/images/call.png" className="h-7 w-7"></img>
                                 <p className="text-sm">
                                     <strong className="text-base">Phone</strong> <br /> + 855 12346789
                                 </p>
@@ -50,7 +45,7 @@ const welcome = () => {
                 <div className="mx-auto flex h-16 max-w-screen-2xl justify-between px-4 sm:px-10 md:px-20">
                     <div className="flex items-center">
                         <MyMenu />
-                        <img src="assets/images/logo.png" className="block w-36 lg:hidden" />
+                        <img src="/assets/images/logo.png" className="block w-36 lg:hidden" />
                     </div>
                     <div className="flex items-center">
                         <Sheet>
@@ -72,19 +67,19 @@ const welcome = () => {
                                 <a href="#">
                                     <img
                                         className="w-10 rounded-md bg-white px-2 py-2 hover:shadow-2xl hover:transition-all"
-                                        src="assets/images/facebook.png"
+                                        src="/assets/images/facebook.png"
                                     />
                                 </a>
                                 <a href="#">
                                     <img
                                         className="w-10 rounded-md bg-white px-2 py-2 hover:shadow-2xl hover:transition-all"
-                                        src="assets/images/linkedin.png"
+                                        src="/assets/images/linkedin.png"
                                     />
                                 </a>
                                 <a href="#">
                                     <img
                                         className="w-10 rounded-md bg-white px-2 py-2 hover:shadow-2xl hover:transition-all"
-                                        src="assets/images/telegram.png"
+                                        src="/assets/images/telegram.png"
                                     />
                                 </a>
                             </div>
@@ -137,183 +132,99 @@ const welcome = () => {
                 </div>
             </div>
             {/*End Navbar */}
+            <div className="mx-auto my-10 flex max-w-screen-2xl flex-col px-4 sm:px-10 md:px-20 lg:flex-row">
+                <TracingBeam className="px-4">
+                    <div className="relative antialiased">
+                        {dummyContent.map((item, index) => (
+                            <div key={`content-${index}`} className="mb-10 p-4">
+                                <p className={'mb-4 text-xl'}>{item.title}</p>
 
-            {/* Slide */}
-            <MySlide />
-            {/*End Slide */}
-
-            {/* About */}
-            <MyAboutComponent />
-            {/*End About */}
-
-            {/* Service */}
-            <div>
-                <div className="bg-blue-100 py-2 sm:py-10 dark:bg-blue-900">
-                    <div className="container mx-auto px-4">
-                        <h2 className="mb-2 text-center sm:mb-4 dark:text-white">Services</h2>
-                        <p className="text-center text-2xl font-bold text-gray-700 sm:text-3xl dark:text-gray-200">Our Best Project</p>
+                                <div className="prose prose-sm dark:prose-invert text-sm">
+                                    {item?.image && (
+                                        <img
+                                            src={item.image}
+                                            alt="blog thumbnail"
+                                            height="1000"
+                                            width="1000"
+                                            className="mb-10 rounded-lg object-cover"
+                                        />
+                                    )}
+                                    {item.description}
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                </div>
+                </TracingBeam>
+                <div>
+                    <div className="max-w-full space-y-15 lg:mx-auto lg:max-w-sm">
+                        {/* Search Box */}
+                        <div className="rounded-xl bg-white p-4 shadow-lg">
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    placeholder="Searching..."
+                                    className="w-full rounded-lg border border-gray-300 py-2 pr-10 pl-4 outline-none focus:border-blue-900 focus:ring focus:ring-blue-900"
+                                />
+                                <span className="absolute top-1/2 right-3 -translate-y-1/2 transform text-gray-400">
+                                    <Search />
+                                </span>
+                            </div>
+                        </div>
 
-                <div className="relative w-full overflow-hidden leading-none dark:bg-gray-800">
-                    <svg
-                        className="relative block h-[60px] w-[101%] md:h-[150px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1200 120"
-                        preserveAspectRatio="none"
-                    >
-                        <path
-                            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                            className="fill-blue-100 dark:fill-blue-900"
-                        ></path>
-                    </svg>
-                </div>
+                        {/* Latest Posts Section */}
+                        <div className="rounded-xl bg-white p-4 shadow-lg">
+                            <h3 className="text-lg font-semibold text-gray-900">Latest Posts</h3>
+                            <div className="my-2 w-12 border-b-4 border-blue-900"></div>
 
-                <div className="mx-auto max-w-screen-2xl bg-white px-4 sm:px-10 pt-12 sm:pt-11 md:px-20 dark:bg-gray-800">
-                    <div className="container mx-auto">
-                        <div className="h-full">
-                            <div className="grid gap-14 md:grid-cols-2 md:gap-16">
+                            <div className="space-y-4">
                                 {[
-                                    {
-                                        title: 'Delivery Management System',
-                                        src: 'assets/images/delivery.png',
-                                        description:
-                                            'is a software tool that streamlines the delivery process by managing orders, optimizing routes, and providing real-time tracking.',
-                                    },
-                                    {
-                                        title: 'HR Management System',
-                                        src: 'assets/images/hr.png',
-                                        description:
-                                            'is a software solution that automates and streamlines various human resource functions. It helps manage employee data, recruitment, payroll, performance evaluations, and benefits administration.',
-                                    },
-                                    {
-                                        title: 'Loan Management System',
-                                        src: 'assets/images/loan.png',
-                                        description:
-                                            'is a software solution designed to manage the lifecycle of loans from origination to repayment. It automates processes such as application processing, credit assessment, disbursement, and collections.',
-                                    },
-                                    {
-                                        title: 'School Management System',
-                                        src: 'assets/images/education.png',
-                                        description:
-                                            'is a software solution designed to manage the school, teachers, students, total fee that students will pay for school.',
-                                    },
-                                ].map((item, index) => (
-                                    <div key={index} className="rounded-xl bg-white p-6 text-center shadow hover:shadow-xl">
-                                        <div className="bg-gradient mx-auto flex h-20 w-20 -translate-y-16 transform items-center justify-center rounded-full hover:shadow-lg hover:shadow-teal-500/40">
-                                            <img src={item.src} alt="icon" className="h-full w-full" />
+                                    'Pen Source Job Report Show More Openings Fewer',
+                                    'Tech Products That Makes Its Easier to Stay at Home',
+                                    'Necessity May Give Us Your Best Virtual Court System',
+                                    'Servo Project Joins The Linux Foundation Fold Desco',
+                                ].map((post, index) => (
+                                    <div key={index} className="flex items-center space-y-3 space-x-3">
+                                        <img src="/assets/images/imageBlog2.png" alt="Thumbnail" className="h-14 w-14 rounded-lg object-cover" />
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-800">{post}</p>
+                                            <span className="flex items-center text-xs text-gray-500">📅 January 21, 2020</span>
                                         </div>
-                                        <h1 className="text-darken mb-3 text-xl font-medium lg:px-14">{item.title}</h1>
-                                        <p className="px-4 text-gray-500">{item.description}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                {/* <div className="mx-auto mt-5 max-w-screen-2xl px-10 md:px-20">
-                <div className="text-center">
-                    <h1 className="text-sm text-blue-900 uppercase">Services</h1>
-                    <p className="mt-4 text-3xl font-bold">Our Best Project</p>
-                    <div className="bg-gradient-line mx-auto my-20 h-px w-full max-w-6xl"></div>
-                    <div className="bg-gradient-line mx-auto my-20 h-px w-full max-w-6xl"></div>
-                    <div className="bg-gradient-line mx-auto my-4 h-px w-full max-w-xl py-1"></div>
-                </div>
-            </div> */}
-            </div>
-            {/*End Service */}
+                        {/* Categories Section */}
+                        <div className="rounded-xl bg-white p-4 shadow-lg">
+                            <h3 className="text-lg font-semibold text-gray-900">Categories</h3>
+                            <div className="my-2 w-12 border-b-4 border-blue-900"></div>
 
-            {/* Project */}
-            <MyProject />
-            {/*My Project */}
-
-            {/* Testmonial */}
-            <div>
-                <div className="bg-blue-100 py-2 sm:py-10 dark:bg-blue-900">
-                    <div className="container mx-auto px-4">
-                        <h2 className="mb-2 text-center sm:mb-4 dark:text-white">Testimonial</h2>
-                        <p className="text-center text-2xl font-bold text-gray-700 sm:text-3xl dark:text-gray-200">What Saying Our Customers</p>
-                    </div>
-                </div>
-
-                <div className="relative w-full overflow-hidden leading-none dark:bg-gray-800">
-                    <svg
-                        className="relative block h-[60px] w-[101%] md:h-[150px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1200 120"
-                        preserveAspectRatio="none"
-                    >
-                        <path
-                            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                            className="fill-blue-100 dark:fill-blue-900"
-                        ></path>
-                    </svg>
-                </div>
-                <MyTestimonial />
-            </div>
-            {/*end Testmonial */}
-
-            {/* Blog */}
-            <div className="py-2 sm:py-10">
-                <div className="bg-blue-100 py-2 sm:py-10 dark:bg-blue-900">
-                    <div className="container mx-auto px-4">
-                        <h2 className="mb-2 text-center sm:mb-4 dark:text-white">Blogs</h2>
-                        <p className="text-center text-2xl font-bold text-gray-700 sm:text-3xl dark:text-gray-200">Read Our Latest Tips & Tricks</p>
-                    </div>
-                </div>
-
-                <div className="relative w-full overflow-hidden leading-none dark:bg-gray-800">
-                    <svg
-                        className="relative block h-[60px] w-[101%] md:h-[150px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1200 120"
-                        preserveAspectRatio="none"
-                    >
-                        <path
-                            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                            className="fill-blue-100 dark:fill-blue-900"
-                        ></path>
-                    </svg>
-                </div>
-                <MyBlog />
-            </div>
-            {/*End Blog */}
-
-            {/* Partner */}
-            <div className="bg-gradient">
-                <div className="mx-auto max-w-screen-2xl px-10 md:px-20">
-                    {/* Scrollable container for small screens */}
-                    <div className="scrollbar-hide flex space-x-6 overflow-x-auto sm:flex-nowrap sm:overflow-x-scroll md:grid md:grid-cols-3 lg:grid-cols-5 lg:overflow-x-hidden">
-                        <a href="#" className="flex h-32 w-32 flex-shrink-0 items-center justify-center p-2">
-                            <img src="assets/images/1.png" alt="Logo 1" />
-                        </a>
-                        <a href="#" className="flex h-32 w-32 flex-shrink-0 items-center justify-center p-2">
-                            <img src="assets/images/2.png" alt="Logo 2" />
-                        </a>
-                        <a href="#" className="flex h-32 w-32 flex-shrink-0 items-center justify-center p-2">
-                            <img src="assets/images/3.png" alt="Logo 3" />
-                        </a>
-                        <a href="#" className="flex h-32 w-32 flex-shrink-0 items-center justify-center p-2">
-                            <img src="assets/images/4.png" alt="Logo 4" />
-                        </a>
-                        <a href="#" className="flex h-32 w-32 flex-shrink-0 items-center justify-center p-2">
-                            <img src="assets/images/5.png" alt="Logo 5" />
-                        </a>
+                            <ul className="space-y-4 text-gray-800">
+                                {[
+                                    'Application Testing',
+                                    'Artificial Intelligence',
+                                    'Digital Technology',
+                                    'IT Services',
+                                    'Software Development',
+                                    'Web Development',
+                                ].map((category, index) => (
+                                    <li key={index} className="cursor-pointer border-b border-gray-200 pb-2 last:border-none hover:text-blue-600">
+                                        {category}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {/*End Partner */}
-
             {/* Footer */}
-            <footer className="bg-gradient-to-b from-blue-100 to-white pt-10 pb-5">
+            <footer className="bg-gradient-to-b from-blue-100 to-white px-4 pt-10 pb-5">
                 <div className="mx-auto max-w-screen-2xl px-5 sm:px-10 md:px-20">
                     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                         {/* Logo & Description */}
                         <div>
                             <h2 className="flex items-center text-2xl font-bold text-gray-900">
-                                <img src="assets/images/logo.png" alt="Logo" className="mr-2 h-8" />
+                                <img src="/assets/images/logo.png" alt="Logo" className="mr-2 h-8" />
                             </h2>
                             <p className="mt-3 text-gray-600">
                                 Vectorasoft is a leading provider of business and educational software solutions, dedicated to transforming
@@ -321,13 +232,13 @@ const welcome = () => {
                             </p>
                             <div className="mt-4 flex space-x-3">
                                 <a href="#" className="rounded-full bg-white p-3 hover:bg-gray-100">
-                                    <img src="assets/images/facebook.png" className="h-5 w-5" />
+                                    <img src="/assets/images/facebook.png" className="h-5 w-5" />
                                 </a>
                                 <a href="#" className="rounded-full bg-white p-3 hover:bg-gray-100">
-                                    <img src="assets/images/linkedin.png" className="h-5 w-5" />
+                                    <img src="/assets/images/linkedin.png" className="h-5 w-5" />
                                 </a>
                                 <a href="#" className="rounded-full bg-white p-3 hover:bg-gray-100">
-                                    <img src="assets/images/telegram.png" className="h-5 w-5" />
+                                    <img src="/assets/images/telegram.png" className="h-5 w-5" />
                                 </a>
                             </div>
                         </div>
@@ -364,19 +275,19 @@ const welcome = () => {
                             <h3 className="text-xl font-semibold text-gray-900">Contact Info</h3>
                             <ul className="mt-4 space-y-4 text-gray-600">
                                 <li className="flex items-center gap-3">
-                                    <img src="assets/images/location.png" className="h-6 w-6" />
+                                    <img src="/assets/images/location.png" className="h-6 w-6" />
                                     AP-1151, Aphivath BLV, Phnom Penh, Cambodia
                                 </li>
                                 <li className="flex items-center gap-3">
-                                    <img src="assets/images/call.png" className="h-6 w-6" />
+                                    <img src="/assets/images/call.png" className="h-6 w-6" />
                                     012 528 131
                                 </li>
                                 <li className="flex items-center gap-3">
-                                    <img src="assets/images/mail.png" className="h-6 w-6" />
+                                    <img src="/assets/images/mail.png" className="h-6 w-6" />
                                     vectorasoft@gmail.com
                                 </li>
                                 <li className="flex items-center gap-3">
-                                    <img src="assets/images/clock.png" className="h-6 w-6" />
+                                    <img src="/assets/images/clock.png" className="h-6 w-6" />
                                     8:00 - 5:00 (Opening Hours)
                                 </li>
                             </ul>
@@ -389,7 +300,7 @@ const welcome = () => {
                             <div className="relative mt-4 flex">
                                 <input type="email" placeholder="Your email address" className="w-full rounded-full border bg-white px-4 py-4" />
                                 <button className="bg-gradient absolute top-1/2 right-0 -translate-y-1/2 rounded-full px-4 py-4 text-white hover:bg-blue-700">
-                                    <img src="assets/images/paper.png" className="h-5 w-5" />
+                                    <img src="/assets/images/paper.png" className="h-5 w-5" />
                                 </button>
                             </div>
                         </div>
@@ -399,7 +310,7 @@ const welcome = () => {
                     <div className="mt-8 flex flex-col items-center justify-between border-t pt-4 text-center text-gray-600 sm:flex-row">
                         <p>&copy; 2025 Vectorasoft | Designed by Vectorasoft</p>
                         <div className="mt-3 flex flex-wrap justify-center space-x-4 sm:mt-0">
-                            <a href="#" className="text-blue-600 underline underline-offset-4 offset-2">
+                            <a href="#" className="offset-2 text-blue-600 underline underline-offset-4">
                                 Home
                             </a>
                             <span>•</span>
@@ -423,8 +334,66 @@ const welcome = () => {
                 </div>
             </footer>
             {/*End Footer */}
-        </div>
+        </>
     );
 };
 
-export default welcome;
+export default detail;
+
+const dummyContent = [
+    {
+        title: 'Delivery Management System',
+        description: (
+            <>
+                <p>
+                    is a software tool that streamlines the delivery process by managing orders, optimizing routes, and providing real-time tracking.
+                </p>
+                <p>
+                    Dolor minim irure ut Lorem proident. Ipsum do pariatur est ad ad veniam in commodo id reprehenderit adipisicing. Proident duis
+                    exercitation ad quis ex cupidatat cupidatat occaecat adipisicing.
+                </p>
+                <p>
+                    Tempor quis dolor veniam quis dolor. Sit reprehenderit eiusmod reprehenderit deserunt amet laborum consequat adipisicing officia
+                    qui irure id sint adipisicing. Adipisicing fugiat aliqua nulla nostrud. Amet culpa officia aliquip deserunt veniam deserunt
+                    officia adipisicing aliquip proident officia sunt.
+                </p>
+            </>
+        ),
+        badge: 'React',
+        image: '/assets/images/imageBlog1.png',
+    },
+    {
+        title: 'Lorem Ipsum Dolor Sit Amet',
+        description: (
+            <>
+                <p>
+                    Ex irure dolore veniam ex velit non aute nisi labore ipsum occaecat deserunt cupidatat aute. Enim cillum dolor et nulla sunt
+                    exercitation non voluptate qui aliquip esse tempor. Ullamco ut sunt consectetur sint qui qui do do qui do. Labore laborum culpa
+                    magna reprehenderit ea velit id esse adipisicing deserunt amet dolore. Ipsum occaecat veniam commodo proident aliqua id ad
+                    deserunt dolor aliquip duis veniam sunt.
+                </p>
+                <p>
+                    In dolore veniam excepteur eu est et sunt velit. Ipsum sint esse veniam fugiat esse qui sint ad sunt reprehenderit do qui proident
+                    reprehenderit. Laborum exercitation aliqua reprehenderit ea sint cillum ut mollit.
+                </p>
+            </>
+        ),
+        badge: 'Changelog',
+        image: '/assets/images/image1.png',
+    },
+    {
+        title: 'Lorem Ipsum Dolor Sit Amet',
+        description: (
+            <>
+                <p>
+                    Ex irure dolore veniam ex velit non aute nisi labore ipsum occaecat deserunt cupidatat aute. Enim cillum dolor et nulla sunt
+                    exercitation non voluptate qui aliquip esse tempor. Ullamco ut sunt consectetur sint qui qui do do qui do. Labore laborum culpa
+                    magna reprehenderit ea velit id esse adipisicing deserunt amet dolore. Ipsum occaecat veniam commodo proident aliqua id ad
+                    deserunt dolor aliquip duis veniam sunt.
+                </p>
+            </>
+        ),
+        badge: 'Launch Week',
+        image: '/assets/images/image2.png',
+    },
+];
