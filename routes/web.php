@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    return Inertia::render('westec/Index');
 })->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('welcome');
+// })->name('home');
 Route::get('/blog', function () {
     return Inertia::render('blog');
 })->name('blog');
