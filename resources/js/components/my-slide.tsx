@@ -31,7 +31,7 @@ export function MySlide() {
                                 <img src={item.image} alt={item.alt} className="w-full h-full object-cover" />
                                 <div className="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-white">
                                     <div className="mx-auto max-w-screen-lg sm:max-w-screen-xl md:max-w-screen-2xl p-5 sm:10 md:p-20 lg:p-20">
-                                        <h3 className="max-w-full text-sm sm:text-lg md:text-2xl lg:text-4xl xl:text-5xl font-bold">
+                                        {/* <h3 className="max-w-full text-sm sm:text-lg md:text-2xl lg:text-4xl xl:text-5xl font-bold">
                                             Transforming Tomorrow, Today
                                         </h3>
                                         <p className="mt-2 sm:mt-3 md:mt-5 max-w-[50%] text-xs sm:text-sm md:text-base">
@@ -51,7 +51,7 @@ export function MySlide() {
                                             >
                                                 Explore
                                             </a>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </Card>

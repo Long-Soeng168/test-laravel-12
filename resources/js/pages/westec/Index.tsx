@@ -1,10 +1,9 @@
-import React from 'react'
+import MyLayout from './layout/layout'
 
 const Index = () => {
   return (
-    <div>
-        Hello
-    </div>
+    <MyLayout>
+    </MyLayout>
   )
 }
 

@@ -81,9 +81,11 @@
     box-shadow: 0px 4px 20px rgba(3, 83, 145, 0.5); /* Adjust opacity */
 }
 
-.bg-gradient{
-    background: rgb(4,24,45);
-    background: linear-gradient(90deg, #002D62  47%, #035391 100%);
+.text-color{
+    color: #273896;
+}
+.background{
+    background: #273896;
 }
 
 .bg-gradient-hover:hover {
