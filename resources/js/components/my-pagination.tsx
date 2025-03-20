@@ -1,38 +1,16 @@
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from '@/components/ui/pagination';
+import { Link } from '@inertiajs/react';
 
-export function MyPagination() {
+export function MyPagination({ links }: { links: any }) {
     return (
-        <Pagination className="p-2">
-            <PaginationContent>
-                <PaginationItem>
-                    <PaginationPrevious href="#" />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#" isActive>
-                        2
-                    </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationEllipsis />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationNext href="#" />
-                </PaginationItem>
-            </PaginationContent>
-        </Pagination>
+        <div className="mt-4 p-2 space-x-1 flex justify-center flex-wrap">
+            {links.map((item: any, index: number) => (
+                <Link
+                    key={item.label + index}
+                    className={`px-4 py-2 rounded whitespace-nowrap hover:shadow-md ${item.active && 'border shadow-md'} ${item.url == null && 'text-foreground/50'}`}
+                    href={item.url || '#'}
+                    dangerouslySetInnerHTML={{ __html: item.label }}
+                />
+            ))}
+        </div>
     );
 }

@@ -11,45 +11,45 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
 
-const DeleteButton = ({ id }: { id: number }) => {
+const StatusButton = ({ id, status }: { id: number; status: number }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <TooltipProvider delayDuration={300}>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <AlertDialogTrigger asChild>
-                            <Button variant="ghost" className="text-destructive" size="icon">
-                                <Trash2Icon />
+                        <AlertDialogTrigger className="cursor-pointer" asChild>
+                            <Button variant="outline" className={status == 1 ? 'text-green-600' : 'text-red-400'} size="sm">
+                                {status == 1 ? <p>Public</p> : <p>Not-Public</p>}
                             </Button>
                         </AlertDialogTrigger>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">
-                        <p>Delete</p>
+                        <p>Update Status</p>
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider>
 
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure? Delete ID : {id}</AlertDialogTitle>
-                    <AlertDialogDescription className='bg-destructive-forground'>
-                        This action cannot be undone. This will permanently delete the category and remove its data from our servers.
-                    </AlertDialogDescription>
+                    <AlertDialogTitle>Are you sure? Update ID : {id}</AlertDialogTitle>
+                    <AlertDialogDescription>This action will update your record status.</AlertDialogDescription>
                 </AlertDialogHeader>
-                <AlertDialogFooter>
+                <AlertDialogFooter className="space-y-2 sm:space-y-0">
                     <AlertDialogCancel disabled={isSubmitting}>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => {}} disabled={isSubmitting} className="bg-destructive text-destructive-foreground">
+                        {isSubmitting ? 'Updating...' : 'Not-Public'}
+                    </AlertDialogAction>
                     <AlertDialogAction
+                        onClick={() => {}}
                         disabled={isSubmitting}
                         autoFocus
-                        className="bg-destructive hover:bg-destructive/80 text-white ring-offset-2 focus:ring-2"
+                        className="bg-green-600 text-white ring-offset-2 focus:ring-2"
                     >
-                        {isSubmitting ? 'Deleting...' : 'Delete'}
+                        {isSubmitting ? 'Updating...' : 'Public'}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
@@ -57,4 +57,4 @@ const DeleteButton = ({ id }: { id: number }) => {
     );
 };
 
-export default DeleteButton;
+export default StatusButton;

@@ -38,7 +38,7 @@ const DeleteButton = ({ id }: { id: number }) => {
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure? Delete ID : {id}</AlertDialogTitle>
-                    <AlertDialogDescription className='bg-destructive-forground'>
+                    <AlertDialogDescription>
                         This action cannot be undone. This will permanently delete the category and remove its data from our servers.
                     </AlertDialogDescription>
                 </AlertDialogHeader>

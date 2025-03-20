@@ -7,7 +7,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm as inertiaUseForm } from '@inertiajs/react';
 import { Check, ChevronsUpDown, CloudUpload } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -18,7 +17,7 @@ const formSchema = z.object({
     title: z.string().min(1).min(5).max(255),
     title_kh: z.string().min(1).min(5).max(255).optional(),
     code: z.string().min(1).min(1).max(255),
-    order_index: z.string().min(0).max(255).optional(),
+    order_index: z.number().min(0).max(255).optional(),
     parent_code: z.string().optional(),
     status: z.string().optional(),
     images: z.string().optional(),
@@ -81,22 +80,14 @@ export default function Create() {
         resolver: zodResolver(formSchema),
     });
 
-    const { post, progress, transform } = inertiaUseForm();
-
     function onSubmit(values: z.infer<typeof formSchema>) {
         try {
+            console.log(values);
             toast(
                 <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
                     <code className="text-white">{JSON.stringify(values, null, 2)}</code>
                 </pre>,
             );
-            transform(() => ({
-                ...values,
-                images: files,
-            }));
-            post('/admin/projects');
-            console.log(values);
-            
         } catch (error) {
             console.error('Form submission error', error);
             toast.error('Failed to submit the form. Please try again.');
@@ -306,11 +297,6 @@ export default function Create() {
                     )}
                 />
                 <Button type="submit">Submit</Button>
-                {progress && (
-                    <progress value={progress.percentage} max="100">
-                        {progress.percentage}%
-                    </progress>
-                )}
             </form>
         </Form>
     );

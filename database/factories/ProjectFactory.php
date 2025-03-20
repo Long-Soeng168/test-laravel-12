@@ -2,13 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
- */
 class ProjectFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Project::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +23,14 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'title_kh' => $this->faker->optional()->sentence(3),
+            'code' => Str::upper($this->faker->unique()->lexify('PRJ???')),
+            'order_index' => $this->faker->optional()->numberBetween(1, 100),
+            'parent_code' => $this->faker->optional()->lexify('PRJ???'),
+            'status' => $this->faker->randomElement(['active', 'inactive', 'pending']),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
