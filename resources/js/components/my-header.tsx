@@ -1,16 +1,16 @@
 import { AlignRight, Search } from 'lucide-react';
 import MyMenu from './my-menu';
 import { MySearch } from './my-search';
-import { MySlide } from './my-slide';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+
 
 const MyHeader = () => {
     return (
         <>
             <div>
                 <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-10 md:px-20">
-                    <img src="assets/images/logo.png" className="hidden w-36 lg:block" />
+                    <img src="assets/images/logo.png" className="hidden w-64 lg:block" />
                     <div className="flex items-center gap-5">
                         <MyMenu />
                         <img src="assets/images/logo.png" className="block w-36 lg:hidden" />
@@ -87,9 +87,7 @@ const MyHeader = () => {
             </div>
             {/*End Navbar */}
 
-            {/* Slide */}
-            <MySlide />
-            {/*End Slide */}
+
         </>
     );
 };

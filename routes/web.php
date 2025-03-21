@@ -6,6 +6,12 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('westec/Index');
 })->name('home');
+Route::get('/contact', function () {
+    return Inertia::render('westec/Contact');
+})->name('contact');
+Route::get('/solutions', function () {
+    return Inertia::render('westec/SolutionsPage');
+})->name('solutions');
 // Route::get('/', function () {
 //     return Inertia::render('welcome');
 // })->name('home');
@@ -26,9 +32,9 @@ Route::get('/about', function () {
 
     return Inertia::render('about');
 })->name('about');
-Route::get('/contact', function () {
-    return Inertia::render('contact');
-})->name('contact');
+// Route::get('/contact', function () {
+//     return Inertia::render('contact');
+// })->name('contact');
 Route::get('/normalblade', function () {
     return view('normalblade');
 })->name('normalblade');
