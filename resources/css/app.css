@@ -7,10 +7,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+    font-family: ProximaBlack;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-black.otf')format('truetype');
+}
+@font-face {
+    font-family: ProximaBlackItalic;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-black-italic.otf')format('truetype');
+}
+
+@font-face {
+    font-family: ProximaThin;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-thin.otf')format('truetype');
+}
+
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-
+    --font-proxima-black: ProximaBlack, 'Poppins';
+    --font-proxima-black-italic: ProximaBlackItalic, 'Poppins';
+    --font-proxima-thin: ProximaThin, 'Poppins';
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
@@ -81,9 +97,51 @@
     box-shadow: 0px 4px 20px rgba(3, 83, 145, 0.5); /* Adjust opacity */
 }
 
-.bg-gradient{
-    background: rgb(4,24,45);
-    background: linear-gradient(90deg, #002D62  47%, #035391 100%);
+@keyframes custom-bounce {
+    0%, 100% {
+      transform: translateY(-10%);
+    }
+    50% {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-bounce-2s {
+    animation: custom-bounce 10s infinite;
+  }
+
+
+.text-color{
+    color: #273896;
+}
+.text-yellow{
+    color: #f68c1f;
+}
+.bg-yellow{
+    background: #f68c1f;
+}
+.background{
+    background: #273896;
+}
+.background-thin{
+    background-color: #273896;
+    opacity: 0.7;
+}
+
+.hover-background:hover{
+    background: #273896;
+}
+.border-color{
+    border-color: #273896;
+}
+.background-blue-color{
+    background: #0bbcd4;
+}
+.background-dark-blue{
+    background: #008080;
+}
+.background-dark-gray{
+    background: #36454f;
 }
 
 .bg-gradient-hover:hover {
@@ -98,6 +156,21 @@
       rgba(149, 131, 198, 0) 107.92%
     );
   }
+
+
+
+/* Custom scrollbar for WebKit browsers */
+.scroll-container::-webkit-scrollbar {
+    height: 5px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 5px;
+}
+.scroll-container::-webkit-scrollbar-track {
+    background-color: #222;
+}
+
 
 :root {
     --background: oklch(1 0 0);
