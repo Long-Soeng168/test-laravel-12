@@ -311,7 +311,7 @@ export const FileUploaderItem = forwardRef<
         onClick={() => removeFileFromSet(index)}
       >
         <span className="sr-only">remove item {index}</span>
-        <RemoveIcon className="w-4 h-4 group-hover:bg-destructive/80 rounded-sm p-0.5 group-hover:stroke-white duration-200 ease-in-out" />
+        <RemoveIcon className="w-4 h-4 group-hover:bg-destructive/80 stroke-white rounded-sm p-0.5 group-hover:stroke-white duration-200 ease-in-out" />
       </button>
     </div>
   );

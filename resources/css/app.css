@@ -7,6 +7,30 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.toaster .toast::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -1px;
+    right: 1px;
+    width: 100%;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 0 100px 100px 100px;
+    transform: translate(0px, 1px);
+    animation: toast-progress linear;
+    animation-duration: 4.2s; /* Match the default Sonner timeout */
+}
+
+@keyframes toast-progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -26,6 +50,10 @@
 
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
 
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
@@ -86,9 +114,9 @@
     box-shadow: 0px 4px 20px rgba(3, 83, 145, 0.5); /* Adjust opacity */
 }
 
-.bg-gradient{
-    background: rgb(4,24,45);
-    background: linear-gradient(90deg, #002D62  47%, #035391 100%);
+.bg-gradient {
+    background: rgb(4, 24, 45);
+    background: linear-gradient(90deg, #002d62 47%, #035391 100%);
 }
 
 .bg-gradient-hover:hover {
@@ -112,8 +140,12 @@
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
+    --primary: oklch(0.59 0.23 278.87);
     --primary-foreground: oklch(0.985 0 0);
+    --success: oklch(0.627 0.194 149.214);
+    --success-foreground: oklch(0.985 0 0);
+    --warning: oklch(0.795 0.184 86.047);
+    --warning-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
@@ -150,6 +182,10 @@
     --popover-foreground: oklch(0.985 0 0);
     --primary: oklch(0.985 0 0);
     --primary-foreground: oklch(0.205 0 0);
+    --success: oklch(0.627 0.194 149.214);
+    --success-foreground: oklch(0.985 0 0);
+    --warning: oklch(0.795 0.184 86.047);
+    --warning-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.269 0 0);
     --secondary-foreground: oklch(0.985 0 0);
     --muted: oklch(0.269 0 0);
@@ -185,4 +221,3 @@
         @apply bg-background text-foreground;
     }
 }
- 

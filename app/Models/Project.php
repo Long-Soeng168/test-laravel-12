@@ -9,5 +9,18 @@ class Project extends Model
 {
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
-    protected $quarded = [];
+    protected $guarded = [];
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+    public function updated_by()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+    public function images()
+    {
+        return $this->hasMany(ProjectImage::class, 'project_id', 'id');
+    }
 }

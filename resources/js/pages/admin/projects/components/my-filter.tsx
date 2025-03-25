@@ -1,10 +1,10 @@
-'use client';
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { router } from '@inertiajs/react';
 import { Check, ChevronsUpDown, FilterIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -22,75 +22,40 @@ export default function MyFilter() {
             value: '',
         },
         {
-            label: 'Public',
-            value: '1',
+            label: 'Active',
+            value: 'active',
         },
         {
-            label: 'Not-Public',
-            value: '0',
+            label: 'Inactive',
+            value: 'inactive',
+        },
+        {
+            label: 'Pending',
+            value: 'pending',
         },
     ] as const;
 
-    const sort_by_items = [
-        {
-            label: 'Select Sort',
-            value: '',
-        },
-        {
-            label: 'Title (Z -> A)',
-            value: 'title_desc',
-        },
-        {
-            label: 'Title (A -> Z)',
-            value: 'title_asc',
-        },
-        {
-            label: 'Index (9 -> 0)',
-            value: 'order_index_desc',
-        },
-        {
-            label: 'Index (0 -> 9)',
-            value: 'order_index_asc',
-        },
-    ] as const;
+    const initialQueryParams = new URLSearchParams(window.location.search);
+    const currentPath = window.location.pathname;
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            status: initialQueryParams.get("status") || "", // Ensure it's a string
+        },
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            const params = new URLSearchParams(window.location.search);
-
-            // Update or delete query parameters based on form values
-            if (values.parent_code) {
-                params.set('parent_code', values.parent_code);
-            } else {
-                params.delete('parent_code');
-            }
-
+            const queryParams = new URLSearchParams(window.location.search);
             if (values.status) {
-                params.set('status', values.status);
+                queryParams.set('status', values.status);
             } else {
-                params.delete('status');
+                queryParams.delete('status');
             }
-
-            if (values.sort_by) {
-                params.set('sort_by', values.sort_by);
-            } else {
-                params.delete('sort_by');
-            }
-
-            params.set('page', '1');
-
-            // Push the updated query parameters to the URL
-            // router.push(`?${params.toString()}`, { scroll: true });
-            // Construct the new URL with updated query parameters
-            const newUrl = `${window.location.pathname}?${params.toString()}`;
-
-            // Refresh the whole page by setting window.location.href
-            window.location.href = newUrl;
-            console.log('Form values submitted:', values);
+            queryParams.set('page', '1');
+            const queryParamsString = queryParams.toString();
+            router.get(currentPath + '?' + queryParamsString);
         } catch (error) {
             console.error('Form submission error', error);
         }
@@ -160,60 +125,6 @@ export default function MyFilter() {
                         />
                     </div>
 
-                    <div className="col-span-6">
-                        <FormField
-                            control={form.control}
-                            name="sort_by"
-                            render={({ field }) => (
-                                <FormItem className="flex flex-col">
-                                    <FormLabel>Sort By</FormLabel>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <FormControl>
-                                                <Button
-                                                    variant="outline"
-                                                    role="combobox"
-                                                    className={cn('w-full justify-between', !field.value && 'text-muted-foreground')}
-                                                >
-                                                    {field.value ? sort_by_items.find((sort) => sort.value === field.value)?.label : 'Select sort'}
-                                                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                                </Button>
-                                            </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-[200px] p-0">
-                                            <Command>
-                                                <CommandInput placeholder="Search sort..." />
-                                                <CommandList>
-                                                    <CommandEmpty>No sort found.</CommandEmpty>
-                                                    <CommandGroup>
-                                                        {sort_by_items.map((sort) => (
-                                                            <CommandItem
-                                                                value={sort.label}
-                                                                key={sort.value}
-                                                                onSelect={() => {
-                                                                    form.setValue('sort_by', sort.value);
-                                                                }}
-                                                            >
-                                                                <Check
-                                                                    className={cn(
-                                                                        'mr-2 h-4 w-4',
-                                                                        sort.value === field.value ? 'opacity-100' : 'opacity-0',
-                                                                    )}
-                                                                />
-                                                                {sort.label}
-                                                            </CommandItem>
-                                                        ))}
-                                                    </CommandGroup>
-                                                </CommandList>
-                                            </Command>
-                                        </PopoverContent>
-                                    </Popover>
-
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
                 </div>
                 <Button type="submit">Submit</Button>
             </form>

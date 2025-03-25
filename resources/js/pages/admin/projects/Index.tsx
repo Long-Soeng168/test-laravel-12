@@ -4,22 +4,29 @@ import AddNewButton from './components/add-new-button';
 import { MyFilterButton } from './components/my-filter-button';
 import { MySearchTableData } from './components/my-search-table-data';
 import MyTableData from './components/my-table-data';
+import { MyRefreshButton } from '@/components/my-refresh-button';
+import { BreadcrumbItem } from '@/types';
 
-const Index = ({ projects }: { projects: any }) => {
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Projects',
+        href: '/admin/projects',
+    },
+];
+const Index = () => {
     return (
-        <AppLayout>
+        <AppLayout breadcrumbs={breadcrumbs}>
             <div className="flex max-w-[100vw] flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center justify-between gap-2">
+                <div className="flex max-lg:w-full lg:flex-1 items-center justify-start gap-2 max-w-[100vw] flex-wrap">
                     <MySearchTableData />
                     <MyFilterButton />
+                    <MyRefreshButton />
                 </div>
                 <AddNewButton />
             </div>
             <div className="h-2" />
-            <MyTableData projects={projects} />
-            <div className='max-w-[100vw] text-center'>
-                <MyPagination links={projects.links} />
-            </div>
+            <MyTableData />
+            <MyPagination />
         </AppLayout>
     );
 };

@@ -9,8 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Filter from "./form/filter";
 import { useState } from "react";
+import MyFilter from "./my-filter";
 
 export function FilterButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,7 @@ export function FilterButton() {
         <DialogHeader>
           <DialogTitle className="hidden"></DialogTitle>
           <DialogDescription className="hidden"></DialogDescription>
-          <Filter />
+          <MyFilter />
         </DialogHeader>
       </DialogContent>
     </Dialog>

@@ -27,8 +27,10 @@ class ProjectFactory extends Factory
             'title_kh' => $this->faker->optional()->sentence(3),
             'code' => Str::upper($this->faker->unique()->lexify('PRJ???')),
             'order_index' => $this->faker->optional()->numberBetween(1, 100),
-            'parent_code' => $this->faker->optional()->lexify('PRJ???'),
+            'parent_code' => null,
             'status' => $this->faker->randomElement(['active', 'inactive', 'pending']),
+            'created_by' => 1,
+            'updated_by' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ];

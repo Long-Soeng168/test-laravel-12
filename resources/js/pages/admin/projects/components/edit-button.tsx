@@ -4,8 +4,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { EditIcon } from 'lucide-react';
 import { useState } from 'react';
+import Edit from '../Edit';
 
-const EditButton = ({ id }: { id: number }) => {
+const EditButton = ({ item }: { item: any }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <Dialog modal={false} open={isOpen} onOpenChange={setIsOpen}>
@@ -13,7 +14,7 @@ const EditButton = ({ id }: { id: number }) => {
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogTrigger asChild>
-                            <Button variant="ghost" className="text-primary" size="icon" onClick={() => console.log('clicked')}>
+                            <Button variant="ghost" className="text-foreground" size="icon" onClick={() => console.log('clicked')}>
                                 <EditIcon />
                             </Button>
                         </DialogTrigger>
@@ -26,8 +27,9 @@ const EditButton = ({ id }: { id: number }) => {
             {isOpen && <div className="fixed inset-0 z-40 bg-black/80" />}
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className="hidden"></DialogTitle>
+                    <DialogTitle>Edit Project</DialogTitle>
                     <DialogDescription className="hidden"></DialogDescription>
+                    <Edit item={item}/>
                 </DialogHeader>
             </DialogContent>
         </Dialog>

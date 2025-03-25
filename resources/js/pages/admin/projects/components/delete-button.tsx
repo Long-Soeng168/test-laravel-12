@@ -1,33 +1,38 @@
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Trash2Icon } from 'lucide-react';
+import { useForm } from '@inertiajs/react';
+import { Loader, Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 const DeleteButton = ({ id }: { id: number }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const { delete: destroy, processing } = useForm();
+
+    const handleDelete = () => {
+        destroy('/admin/projects/' + id, {
+            onSuccess: () => {
+                setIsOpen(false);
+                toast.success('Delete Successfully');
+            },
+            onError: (errors) => {
+                setIsOpen(false);
+                toast.error(errors?.message || 'Something went wrong!');
+            },
+        });
+    };
 
     return (
-        <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <TooltipProvider delayDuration={300}>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <AlertDialogTrigger asChild>
-                            <Button variant="ghost" className="text-destructive" size="icon">
+                        <DialogTrigger asChild>
+                            <Button variant="ghost" className="text-destructive hover:text-destructive" size="icon">
                                 <Trash2Icon />
                             </Button>
-                        </AlertDialogTrigger>
+                        </DialogTrigger>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">
                         <p>Delete</p>
@@ -35,25 +40,34 @@ const DeleteButton = ({ id }: { id: number }) => {
                 </Tooltip>
             </TooltipProvider>
 
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure? Delete ID : {id}</AlertDialogTitle>
-                    <AlertDialogDescription className='bg-destructive-forground'>
-                        This action cannot be undone. This will permanently delete the category and remove its data from our servers.
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel disabled={isSubmitting}>Cancel</AlertDialogCancel>
-                    <AlertDialogAction
-                        disabled={isSubmitting}
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Are you sure?</DialogTitle>
+                    <DialogDescription>
+                        This action cannot be undone. This will permanently delete and remove its data from the servers.
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                    <Button onClick={() => setIsOpen(false)} disabled={processing} variant="secondary">
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={handleDelete}
                         autoFocus
-                        className="bg-destructive hover:bg-destructive/80 text-white ring-offset-2 focus:ring-2"
+                        className="ring-primary focus:ring-2 focus:ring-offset-2"
+                        disabled={processing}
+                        variant="destructive"
                     >
-                        {isSubmitting ? 'Deleting...' : 'Delete'}
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+                        {processing && (
+                            <span className="animate-spin">
+                                <Loader />
+                            </span>
+                        )}
+                        {processing ? 'Deleting...' : 'Delete'}
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     );
 };
 

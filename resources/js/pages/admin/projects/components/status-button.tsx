@@ -1,59 +1,74 @@
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useState } from 'react';
 
-const StatusButton = ({ id, status }: { id: number; status: number }) => {
+const StatusButton = ({ id, status }: { id: number; status: string }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <TooltipProvider delayDuration={300}>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <AlertDialogTrigger className="cursor-pointer" asChild>
-                            <Button variant="outline" className={status == 1 ? 'text-green-600' : 'text-red-400'} size="sm">
-                                {status == 1 ? <p>Public</p> : <p>Not-Public</p>}
+                        <DialogTrigger className="cursor-pointer" asChild>
+                            <Button
+                                variant="outline"
+                                className={`${status == 'active' && 'text-green-600'} ${status == 'inactive' && 'text-red-400'} ${status == 'pending' && 'text-yellow-600'} `}
+                                size="sm"
+                            >
+                                {status}
                             </Button>
-                        </AlertDialogTrigger>
+                        </DialogTrigger>
                     </TooltipTrigger>
-                    <TooltipContent side="bottom">
+                    <TooltipContent side="left">
                         <p>Update Status</p>
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider>
 
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure? Update ID : {id}</AlertDialogTitle>
-                    <AlertDialogDescription>This action will update your record status.</AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter className="space-y-2 sm:space-y-0">
-                    <AlertDialogCancel disabled={isSubmitting}>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => {}} disabled={isSubmitting} className="bg-destructive text-destructive-foreground">
-                        {isSubmitting ? 'Updating...' : 'Not-Public'}
-                    </AlertDialogAction>
-                    <AlertDialogAction
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Are you sure? Update ID : {id}</DialogTitle>
+                    <DialogDescription>This action will update your record status.</DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="space-y-2 sm:space-y-0"> 
+                    <Button
                         onClick={() => {}}
                         disabled={isSubmitting}
-                        autoFocus
-                        className="bg-green-600 text-white ring-offset-2 focus:ring-2"
+                        variant='warning'
+                        className="focus:ring-offset-2 focus:ring-2 ring-primary"
                     >
-                        {isSubmitting ? 'Updating...' : 'Public'}
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+                        {isSubmitting ? 'Updating...' : 'Pending'}
+                    </Button>
+                    <Button
+                        onClick={() => {}}
+                        disabled={isSubmitting}
+                        variant='destructive'
+                        className="focus:ring-offset-2 focus:ring-2 ring-primary"
+                    >
+                        {isSubmitting ? 'Updating...' : 'Inactive'}
+                    </Button>
+                    <Button
+                        onClick={() => {}}
+                        disabled={isSubmitting}
+                        variant='success'
+                        autoFocus
+                        className="focus:ring-offset-2 focus:ring-2 ring-primary"
+                    >
+                        {isSubmitting ? 'Updating...' : 'Active'}
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     );
 };
 

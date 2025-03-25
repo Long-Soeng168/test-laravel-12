@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm as inertiaUseForm } from '@inertiajs/react';
 import axios from 'axios';
-import { Check, ChevronsUpDown, CloudUpload, Loader } from 'lucide-react';
+import { Check, ChevronsUpDown, CloudUpload, Loader, Trash2Icon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -26,7 +26,7 @@ const formSchema = z.object({
     images: z.string().optional(),
 });
 
-export default function Create() {
+export default function Edit({ item }: { item: any }) {
     const [files, setFiles] = useState<File[] | null>(null);
 
     const dropZoneConfig = {
@@ -43,12 +43,12 @@ export default function Create() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: '',
-            title_kh: '',
-            code: '',
-            order_index: '',
-            parent_code: '',
-            status: 'active',
+            title: item.title,
+            title_kh: item.title_kh,
+            code: item.code,
+            order_index: item.order_index,
+            parent_code: item.parent_code,
+            status: item.status,
         },
     });
 
@@ -67,7 +67,7 @@ export default function Create() {
             });
     }, []);
 
-    const { post, progress, processing, transform, errors } = inertiaUseForm();
+    const { post, delete: destroy, progress, processing, transform, errors } = inertiaUseForm();
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         // toast(
@@ -84,26 +84,40 @@ export default function Create() {
             post('/admin/projects', {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Success", {
-                        description: "Created successfully",
-                    })
+                    toast.success('Success', {
+                        description: 'Created successfully',
+                    });
                     form.reset();
                     setFiles(null);
                 },
                 onError: () => {
-                    toast.error("Error", {
-                        description: "Failed to create.",
-                    })
+                    toast.error('Error', {
+                        description: 'Failed to create.',
+                    });
                 },
-                
             });
         } catch (error) {
             console.error('Form submission error', error);
-            toast.error("Error", {
-                description: "Something went wrong!",
-            })
+            toast.error('Error', {
+                description: 'Something went wrong!',
+            });
         }
     }
+
+    const handleDestroyImage = (id: number) => {
+        destroy('/admin/projects/images/' + id, {
+            onSuccess: () => {
+                toast.success('Success', {
+                    description: 'Delete successfully',
+                });
+            },
+            onError: () => {
+                toast.error('Error', {
+                    description: 'Failed to delete.',
+                });
+            },
+        });
+    };
 
     return (
         <Form {...form}>
@@ -241,7 +255,7 @@ export default function Create() {
                             control={form.control}
                             name="status"
                             render={({ field }) => (
-                                <FormItem >
+                                <FormItem>
                                     <FormLabel>Status</FormLabel>
                                     <Select key={field.value} onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
@@ -269,12 +283,7 @@ export default function Create() {
                         <FormItem>
                             <FormLabel>Select Images</FormLabel>
                             <FormControl>
-                                <FileUploader
-                                    value={files}
-                                    onValueChange={setFiles}
-                                    dropzoneOptions={dropZoneConfig}
-                                    className="relative p-2"
-                                >
+                                <FileUploader value={files} onValueChange={setFiles} dropzoneOptions={dropZoneConfig} className="relative p-2">
                                     <FileInput id="fileInput" className="outline-1 outline-slate-500 outline-dashed">
                                         <div className="flex w-full flex-col items-center justify-center p-8">
                                             <CloudUpload className="h-10 w-10 text-gray-500" />
@@ -300,20 +309,53 @@ export default function Create() {
                                             //     <span>{file.name}</span>
                                             // </FileUploaderItem>
                                         ))}
-                                    </FileUploaderContent> 
+                                    </FileUploaderContent>
                                 </FileUploader>
                             </FormControl>
                             <FormMessage>{errors.images && <div>{errors.images}</div>}</FormMessage>
+
+                            {/* Initial Image */}
+                            {item.images?.length > 0 && (
+                                <div className="mt-4">
+                                    <FormDescription>Uploaded Image(s).</FormDescription>
+                                    <div className="flex w-full flex-row flex-wrap items-center gap-2 overflow-auto rounded-md p-1">
+                                        {item.images.map((imageObject) => (
+                                            <span key={imageObject.id} className="group relative size-20 overflow-hidden rounded-md border p-0">
+                                                <img
+                                                    src={'/assets/images/projects/thumb/' + imageObject.image}
+                                                    alt={imageObject.name}
+                                                    className="size-20 object-contain"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="invisible absolute top-1 right-1 cursor-pointer group-hover:visible"
+                                                    onClick={() => handleDestroyImage(imageObject.id)}
+                                                >
+                                                    <span className="sr-only">remove item</span>
+                                                    <Trash2Icon className="group-hover:bg-destructive/80 size-6 rounded-sm stroke-white p-0.5 duration-200 ease-in-out group-hover:stroke-white" />
+                                                </button>
+                                            </span>
+
+                                            // <FileUploaderItem key={i} index={i}>
+                                            //     <Paperclip className="h-4 w-4 stroke-current" />
+                                            //     <span>{file.name}</span>
+                                            // </FileUploaderItem>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </FormItem>
                     )}
                 />
                 <Button disabled={processing} type="submit">
-                    {processing && <span className='size-6 animate-spin'><Loader /></span>}
+                    {processing && (
+                        <span className="size-6 animate-spin">
+                            <Loader />
+                        </span>
+                    )}
                     {processing ? 'Submiting...' : 'Submit'}
                 </Button>
-                {progress && (
-                    <ProgressWithValue value={progress.percentage} position="start" />
-                )}
+                {progress && <ProgressWithValue value={progress.percentage} position="start" />}
             </form>
         </Form>
     );

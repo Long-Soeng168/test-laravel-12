@@ -16,10 +16,34 @@ return new class extends Migration
             $table->string('title')->index();
             $table->string('title_kh')->nullable();
             $table->string('code')->unique();
-            $table->integer('order_index')->nullable();
+            $table->integer('order_index')->default(1)->nullable();
             $table->string('parent_code')->nullable();
-            $table->string('status')->nullable(); 
+            $table->string('status')->default('active')->nullable();
+
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('SET NULL');
+
+            $table->unsignedBigInteger('updated_by');
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('SET NULL');
+
             $table->timestamps();
+        });
+
+        // Step 2: Add foreign key constraint after table creation
+        Schema::table('projects', function (Blueprint $table) {
+            $table->foreign('parent_code')
+                ->references('code')
+                ->on('projects')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
         });
     }
 
@@ -28,6 +52,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Drop foreign key before dropping the table
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropForeign(['parent_code']);
+        });
+
         Schema::dropIfExists('projects');
     }
 };
