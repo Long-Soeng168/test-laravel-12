@@ -1,42 +1,19 @@
-import { AlignRight, Search } from 'lucide-react';
-import MyMenu from './my-menu';
-import { MySearch } from './my-search';
+import { AlignRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
-
 
 const MyHeader = () => {
     return (
         <>
-            <div>
-                <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-10 md:px-20">
-                    <img src="assets/images/logo.png" className="hidden w-64 lg:block" />
-                    <div className="flex items-center gap-5">
-                        <MyMenu />
-                        <img src="assets/images/logo.png" className="block w-36 lg:hidden" />
-                    </div>
-                    <div className="flex items-center">
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button
-                                    variant="myStyle"
-                                    className="flex items-center rounded-md text-sm font-medium text-black transition-all duration-500 hover:scale-105 hover:cursor-pointer hover:text-blue-900 focus:ring-2 focus:outline-none"
-                                >
-                                    <Search size={24} className="h-6 w-6" />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent side="top">
-                                <MySearch />
-                            </SheetContent>
-                        </Sheet>
-                        <div className="flex items-center gap-5 md:ml-4">
-                            <div className="h-4 items-center justify-center border border-blue-900"></div>
-                            <div className="gap-2 lg:flex">
-                                <a href="#">
-                                    <img className="w-7" src="assets/images/usa.png" />
-                                </a>
-                            </div>
-                        </div>
+            <header className="sticky top-0 z-50 bg-white py-4 shadow-lg">
+                <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-4 sm:px-10 md:px-20">
+                    {/* Logo */}
+                    <a href="/" className="text-primary hover:text-secondary flex w-50 items-center">
+                        <img src="assets/images/logo.png" />
+                    </a>
+
+                    {/* Mobile Menu Button */}
+                    <div className="xl:hidden">
                         <Sheet>
                             <SheetTrigger asChild className="ml-4 flex items-center xl:hidden">
                                 <Button
@@ -83,11 +60,351 @@ const MyHeader = () => {
                             </SheetContent>
                         </Sheet>
                     </div>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden xl:block ">
+                        <ul className="flex space-x-4">
+                            <li>
+                                <div className="group relative">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
+                                    About Us
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                                        <div>
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Web Development
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Mobile Apps
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Desktop Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Enterprise Solutions
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        API Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="group relative">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-white background-dark-blue hover:bg-gray-100">
+                                    Solutions
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                                        <div>
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Web Development
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Mobile Apps
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Desktop Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Enterprise Solutions
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        API Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="group relative">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-white background-dark-blue hover:bg-gray-100">
+                                    Case Studies
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                                        <div>
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Web Development
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Mobile Apps
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Desktop Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Enterprise Solutions
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        API Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div className="group relative">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-white background-dark-blue hover:bg-gray-100">
+                                    Partners
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                                        <div>
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Web Development
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Mobile Apps
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Desktop Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Enterprise Solutions
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        API Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="group relative">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-white background-dark-blue hover:bg-gray-100">
+                                    Careers
+
+
+
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                                        <div>
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Web Development
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Mobile Apps
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Desktop Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Enterprise Solutions
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        API Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="group relative">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-white background-dark-blue hover:bg-gray-100">
+                                    News
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                                        <div>
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">News
+                                            </h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Web Development
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Mobile Apps
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Desktop Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Enterprise Solutions
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        API Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="group relative">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-white background-dark-blue hover:bg-gray-100">
+                                    Contact Us
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                                        <div>
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Contact Us
+                                            </h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Web Development
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Mobile Apps
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Desktop Software
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        Enterprise Solutions
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="text-gray-600 hover:text-indigo-600">
+                                                        API Services
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </div>
-            {/*End Navbar */}
 
-
+                {/* Mobile Menu */}
+            </header>
         </>
     );
 };

@@ -123,11 +123,25 @@
 .background{
     background: #273896;
 }
+.background-thin{
+    background-color: #273896;
+    opacity: 0.7;
+}
+
+.hover-background:hover{
+    background: #273896;
+}
 .border-color{
     border-color: #273896;
 }
 .background-blue-color{
     background: #0bbcd4;
+}
+.background-dark-blue{
+    background: #008080;
+}
+.background-dark-gray{
+    background: #36454f;
 }
 
 .bg-gradient-hover:hover {
@@ -142,6 +156,21 @@
       rgba(149, 131, 198, 0) 107.92%
     );
   }
+
+
+
+/* Custom scrollbar for WebKit browsers */
+.scroll-container::-webkit-scrollbar {
+    height: 5px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 5px;
+}
+.scroll-container::-webkit-scrollbar-track {
+    background-color: #222;
+}
+
 
 :root {
     --background: oklch(1 0 0);
