@@ -15,7 +15,7 @@ export function MyFilterButton() {
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogTrigger asChild>
-                            <span className="rounded-xl p-1 border ">
+                            <span className="rounded-xl border p-1">
                                 <Button type="submit" variant="outline" size="icon" className="relative p-5">
                                     <FilterIcon />
                                     {queryParams?.get('status') && (
@@ -26,7 +26,6 @@ export function MyFilterButton() {
                                             </span>
                                         </div>
                                     )}
-                                    {}
                                 </Button>
                             </span>
                         </DialogTrigger>

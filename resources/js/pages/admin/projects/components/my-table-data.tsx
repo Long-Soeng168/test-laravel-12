@@ -1,3 +1,4 @@
+import DeleteButton from '@/components/delete-button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { router, usePage } from '@inertiajs/react';
@@ -5,7 +6,6 @@ import { ArrowUpDown } from 'lucide-react';
 import EditButton from './edit-button';
 import StatusButton from './status-button';
 import ViewButton from './view-button';
-import DeleteButton from '@/components/delete-button';
 
 const MyTableData = () => {
     const { projects } = usePage().props;
@@ -70,8 +70,8 @@ const MyTableData = () => {
                             </TableCell>
                             <TableCell>
                                 <span className="flex h-full items-center justify-start">
-                                    <ViewButton />
-                                    <DeleteButton deletePath='/admin/projects/' id={item.id} />
+                                    <ViewButton item={item} />
+                                    <DeleteButton deletePath="/admin/projects/" id={item.id} />
                                     <EditButton item={item} />
                                 </span>
                             </TableCell>
@@ -88,28 +88,32 @@ const MyTableData = () => {
                                     <img src={`/assets/icons/image-icon.png`} width={100} height={100} alt="" className="size-10 object-contain" />
                                 )}
                             </TableCell>
-                            <TableCell>{item.code}</TableCell>
-                            <TableCell>{item.title}</TableCell>
-                            <TableCell>{item.title_kh}</TableCell>
-                            <TableCell>{item.order_index}</TableCell>
+                            <TableCell>{item.code || '---'}</TableCell>
+                            <TableCell>{item.title || '---'}</TableCell>
+                            <TableCell>{item.title_kh || '---'}</TableCell>
+                            <TableCell>{item.order_index || '---'}</TableCell>
                             <TableCell>{item.parent_code || '---'}</TableCell>
                             <TableCell>
                                 <StatusButton id={item.id} status={item.status} />
                             </TableCell>
                             <TableCell>
-                                {new Date(item.created_at).toLocaleDateString('en-UK', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                })}
+                                {item.created_at
+                                    ? new Date(item.created_at).toLocaleDateString('en-UK', {
+                                          year: 'numeric',
+                                          month: 'long',
+                                          day: 'numeric',
+                                      })
+                                    : '---'}
                             </TableCell>
                             <TableCell>{item.created_by?.name || '---'}</TableCell>
                             <TableCell>
-                                {new Date(item.updated_at).toLocaleDateString('en-UK', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                })}
+                                {item.updated_at
+                                    ? new Date(item.updated_at).toLocaleDateString('en-UK', {
+                                          year: 'numeric',
+                                          month: 'long',
+                                          day: 'numeric',
+                                      })
+                                    : '---'}
                             </TableCell>
                             <TableCell>{item.updated_by?.name || '---'}</TableCell>
                         </TableRow>

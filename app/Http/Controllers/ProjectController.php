@@ -168,6 +168,18 @@ class ProjectController extends Controller
 
         return redirect()->back()->with('success', 'Project updated successfully!');
     }
+
+    public function update_status(Request $request, Project $project)
+    {
+        $request->validate([
+            'status' => 'required|string|in:active,inactive,pending',
+        ]);
+        $project->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->back()->with('success', 'Status updated successfully!');
+    }
     /**
      * Remove the specified resource from storage.
      */

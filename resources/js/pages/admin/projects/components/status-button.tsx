@@ -1,19 +1,19 @@
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useForm } from '@inertiajs/react';
+import { LoaderIcon } from 'lucide-react';
 import { useState } from 'react';
 
 const StatusButton = ({ id, status }: { id: number; status: string }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const { post, data, processing, errors } = useForm();
+    function handleChangeStatus(status: string) {
+        data.status = status;
+        post('/admin/projects/' + id + '/update_status', {
+            preserveScroll: true,
+        });
+    }
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <TooltipProvider delayDuration={300}>
@@ -22,7 +22,7 @@ const StatusButton = ({ id, status }: { id: number; status: string }) => {
                         <DialogTrigger className="cursor-pointer" asChild>
                             <Button
                                 variant="outline"
-                                className={`${status == 'active' && 'text-green-600'} ${status == 'inactive' && 'text-red-400'} ${status == 'pending' && 'text-yellow-600'} `}
+                                className={`${status == 'active' && 'text-green-600'} ${status == 'inactive' && 'text-red-400'} ${status == 'pending' && 'text-yellow-600'} capitalize`}
                                 size="sm"
                             >
                                 {status}
@@ -37,34 +37,43 @@ const StatusButton = ({ id, status }: { id: number; status: string }) => {
 
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Are you sure? Update ID : {id}</DialogTitle>
+                    <DialogTitle>Are you sure?</DialogTitle>
                     <DialogDescription>This action will update your record status.</DialogDescription>
+                    {errors && <span className="text-destructive">{errors.status}</span>}
                 </DialogHeader>
-                <DialogFooter className="space-y-2 sm:space-y-0"> 
+                <DialogFooter className="space-y-2 sm:space-y-0">
+                    {processing && (
+                        <Button variant="ghost" className="cursor-auto hover:bg-transparent">
+                            <span className="size-6 animate-spin">
+                                <LoaderIcon />
+                            </span>
+                            Updating...
+                        </Button>
+                    )}
                     <Button
-                        onClick={() => {}}
-                        disabled={isSubmitting}
-                        variant='warning'
-                        className="focus:ring-offset-2 focus:ring-2 ring-primary"
+                        onClick={() => handleChangeStatus('pendinggg')}
+                        disabled={processing}
+                        variant="warning"
+                        className="ring-primary m-0 focus:ring-2 focus:ring-offset-2"
                     >
-                        {isSubmitting ? 'Updating...' : 'Pending'}
+                        Pending
                     </Button>
                     <Button
-                        onClick={() => {}}
-                        disabled={isSubmitting}
-                        variant='destructive'
-                        className="focus:ring-offset-2 focus:ring-2 ring-primary"
+                        onClick={() => handleChangeStatus('inactive')}
+                        disabled={processing}
+                        variant="destructive"
+                        className="ring-primary m-0 focus:ring-2 focus:ring-offset-2"
                     >
-                        {isSubmitting ? 'Updating...' : 'Inactive'}
+                        Inactive
                     </Button>
                     <Button
-                        onClick={() => {}}
-                        disabled={isSubmitting}
-                        variant='success'
+                        onClick={() => handleChangeStatus('active')}
+                        disabled={processing}
+                        variant="success"
                         autoFocus
-                        className="focus:ring-offset-2 focus:ring-2 ring-primary"
+                        className="ring-primary m-0 focus:ring-2 focus:ring-offset-2"
                     >
-                        {isSubmitting ? 'Updating...' : 'Active'}
+                        Active
                     </Button>
                 </DialogFooter>
             </DialogContent>
