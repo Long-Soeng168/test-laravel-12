@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return 'Hello World';
+    return Inertia::render('LaravelDefaultPage');
 })->name('home');
 
 // Route::get('/', function () {
