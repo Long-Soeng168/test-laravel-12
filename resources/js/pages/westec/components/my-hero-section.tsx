@@ -29,8 +29,8 @@ export function MyHeroSection() {
         </div>
 
         {/* Right Section */}
-        <div className="mt-[50%] flex flex-col">
-            <div className="grid grid-cols-5 justify-end gap-6">
+        <div className="mt-[50%] flex flex-col ">
+            <div className="grid grid-cols-5 justify-end gap-4">
                 {[
                     { img: 'cctv.png', label: 'CCTV' },
                     { img: 'access-control.png', label: 'Access Control System' },
@@ -41,12 +41,12 @@ export function MyHeroSection() {
                     <Link
                         key={index}
                         href="#"
-                        className="size-25 w-35 border rounded-xl bg-gray-800 p-2 text-center transition-all duration-500 hover:scale-110 hover:shadow-lg"
+                        className="size-25 w-32 border rounded-xl bg-gray-800 p-2 text-center transition-all duration-500 hover:scale-110 hover:shadow-lg"
                     >
                         <div className="flex flex-col items-center">
                             <img src={`assets/images/${item.img}`} className="h-12 w-12 object-cover" alt={`${item.label} Icon`} />
                         </div>
-                        <p className="text-start text-sm leading-5 text-white capitalize">{item.label}</p>
+                        <p className="text-start text-[12px] leading-5 text-white capitalize">{item.label}</p>
                     </Link>
                 ))}
             </div>
