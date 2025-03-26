@@ -5,7 +5,7 @@ const Index = () => {
     return (
         <MyLayout>
 
-            <img src='assets/images/banner1.png' className='w-full aspect-[21/9]' />
+            <img src='assets/images/banner1.png' className='w-full aspect-[21/7] object-cover' />
             <div>
                 <MyHeroSection />
             </div>

@@ -66,7 +66,7 @@ const MyHeader = () => {
                         <ul className="flex space-x-4">
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
                                     About Us
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -113,7 +113,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
                                     Solutions
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -160,7 +160,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
                                     Case Studies
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -208,7 +208,7 @@ const MyHeader = () => {
 
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
                                     Partners
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -255,7 +255,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
                                     Careers
 
 
@@ -305,7 +305,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
                                     News
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -353,7 +353,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
                                     Contact Us
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path

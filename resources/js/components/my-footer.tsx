@@ -1,12 +1,12 @@
 const MyFooter = () => {
     return (
         <>
-            <footer className="bg-white py-10 text-black">
+            <footer className="background py-10 text-white">
                 <div className="mx-auto grid max-w-[4000px] grid-cols-1 gap-8 px-4 sm:px-10 md:grid-cols-4">
                     {/* Contact Section */}
                     <div className="grid grid-cols-1">
-                        <img src="assets/images/logo.png" alt="Angkor Wildlife & Aquarium" className="mb-4 w-48" />
-                        <div className="text-sm leading-relaxed text-black md:text-base">
+                        <img src="assets/images/whiteLogo.png" alt="Angkor Wildlife & Aquarium" className="mb-4 w-48" />
+                        <div className="text-sm leading-relaxed text-white md:text-base">
                             <p>
                                 No. 20, St. 598C, Phum Tomnub Toek,
                                 <br />
@@ -21,7 +21,7 @@ const MyFooter = () => {
                                 <p>: +855 23 882 580</p>
                             </div>
 
-                            <p className="mt-4 text-blue-600 underline">contact@westec.com</p>
+                            <p className="mt-4 underline">contact@westec.com</p>
 
                             <div className="mt-4">
                                 <p>8:00AM - 5:00PM</p>
@@ -32,7 +32,7 @@ const MyFooter = () => {
 
                     {/* Footer Links Section */}
                     <div className="md:col-span-3">
-                        <div className="grid w-full grid-cols-1 gap-6 text-sm text-black md:grid-cols-3">
+                        <div className="grid w-full grid-cols-1 gap-6 text-sm text-white md:grid-cols-3">
                             {/* About Us */}
                             <div>
                                 <h3 className="inline-block bg-teal-700 px-4 py-2 text-white">ABOUT US</h3>
