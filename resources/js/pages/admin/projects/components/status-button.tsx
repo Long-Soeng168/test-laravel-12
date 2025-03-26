@@ -41,7 +41,7 @@ const StatusButton = ({ id, status }: { id: number; status: string }) => {
                     <DialogDescription>This action will update your record status.</DialogDescription>
                     {errors && <span className="text-destructive">{errors.status}</span>}
                 </DialogHeader>
-                <DialogFooter className="space-y-2 sm:space-y-0">
+                <DialogFooter key={status} className="space-y-2 sm:space-y-0">
                     {processing && (
                         <Button variant="ghost" className="cursor-auto hover:bg-transparent">
                             <span className="size-6 animate-spin">
@@ -51,9 +51,10 @@ const StatusButton = ({ id, status }: { id: number; status: string }) => {
                         </Button>
                     )}
                     <Button
-                        onClick={() => handleChangeStatus('pendinggg')}
+                        onClick={() => handleChangeStatus('pending')}
                         disabled={processing}
                         variant="warning"
+                        autoFocus={status === 'pending'}
                         className="ring-primary m-0 focus:ring-2 focus:ring-offset-2"
                     >
                         Pending
@@ -62,6 +63,7 @@ const StatusButton = ({ id, status }: { id: number; status: string }) => {
                         onClick={() => handleChangeStatus('inactive')}
                         disabled={processing}
                         variant="destructive"
+                        autoFocus={status === 'inactive'}
                         className="ring-primary m-0 focus:ring-2 focus:ring-offset-2"
                     >
                         Inactive
@@ -70,7 +72,7 @@ const StatusButton = ({ id, status }: { id: number; status: string }) => {
                         onClick={() => handleChangeStatus('active')}
                         disabled={processing}
                         variant="success"
-                        autoFocus
+                        autoFocus={status === 'active'}
                         className="ring-primary m-0 focus:ring-2 focus:ring-offset-2"
                     >
                         Active

@@ -264,7 +264,7 @@ export default function Create() {
                         <FormItem>
                             <FormLabel>Select Images</FormLabel>
                             <FormControl>
-                                <FileUploader value={files} onValueChange={setFiles} dropzoneOptions={dropZoneConfig} className="relative p-2">
+                                <FileUploader value={files} onValueChange={setFiles} dropzoneOptions={dropZoneConfig} className="relative p-1">
                                     <FileInput id="fileInput" className="outline-1 outline-slate-500 outline-dashed">
                                         <div className="flex w-full flex-col items-center justify-center p-8">
                                             <CloudUpload className="h-10 w-10 text-gray-500" />
@@ -275,15 +275,15 @@ export default function Create() {
                                             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
                                         </div>
                                     </FileInput>
-                                    <FileUploaderContent className="flex w-full flex-row flex-wrap items-center gap-2 overflow-auto rounded-md">
+                                    <FileUploaderContent className="grid grid-cols-3 lg:grid-cols-4 w-full gap-2 rounded-md">
                                         {files?.map((file, i) => (
                                             <FileUploaderItem
                                                 key={i}
                                                 index={i}
-                                                className="size-20 overflow-hidden rounded-md border p-0"
+                                                className="w-full h-auto aspect-square overflow-hidden rounded-md border p-0 bg-background"
                                                 aria-roledescription={`file ${i + 1} containing ${file.name}`}
                                             >
-                                                <img src={URL.createObjectURL(file)} alt={file.name} className="size-20 object-contain" />
+                                                <img src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-contain" />
                                             </FileUploaderItem>
                                             // <FileUploaderItem key={i} index={i}>
                                             //     <Paperclip className="h-4 w-4 stroke-current" />
@@ -297,6 +297,7 @@ export default function Create() {
                         </FormItem>
                     )}
                 />
+                {progress && <ProgressWithValue value={progress.percentage} position="start" />}
                 <Button disabled={processing} type="submit">
                     {processing && (
                         <span className="size-6 animate-spin">
@@ -305,7 +306,6 @@ export default function Create() {
                     )}
                     {processing ? 'Submiting...' : 'Submit'}
                 </Button>
-                {progress && <ProgressWithValue value={progress.percentage} position="start" />}
             </form>
         </Form>
     );
