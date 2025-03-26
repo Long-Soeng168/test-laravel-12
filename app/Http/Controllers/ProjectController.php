@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ImageHelper;
-use App\Http\Requests\StoreProjectRequest;
-use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\File;
-use Intervention\Image\Laravel\Facades\Image;
 
 
 class ProjectController extends Controller
@@ -36,7 +32,8 @@ class ProjectController extends Controller
 
         if ($search) {
             $query->where(function ($sub_query) use ($search) {
-                return $sub_query->where('title', 'LIKE', "%{$search}%");
+                return $sub_query->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('title', 'LIKE', "%{$search}%");
             });
         }
 
@@ -93,18 +90,18 @@ class ProjectController extends Controller
         if ($image_files) {
             try {
                 foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image);
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'projects', 600);
                     ProjectImage::create([
                         'image' => $created_image_name,
                         'project_id' => $created_project->id,
                     ]);
                 }
             } catch (\Exception $e) {
-                return redirect('/admin/projects')->with('error', 'Failed to upload images: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Failed to upload images: ' . $e->getMessage());
             }
         }
 
-        return redirect('/admin/projects')->with('success', 'Project created successfully!');
+        return redirect()->back()->with('success', 'Project created successfully!');
     }
 
     /**
