@@ -43,12 +43,12 @@ export default function Edit({ item }: { item: any }) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: item.title,
-            title_kh: item.title_kh,
-            code: item.code,
-            order_index: item.order_index,
-            parent_code: item.parent_code,
-            status: item.status,
+            title: item.title || '',
+            title_kh: item.title_kh || '',
+            code: item.code || '',
+            order_index: item.order_index?.toString() || '',
+            parent_code: item.parent_code || '',
+            status: item.status || 'active',
         },
     });
 
@@ -79,21 +79,14 @@ export default function Edit({ item }: { item: any }) {
             transform(() => ({
                 ...values,
                 images: files || null,
-                // image: files ? files[0] : null,
             }));
-            post('/admin/projects', {
+            post('/admin/projects/' + item.id + '/update', {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success('Success', {
-                        description: 'Created successfully',
-                    });
-                    form.reset();
                     setFiles(null);
                 },
-                onError: () => {
-                    toast.error('Error', {
-                        description: 'Failed to create.',
-                    });
+                onError: (e) => {
+                    console.log(e);
                 },
             });
         } catch (error) {
@@ -105,23 +98,12 @@ export default function Edit({ item }: { item: any }) {
     }
 
     const handleDestroyImage = (id: number) => {
-        destroy('/admin/projects/images/' + id, {
-            onSuccess: () => {
-                toast.success('Success', {
-                    description: 'Delete successfully',
-                });
-            },
-            onError: () => {
-                toast.error('Error', {
-                    description: 'Failed to delete.',
-                });
-            },
-        });
+        destroy('/admin/projects/images/' + id);
     };
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto max-w-3xl space-y-8 py-10">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 pt-10">
                 <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-6">
                         <FormField
@@ -185,7 +167,7 @@ export default function Edit({ item }: { item: any }) {
                                         <Input placeholder="ex: 1" type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>Lower number is priority (default = 1)</FormDescription>
-                                    <FormMessage />
+                                    <FormMessage>{errors.order_index && <div>{errors.order_index}</div>}</FormMessage>
                                 </FormItem>
                             )}
                         />
@@ -221,23 +203,25 @@ export default function Edit({ item }: { item: any }) {
                                                 <CommandList>
                                                     <CommandEmpty>No category found.</CommandEmpty>
                                                     <CommandGroup>
-                                                        {parents_projects.map((item) => (
-                                                            <CommandItem
-                                                                value={item.title}
-                                                                key={item.code}
-                                                                onSelect={() => {
-                                                                    form.setValue('parent_code', item.code);
-                                                                }}
-                                                            >
-                                                                <Check
-                                                                    className={cn(
-                                                                        'mr-2 h-4 w-4',
-                                                                        item.code === field.value ? 'opacity-100' : 'opacity-0',
-                                                                    )}
-                                                                />
-                                                                {item.title}
-                                                            </CommandItem>
-                                                        ))}
+                                                        {parents_projects
+                                                            .filter((parent_item) => parent_item.id !== item.id) // Skip current item
+                                                            .map((parent_item) => (
+                                                                <CommandItem
+                                                                    value={parent_item.title}
+                                                                    key={parent_item.code}
+                                                                    onSelect={() => {
+                                                                        form.setValue('parent_code', parent_item.code);
+                                                                    }}
+                                                                >
+                                                                    <Check
+                                                                        className={cn(
+                                                                            'mr-2 h-4 w-4',
+                                                                            parent_item.code === field.value ? 'opacity-100' : 'opacity-0',
+                                                                        )}
+                                                                    />
+                                                                    {parent_item.title}
+                                                                </CommandItem>
+                                                            ))}
                                                     </CommandGroup>
                                                 </CommandList>
                                             </Command>

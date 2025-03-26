@@ -20,7 +20,6 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        // sleep(20);
         $search = $request->input('search', '');
         $sortBy = $request->input('sortBy', 'id');
         $sortDirection = $request->input('sortDirection', 'desc');
@@ -50,7 +49,7 @@ class ProjectController extends Controller
 
     public function all_projects()
     {
-        return response()->json(Project::all());
+        return response()->json(Project::orderBy('id', 'desc')->get());
     }
 
     /**
@@ -66,8 +65,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // sleep(10);
-        // dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'title_kh' => 'required|string|max:255',
@@ -79,8 +76,8 @@ class ProjectController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $validated['created_by'] = request()->user()->id;
-        $validated['updated_by'] = request()->user()->id;
+        $validated['created_by'] = $request->user()->id;
+        $validated['updated_by'] = $request->user()->id;
 
         $image_files = $request->file('images');
         unset($validated['images']);
@@ -94,16 +91,20 @@ class ProjectController extends Controller
         $created_project = Project::create($validated);
 
         if ($image_files) {
-            foreach ($image_files as $key => $image) {
-                $created_image_name = ImageHelper::uploadAndResizeImage($image);
-                ProjectImage::create([
-                    'image' => $created_image_name,
-                    'project_id' => $created_project->id,
-                ]);
+            try {
+                foreach ($image_files as $image) {
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image);
+                    ProjectImage::create([
+                        'image' => $created_image_name,
+                        'project_id' => $created_project->id,
+                    ]);
+                }
+            } catch (\Exception $e) {
+                return redirect('/admin/projects')->with('error', 'Failed to upload images: ' . $e->getMessage());
             }
         }
 
-        return redirect('/admin/projects');
+        return redirect('/admin/projects')->with('success', 'Project created successfully!');
     }
 
     /**
@@ -125,11 +126,48 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProjectRequest $request, Project $project)
+    public function update(Request $request, Project $project)
     {
-        //
-    }
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'title_kh' => 'required|string|max:255',
+            'code' => 'required|string|max:255|unique:projects,code,' . $project->id,
+            'order_index' => 'nullable|integer|min:0|max:255',
+            'parent_code' => 'nullable|string',
+            'status' => 'nullable|string',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
+        $validated['updated_by'] = $request->user()->id;
+
+        $image_files = $request->file('images');
+        unset($validated['images']);
+
+        foreach ($validated as $key => $value) {
+            if ($value === null || $value === '') {
+                unset($validated[$key]);
+            }
+        }
+
+        $project->update($validated);
+
+        if ($image_files) {
+            try {
+                foreach ($image_files as $image) {
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image);
+                    ProjectImage::create([
+                        'image' => $created_image_name,
+                        'project_id' => $project->id,
+                    ]);
+                }
+            } catch (\Exception $e) {
+                return redirect('/admin/projects')->with('error', 'Failed to upload images: ' . $e->getMessage());
+            }
+        }
+
+        return redirect()->back()->with('success', 'Project updated successfully!');
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -141,7 +179,7 @@ class ProjectController extends Controller
             }
         }
         $project->delete();
-        return redirect('/admin/projects');
+        return redirect()->back()->with('success', 'Project deleted successfully.');
     }
 
     public function destroy_image(ProjectImage $image)
@@ -157,6 +195,6 @@ class ProjectController extends Controller
         // Delete from DB
         $image->delete();
 
-        return redirect('/admin/projects')->with('success', 'Image deleted successfully.');
+        return redirect()->back()->with('success', 'Image deleted successfully.');
     }
 }

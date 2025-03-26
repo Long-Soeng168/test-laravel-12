@@ -79,35 +79,30 @@ export default function Create() {
             transform(() => ({
                 ...values,
                 images: files || null,
-                // image: files ? files[0] : null,
             }));
             post('/admin/projects', {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Success", {
-                        description: "Created successfully",
-                    })
                     form.reset();
                     setFiles(null);
                 },
                 onError: () => {
-                    toast.error("Error", {
-                        description: "Failed to create.",
-                    })
+                    toast.error('Error', {
+                        description: 'Failed to create.',
+                    });
                 },
-                
             });
         } catch (error) {
             console.error('Form submission error', error);
-            toast.error("Error", {
-                description: "Something went wrong!",
-            })
+            toast.error('Error', {
+                description: 'Something went wrong!',
+            });
         }
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto max-w-3xl space-y-8 py-10">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 pt-10">
                 <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-6">
                         <FormField
@@ -171,7 +166,7 @@ export default function Create() {
                                         <Input placeholder="ex: 1" type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>Lower number is priority (default = 1)</FormDescription>
-                                    <FormMessage />
+                                    <FormMessage>{errors.order_index && <div>{errors.order_index}</div>}</FormMessage>
                                 </FormItem>
                             )}
                         />
@@ -196,20 +191,20 @@ export default function Create() {
                                                 >
                                                     {field.value
                                                         ? parents_projects.find((item) => item.code === field.value)?.title
-                                                        : 'Select category'}
+                                                        : 'Select parent'}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                 </Button>
                                             </FormControl>
                                         </PopoverTrigger>
                                         <PopoverContent className="w-[200px] p-0">
                                             <Command>
-                                                <CommandInput placeholder="Search category..." />
+                                                <CommandInput placeholder="Search parent..." />
                                                 <CommandList>
-                                                    <CommandEmpty>No category found.</CommandEmpty>
+                                                    <CommandEmpty>No parent found.</CommandEmpty>
                                                     <CommandGroup>
                                                         {parents_projects.map((item) => (
                                                             <CommandItem
-                                                                value={item.title}
+                                                                value={item.title + item.code}
                                                                 key={item.code}
                                                                 onSelect={() => {
                                                                     form.setValue('parent_code', item.code);
@@ -221,7 +216,7 @@ export default function Create() {
                                                                         item.code === field.value ? 'opacity-100' : 'opacity-0',
                                                                     )}
                                                                 />
-                                                                {item.title}
+                                                                {item.title} 
                                                             </CommandItem>
                                                         ))}
                                                     </CommandGroup>
@@ -229,7 +224,7 @@ export default function Create() {
                                             </Command>
                                         </PopoverContent>
                                     </Popover>
-                                    <FormDescription>Select the main category this item belongs to.</FormDescription>
+                                    <FormDescription>Select the parent this item belongs to.</FormDescription>
                                     <FormMessage>{errors.parent_code && <div>{errors.parent_code}</div>}</FormMessage>
                                 </FormItem>
                             )}
@@ -241,7 +236,7 @@ export default function Create() {
                             control={form.control}
                             name="status"
                             render={({ field }) => (
-                                <FormItem >
+                                <FormItem>
                                     <FormLabel>Status</FormLabel>
                                     <Select key={field.value} onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
@@ -269,12 +264,7 @@ export default function Create() {
                         <FormItem>
                             <FormLabel>Select Images</FormLabel>
                             <FormControl>
-                                <FileUploader
-                                    value={files}
-                                    onValueChange={setFiles}
-                                    dropzoneOptions={dropZoneConfig}
-                                    className="relative p-2"
-                                >
+                                <FileUploader value={files} onValueChange={setFiles} dropzoneOptions={dropZoneConfig} className="relative p-2">
                                     <FileInput id="fileInput" className="outline-1 outline-slate-500 outline-dashed">
                                         <div className="flex w-full flex-col items-center justify-center p-8">
                                             <CloudUpload className="h-10 w-10 text-gray-500" />
@@ -300,7 +290,7 @@ export default function Create() {
                                             //     <span>{file.name}</span>
                                             // </FileUploaderItem>
                                         ))}
-                                    </FileUploaderContent> 
+                                    </FileUploaderContent>
                                 </FileUploader>
                             </FormControl>
                             <FormMessage>{errors.images && <div>{errors.images}</div>}</FormMessage>
@@ -308,12 +298,14 @@ export default function Create() {
                     )}
                 />
                 <Button disabled={processing} type="submit">
-                    {processing && <span className='size-6 animate-spin'><Loader /></span>}
+                    {processing && (
+                        <span className="size-6 animate-spin">
+                            <Loader />
+                        </span>
+                    )}
                     {processing ? 'Submiting...' : 'Submit'}
                 </Button>
-                {progress && (
-                    <ProgressWithValue value={progress.percentage} position="start" />
-                )}
+                {progress && <ProgressWithValue value={progress.percentage} position="start" />}
             </form>
         </Form>
     );

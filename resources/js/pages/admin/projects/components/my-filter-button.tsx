@@ -15,18 +15,20 @@ export function MyFilterButton() {
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogTrigger asChild>
-                            <Button type="submit" variant="outline" size="icon" className="relative p-5">
-                                <FilterIcon />
-                                {queryParams?.get('status') && (
-                                    <div className="absolute -top-1 -right-1">
-                                        <span className="relative flex size-3">
-                                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
-                                            <span className="relative inline-flex size-3 rounded-full bg-red-500"></span>
-                                        </span>
-                                    </div>
-                                )}
-                                {}
-                            </Button>
+                            <span className="rounded-xl p-1 border ">
+                                <Button type="submit" variant="outline" size="icon" className="relative p-5">
+                                    <FilterIcon />
+                                    {queryParams?.get('status') && (
+                                        <div className="absolute -top-1 -right-1">
+                                            <span className="relative flex size-3">
+                                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                                                <span className="relative inline-flex size-3 rounded-full bg-red-500"></span>
+                                            </span>
+                                        </div>
+                                    )}
+                                    {}
+                                </Button>
+                            </span>
                         </DialogTrigger>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">

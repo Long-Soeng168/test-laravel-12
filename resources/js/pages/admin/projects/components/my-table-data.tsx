@@ -2,10 +2,10 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { router, usePage } from '@inertiajs/react';
 import { ArrowUpDown } from 'lucide-react';
-import DeleteButton from './delete-button';
 import EditButton from './edit-button';
 import StatusButton from './status-button';
 import ViewButton from './view-button';
+import DeleteButton from '@/components/delete-button';
 
 const MyTableData = () => {
     const { projects } = usePage().props;
@@ -71,7 +71,7 @@ const MyTableData = () => {
                             <TableCell>
                                 <span className="flex h-full items-center justify-start">
                                     <ViewButton />
-                                    <DeleteButton id={item.id} />
+                                    <DeleteButton deletePath='/admin/projects/' id={item.id} />
                                     <EditButton item={item} />
                                 </span>
                             </TableCell>
