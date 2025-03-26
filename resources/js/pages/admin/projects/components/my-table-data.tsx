@@ -1,8 +1,10 @@
 import DeleteButton from '@/components/delete-button';
+import MyImageGallery from '@/components/my-image-gallery';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { router, usePage } from '@inertiajs/react';
 import { ArrowUpDown } from 'lucide-react';
+import { useState } from 'react';
 import EditButton from './edit-button';
 import StatusButton from './status-button';
 import ViewButton from './view-button';
@@ -26,8 +28,17 @@ const MyTableData = () => {
         router.get(currentPath + '?' + queryParams.toString());
     };
 
+    const [selectedImages, setSelectedImages] = useState([]);
+    const [isOpenViewImages, setIsOpenViewImages] = useState(false);
+
     return (
         <ScrollArea className="w-full rounded-md border">
+            <MyImageGallery
+                imagePath="/assets/images/projects/"
+                selectedImages={selectedImages}
+                isOpenViewImages={isOpenViewImages}
+                setIsOpenViewImages={setIsOpenViewImages}
+            />
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -77,13 +88,20 @@ const MyTableData = () => {
                             </TableCell>
                             <TableCell>
                                 {item.images[0] ? (
-                                    <img
-                                        src={`/assets/images/projects/thumb/` + item.images[0]?.image}
-                                        width={100}
-                                        height={100}
-                                        alt=""
-                                        className="size-10 object-contain"
-                                    />
+                                    <button
+                                        onClick={() => {
+                                            setSelectedImages(item.images);
+                                            setIsOpenViewImages(true);
+                                        }}
+                                    >
+                                        <img
+                                            src={`/assets/images/projects/thumb/` + item.images[0]?.image}
+                                            width={100}
+                                            height={100}
+                                            alt=""
+                                            className="size-10 object-contain"
+                                        />
+                                    </button>
                                 ) : (
                                     <img src={`/assets/icons/image-icon.png`} width={100} height={100} alt="" className="size-10 object-contain" />
                                 )}
