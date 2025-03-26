@@ -54,6 +54,8 @@ return new class extends Migration
     {
         // Drop foreign key before dropping the table
         Schema::table('projects', function (Blueprint $table) {
+            $table->dropForeign(['created_by']);
+            $table->dropForeign(['updated_by']);
             $table->dropForeign(['parent_code']);
         });
 

@@ -4,22 +4,14 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useForm } from '@inertiajs/react';
 import { Loader, Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
-import { toast } from 'sonner';
 
-const DeleteButton = ({ id }: { id: number }) => {
+const DeleteButton = ({ deletePath, id }: { deletePath: string; id: number }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { delete: destroy, processing } = useForm();
 
     const handleDelete = () => {
-        destroy('/admin/projects/' + id, {
-            onSuccess: () => {
-                setIsOpen(false);
-                toast.success('Delete Successfully');
-            },
-            onError: (errors) => {
-                setIsOpen(false);
-                toast.error(errors?.message || 'Something went wrong!');
-            },
+        destroy(deletePath + id, {
+            preserveScroll: true,
         });
     };
 

@@ -21,8 +21,8 @@ const ProgressWithValue = React.forwardRef<
       className={cn(
         'hidden text-sm font-bold',
         position === 'start-outside' && 'block text-primary',
-        position === 'follow' && cn(valueCommonClass, 'flex justify-end text-primary-foreground'),
-        position === 'start' && cn(valueCommonClass, 'flex justify-start text-primary-foreground'),
+        position === 'follow' && cn(valueCommonClass, 'flex justify-end text-white'),
+        position === 'start' && cn(valueCommonClass, 'flex justify-start text-white'),
         position === 'end' && cn(valueCommonClass, 'flex justify-end text-primary'),
         position === 'end-outside' && 'block text-primary',
         valueClassName,
@@ -41,7 +41,7 @@ const ProgressWithValue = React.forwardRef<
         {...props}
       >
         <ProgressPrimitive.Indicator
-          className="h-full w-full flex-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  transition-all rounded-full"
+          className="h-full w-full flex-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  transition-all rounded-full "
           style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
         >
           {position === 'follow' && <ProgressValue />}

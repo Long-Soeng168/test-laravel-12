@@ -2,10 +2,10 @@ import { MyPagination } from '@/components/my-pagination';
 import AppLayout from '@/layouts/app-layout';
 import AddNewButton from './components/add-new-button';
 import { MyFilterButton } from './components/my-filter-button';
-import { MySearchTableData } from './components/my-search-table-data';
 import MyTableData from './components/my-table-data';
 import { MyRefreshButton } from '@/components/my-refresh-button';
 import { BreadcrumbItem } from '@/types';
+import { MySearchTableData } from '@/components/my-search-table-data';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
