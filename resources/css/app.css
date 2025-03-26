@@ -37,6 +37,10 @@
     src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-black.otf')format('truetype');
 }
 @font-face {
+    font-family: NovaRegular;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-regular.otf')format('truetype');
+}
+@font-face {
     font-family: ProximaBlackItalic;
     src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-black-italic.otf')format('truetype');
 }
@@ -53,6 +57,7 @@
     --font-proxima-black: ProximaBlack, 'Poppins';
     --font-proxima-black-italic: ProximaBlackItalic, 'Poppins';
     --font-proxima-thin: ProximaThin, 'Poppins';
+    --font-proxima-nova-regular: NovaRegular, 'Poppins';
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);

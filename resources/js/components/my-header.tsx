@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 const MyHeader = () => {
     return (
         <>
-            <header className="sticky top-0 z-50 bg-white py-4 shadow-lg">
+            <header className="sticky top-0 z-50 bg-white py-5 shadow-lg">
                 <div className="flex max-w-[4000px] mx-auto items-center justify-between px-4 sm:px-10">
                     {/* Logo */}
                     <a href="/" className="text-primary hover:text-secondary flex w-50 items-center">
@@ -66,7 +66,7 @@ const MyHeader = () => {
                         <ul className="flex space-x-4">
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
+                                    <button className="font-proxima-nova-regular flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all duration-300 transition-all">
                                     About Us
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -79,8 +79,8 @@ const MyHeader = () => {
 
                                     <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
                                         <div>
-                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
-                                            <ul className="space-y-3">
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900 font-proxima-nova-regular">Software</h3>
+                                            <ul className="space-y-3 font-proxima-nova-regular">
                                                 <li>
                                                     <a href="#" className="text-gray-600 hover:text-indigo-600">
                                                         Web Development
@@ -113,7 +113,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="font-proxima-nova-regular flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
                                     Solutions
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -126,8 +126,8 @@ const MyHeader = () => {
 
                                     <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
                                         <div>
-                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
-                                            <ul className="space-y-3">
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900 font-proxima-nova-regular">Software</h3>
+                                            <ul className="space-y-3 font-proxima-nova-regular">
                                                 <li>
                                                     <a href="#" className="text-gray-600 hover:text-indigo-600">
                                                         Web Development
@@ -160,7 +160,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="font-proxima-nova-regular flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
                                     Case Studies
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -173,8 +173,8 @@ const MyHeader = () => {
 
                                     <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
                                         <div>
-                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
-                                            <ul className="space-y-3">
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900 font-proxima-nova-regular">Software</h3>
+                                            <ul className="space-y-3 font-proxima-nova-regular">
                                                 <li>
                                                     <a href="#" className="text-gray-600 hover:text-indigo-600">
                                                         Web Development
@@ -208,7 +208,7 @@ const MyHeader = () => {
 
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="font-proxima-nova-regular flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
                                     Partners
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -221,8 +221,8 @@ const MyHeader = () => {
 
                                     <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
                                         <div>
-                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
-                                            <ul className="space-y-3">
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900 font-proxima-nova-regular">Software</h3>
+                                            <ul className="space-y-3 font-proxima-nova-regular">
                                                 <li>
                                                     <a href="#" className="text-gray-600 hover:text-indigo-600">
                                                         Web Development
@@ -255,7 +255,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="font-proxima-nova-regular flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
                                     Careers
 
 
@@ -271,8 +271,8 @@ const MyHeader = () => {
 
                                     <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
                                         <div>
-                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Software</h3>
-                                            <ul className="space-y-3">
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900 font-proxima-nova-regular">Software</h3>
+                                            <ul className="space-y-3 font-proxima-nova-regular">
                                                 <li>
                                                     <a href="#" className="text-gray-600 hover:text-indigo-600">
                                                         Web Development
@@ -305,7 +305,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="font-proxima-nova-regular flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
                                     News
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -318,9 +318,9 @@ const MyHeader = () => {
 
                                     <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
                                         <div>
-                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">News
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900 font-proxima-nova-regular">News
                                             </h3>
-                                            <ul className="space-y-3">
+                                            <ul className="space-y-3 font-proxima-nova-regular">
                                                 <li>
                                                     <a href="#" className="text-gray-600 hover:text-indigo-600">
                                                         Web Development
@@ -353,7 +353,7 @@ const MyHeader = () => {
                             </li>
                             <li>
                                 <div className="group relative">
-                                    <button className="flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100">
+                                    <button className="font-proxima-nova-regular flex items-center rounded-md px-3 py-2 text-sm text-white background-dark-blue hover:bg-gray-100 duration-300 transition-all">
                                     Contact Us
                                         <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -366,9 +366,9 @@ const MyHeader = () => {
 
                                     <div className="invisible absolute left-0 z-50 mt-2 w-50 -translate-x-1/4 transform rounded-lg border border-gray-200 bg-white p-6 opacity-0 shadow-lg transition-all duration-300 group-hover:visible group-hover:opacity-100">
                                         <div>
-                                            <h3 className="mb-4 text-lg font-semibold text-gray-900">Contact Us
+                                            <h3 className="mb-4 text-lg font-semibold text-gray-900 font-proxima-nova-regular">Contact Us
                                             </h3>
-                                            <ul className="space-y-3">
+                                            <ul className="space-y-3 font-proxima-nova-regular">
                                                 <li>
                                                     <a href="#" className="text-gray-600 hover:text-indigo-600">
                                                         Web Development

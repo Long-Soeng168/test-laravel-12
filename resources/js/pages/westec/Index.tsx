@@ -1,19 +1,18 @@
+import { MySlide } from '@/components/my-slide';
+import { MyBottomContent } from './components/my-bottom-content';
 import { MyHeroSection } from './components/my-hero-section';
 import MyLayout from './layout/layout';
+import { MyFeatureProducts } from './components/my-feature-products';
 
 const Index = () => {
     return (
         <MyLayout>
-
-            <img src='assets/images/banner1.png' className='w-full aspect-[21/7] object-cover' />
-            <div>
-                <MyHeroSection />
-            </div>
-            {/* <MySlide/>
-            <div className='max-w-screen-2xl mx-auto'>
-                <MyBottomContent/>
-            </div>
-            <MySlide/> */}
+            <img src="assets/demo-images/banner1.png" className="aspect-[21/7] w-full object-cover" />
+            <MyHeroSection />
+            <MySlide />
+            <MyBottomContent />
+            <MySlide />
+            <MyFeatureProducts/>
         </MyLayout>
     );
 };

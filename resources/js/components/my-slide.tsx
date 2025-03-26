@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 
 export function MySlide() {
     const images = [
-        { id: '1', image: '/assets/images/banner2.png', alt: 'Slide 1' },
-        { id: '2', image: '/assets/images/banner1.png', alt: 'Slide 2' },
+        { id: '1', image: '/assets/demo-images/banner2.png', alt: 'Slide 1' },
+        { id: '2', image: '/assets/demo-images/banner1.png', alt: 'Slide 2' },
     ];
 
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -21,13 +21,13 @@ export function MySlide() {
     }, [emblaApi]);
 
     return (
-        <div className="relative mx-auto w-full max-w-full ">
+        <div className="relative mx-auto w-full max-w-[4000px] ">
             {/* Carousel */}
             <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex">
                     {images?.map((item) => (
                         <div key={item.id} className="flex-[0_0_100%] mt-1">
-                            <Card className="relative aspect-[16/9] sm:aspect-[19/7] md:aspect-[21/9] w-full rounded-none py-0">
+                            <Card className="relative aspect-[16/9] sm:aspect-[19/7] md:aspect-[21/7] w-full rounded-none py-0">
                                 <img src={item.image} alt={item.alt} className="w-full h-full object-cover" />
                                 <div className="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 ">
                                     <div className="mx-auto max-w-screen-lg sm:max-w-screen-xl md:max-w-screen-2xl p-5 sm:10 md:p-20 lg:p-20">

@@ -89,7 +89,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     >
       <div className="relative w-full">
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto py-10 md:py-20 scroll-smooth [scrollbar-width:none]"
+          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth [scrollbar-width:none]"
           ref={carouselRef}
           onScroll={checkScrollability}
         >
@@ -102,7 +102,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           <div
             className={cn(
               "flex flex-row justify-start gap-4 pl-4",
-              "max-w-7xl mx-auto" // remove max-w-4xl if you want the carousel to span the full width of its container
+              "px-4 sm:px-10 mx-auto" // remove max-w-4xl if you want the carousel to span the full width of its container
             )}
           >
             {items.map((item, index) => (
@@ -130,20 +130,20 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             ))}
           </div>
         </div>
-        <div className="flex justify-end gap-2 mr-10">
+        <div className="flex justify-end gap-2 mr-10 my-6">
           <button
-            className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
+            className="relative z-40 h-10 w-10 rounded-full background flex items-center justify-center disabled:opacity-50"
             onClick={scrollLeft}
             disabled={!canScrollLeft}
           >
-            <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
+            <IconArrowNarrowLeft className="h-6 w-6 text-white" />
           </button>
           <button
-            className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
+            className="relative z-40 h-10 w-10 rounded-full background flex items-center justify-center disabled:opacity-50"
             onClick={scrollRight}
             disabled={!canScrollRight}
           >
-            <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
+            <IconArrowNarrowRight className="h-6 w-6 text-white" />
           </button>
         </div>
       </div>
@@ -194,33 +194,41 @@ export const Card = ({
 
   return (
     <>
-      <motion.button
-        layoutId={layout ? `card-${card.title}` : undefined}
-        onClick={handleOpen}
-        className="rounded-3xl bg-gray-100 dark:bg-neutral-900 h-56 aspect-square md:h-96 overflow-hidden flex flex-col items-start justify-start relative z-10"
-      >
-        <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
-        <div className="relative z-40 p-8">
-          <motion.p
-            layoutId={layout ? `category-${card.category}` : undefined}
-            className="text-white text-sm md:text-base font-medium font-sans text-left"
-          >
-            {card.category}
-          </motion.p>
-          <motion.p
-            layoutId={layout ? `title-${card.title}` : undefined}
-            className="text-white text-xl md:text-3xl font-semibold max-w-xs text-left [text-wrap:balance] font-sans mt-2"
-          >
-            {card.title}
-          </motion.p>
-        </div>
-        <BlurImage
-          src={card.src}
-          alt={card.title}
-          fill
-          className="object-cover absolute z-10 inset-0"
-        />
-      </motion.button>
+     <motion.button
+  layoutId={layout ? `card-${card.title}` : undefined}
+  onClick={handleOpen}
+  className="relative z-10 flex  aspect-square h-56 flex-col items-start justify-start overflow-hidden rounded-2xl bg-gray-100 dark:bg-neutral-900 md:h-96"
+>
+  {/* Gradient Overlay */}
+  <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent z-30" />
+
+  {/* Top Text (Category) */}
+  <div className="relative z-40 p-8">
+    <motion.p
+      layoutId={layout ? `category-${card.category}` : undefined}
+      className="text-left text-base font-proxima-nova-regular text-white md:text-2xl"
+    >
+      {card.category}
+    </motion.p>
+  </div>
+
+  {/* Title (Bottom Positioned) */}
+  <motion.p
+    layoutId={layout ? `title-${card.title}` : undefined}
+    className="relative z-40 p-4 rounded-tr-full text-left font-proxima-nova-regular background text-base text-white md:text-xl [text-wrap:balance] mt-auto"
+  >
+    {card.title}
+  </motion.p>
+
+  {/* Background Image */}
+  <BlurImage
+    src={card.src}
+    alt={card.title}
+    fill
+    className="absolute inset-0 z-10 object-cover transition-all duration-500 hover:scale-110 hover:cursor-pointer"
+  />
+</motion.button>
+
     </>
   );
 };
