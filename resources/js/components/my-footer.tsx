@@ -1,138 +1,118 @@
-import { Link } from "@inertiajs/react";
-
 const MyFooter = () => {
     return (
         <>
-            <footer className="background px-6 py-10 text-white md:px-20">
-                <div className="mx-auto grid max-w-scren-2xl grid-cols-1 gap-8 md:grid-cols-4">
-                    <div>
-                        <img src="assets/images/whiteLogo.png" alt="Angkor Wildlife & Aquarium" className="mb-4 w-64" />
-                        <div>
-                            <p>#20, Street. 598C, Phum Tomnob, Sangkat Phnom Penh Thmey, Khan SenSok, Phnom Penh, Cambodia</p>
-                        </div>
-                        <p className="mt-2 ">Tell : 023 882 580 | 016 991 580 | 012 269 661</p>
-                        <p> Email: contact@westec.com | sales@westec.com | support@westec.com</p>
-                        <p className="mt-4"> Monday - Saturday : 8:00am - 5:00pm</p>
-                    </div>
+            <footer className="bg-white py-10 text-black">
+                <div className="mx-auto grid max-w-[4000px] grid-cols-1 gap-8 px-4 sm:px-10 md:grid-cols-4">
+                    {/* Contact Section */}
+                    <div className="grid grid-cols-1">
+                        <img src="assets/images/logo.png" alt="Angkor Wildlife & Aquarium" className="mb-4 w-48" />
+                        <div className="text-sm leading-relaxed text-black md:text-base">
+                            <p>
+                                No. 20, St. 598C, Phum Tomnub Toek,
+                                <br />
+                                Sangkat Phnom Penh Thmey, Khan Sen Sok,
+                                <br />
+                                Phnom Penh City, Kingdom of Cambodia.
+                            </p>
 
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">About Us</h3>
-                        <ul className="mt-2 space-y-1">
-                            <li>Who We Are</li>
-                            <li>Sustainability</li>
-                            <li>Education</li>
-                            <li>Animal Care</li>
-                        </ul>
-                    </div>
+                            <div className="mt-4 flex flex-col">
+                                <p><span className="pr-3">Mobile Phone</span>: +855 12 269 661</p>
+                                <p><span>Landline Phone</span>: +855 16 991 580</p>
+                                <p>: +855 23 882 580</p>
+                            </div>
 
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">Solutions</h3>
-                        <ul className="mt-2 space-y-1">
-                            <li>River & Sea Spectacle</li>
-                            <li>Touch Pool</li>
-                            <li>Wildlife Animal Park</li>
-                            <li>Reptile House</li>
-                        </ul>
-                    </div>
+                            <p className="mt-4 text-blue-600 underline">contact@westec.com</p>
 
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">Case Studies</h3>
-                        <ul className="mt-2 space-y-1">
-                            <li>Park Map</li>
-                            <li>Activities</li>
-                            <li>Dining</li>
-                            <li>Retail</li>
-                            <li>Facilities</li>
-                            <li>Adventure Rules</li>
-                        </ul>
-                    </div>
-                    {/* <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">Partners</h3>
-                        <ul className="mt-2 space-y-1">
-                            <li>Park Map</li>
-                            <li>Activities</li>
-                            <li>Dining</li>
-                            <li>Retail</li>
-                            <li>Facilities</li>
-                            <li>Adventure Rules</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">Careers</h3>
-                        <ul className="mt-2 space-y-1">
-                            <li>Park Map</li>
-                            <li>Activities</li>
-                            <li>Dining</li>
-                            <li>Retail</li>
-                            <li>Facilities</li>
-                            <li>Adventure Rules</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">News</h3>
-                        <ul className="mt-2 space-y-1">
-                            <li>Park Map</li>
-                            <li>Activities</li>
-                            <li>Dining</li>
-                            <li>Retail</li>
-                            <li>Facilities</li>
-                            <li>Adventure Rules</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">Contact Us</h3>
-                        <ul className="mt-2 space-y-1">
-                            <li>Park Map</li>
-                            <li>Activities</li>
-                            <li>Dining</li>
-                            <li>Retail</li>
-                            <li>Facilities</li>
-                            <li>Adventure Rules</li>
-                        </ul>
-                    </div> */}
-                </div>
-
-                <div className="mx-auto mt-10 grid max-w-screen-2xl grid-cols-1 gap-8 border-t border-gray-600 pt-6 md:grid-cols-2">
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">Follow Us!</h3>
-                        <div className="mt-3 flex items-center space-x-4">
-                            <Link href="#" className="fab fa-facebook-square text-2xl">
-                                <img src="assets/images/facebook-new.png" className="w-10"/>
-                            </Link>
-
-                            <Link href="#" className="fab fa-facebook-square text-2xl">
-                                <img src="assets/images/icons8-linkedin-64.png" className="w-11"/>
-                            </Link>
-                            <Link href="#" className="fab fa-facebook-square text-2xl">
-                                <img src="assets/images/youtube-play.png" className="w-10"/>
-                            </Link>
-
-
+                            <div className="mt-4">
+                                <p>8:00AM - 5:00PM</p>
+                                <p>Monday - Saturday</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div>
-                        <h3 className="inline-block border-b-2 border-green-500 pb-1 text-lg font-bold">Chat With Us!</h3>
-                        <div className="mt-3 flex space-x-4">
+                    {/* Footer Links Section */}
+                    <div className="md:col-span-3">
+                        <div className="grid w-full grid-cols-1 gap-6 text-sm text-black md:grid-cols-3">
+                            {/* About Us */}
+                            <div>
+                                <h3 className="inline-block bg-teal-700 px-4 py-2 text-white">ABOUT US</h3>
+                                <ul className="mt-2 space-y-1">
+                                    <li>. What is Westec?</li>
+                                    <li>. Mission & Vision</li>
+                                    <li>. Why Westec</li>
+                                    <li>. Sales advantages</li>
+                                </ul>
+                            </div>
 
-                            <Link href="#" className="fab fa-facebook-square text-2xl">
-                                <img src="assets/images/icons8-telegram-64.png" className="w-10"/>
-                            </Link>
-                            <Link href="#" className="fab fa-facebook-square text-2xl">
-                                <img src="assets/images/icons8-messenger-64.png" className="w-10"/>
-                            </Link>
-                            <Link href="#" className="fab fa-facebook-square text-2xl">
-                                <img src="assets/images/icons8-call-64.png" className="w-9"/>
-                            </Link>
+                            {/* Solutions */}
+                            <div>
+                                <h3 className="inline-block bg-teal-700 px-4 py-2 text-white">SOLUTIONS</h3>
+                                <ul className="mt-2 space-y-1">
+                                    <li>. Security & Safety Solutions</li>
+                                    <li>. Smart Home & Office Solutions</li>
+                                    <li>. Commercial & Residential Equipments</li>
+                                    <li>. IT Solutions</li>
+                                </ul>
+                            </div>
+
+                            {/* Case Studies */}
+                            <div>
+                                <h3 className="inline-block bg-teal-700 px-4 py-2 text-white">CASE STUDIES</h3>
+                                <ul className="mt-2 space-y-1">
+                                    <li>. Banking</li>
+                                    <li>. Embassy</li>
+                                    <li>. Microfinance</li>
+                                    <li>. Manufacturing</li>
+                                    <li>. Construction</li>
+                                    <li>. Entertainment</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Social & Chat Sections */}
+                        <div className="mt-10 flex max-w-[82%] items-start justify-between">
+                            {/* Follow Us */}
+                            <div>
+                                <h3 className="inline-block bg-teal-700 px-4 py-2 text-white">FOLLOW US!</h3>
+                                <div className="mt-2 flex gap-2">
+                                    {[
+                                        { name: 'facebook', alt: 'Facebook' },
+                                        { name: 'instagram', alt: 'Instagram' },
+                                        { name: 'tiktok', alt: 'TikTok' },
+                                        { name: 'youtube', alt: 'YouTube' },
+                                        { name: 'linkedin', alt: 'LinkedIn' },
+                                    ].map((icon, index) => (
+                                        <img
+                                            key={index}
+                                            src={`/assets/demo-images/${icon.name}.png`}
+                                            alt={icon.alt}
+                                            className="h-8 w-8 background p-1"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Chat With Us */}
+                            <div>
+                                <h3 className="inline-block bg-teal-700 px-4 py-2 text-white">CHAT WITH US!</h3>
+                                <div className="mt-2 flex gap-2">
+                                    {[
+                                        { name: 'talk', alt: 'Talk' },
+                                        { name: 'telegram', alt: 'Telegram' },
+                                        { name: 'wechat', alt: 'WeChat' },
+                                        { name: 'whatsapp', alt: 'WhatsApp' },
+                                    ].map((icon, index) => (
+                                        <img
+                                            key={index}
+                                            src={`/assets/demo-images/${icon.name}.png`}
+                                            alt={icon.alt}
+                                            className="h-8 w-8 background p-1"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="mt-8 border-t max-w-screen-2xl mx-auto  flex justify-between border-gray-600 pt-6 text-sm text-gray-300">
-                    <p>&copy; 2025 - Angkor Wildlife & Aquarium - All Rights Reserved</p>
-                    <p>
-                        Made with <span className="text-red-500">❤️</span> by Olive & Lake
-                    </p>
                 </div>
             </footer>
         </>
