@@ -93,13 +93,14 @@ const MyTableData = () => {
                                             setSelectedImages(item.images);
                                             setIsOpenViewImages(true);
                                         }}
+                                        className='cursor-pointer'
                                     >
                                         <img
                                             src={`/assets/images/projects/thumb/` + item.images[0]?.image}
                                             width={100}
                                             height={100}
                                             alt=""
-                                            className="size-10 object-contain"
+                                            className="size-10 object-contain hover:scale-150 transition-all duration-300"
                                         />
                                     </button>
                                 ) : (
