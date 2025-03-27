@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm as inertiaUseForm } from '@inertiajs/react';
 import axios from 'axios';
-import { Check, ChevronsUpDown, CloudUpload, Loader } from 'lucide-react';
+import { Check, ChevronsUpDown, CloudUpload, Loader, Trash2Icon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -26,7 +26,7 @@ const formSchema = z.object({
     images: z.string().optional(),
 });
 
-export default function Create() {
+export default function Edit({ item }: { item: any }) {
     const [files, setFiles] = useState<File[] | null>(null);
 
     const dropZoneConfig = {
@@ -43,16 +43,15 @@ export default function Create() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: '',
-            title_kh: '',
-            code: '',
-            order_index: '',
-            parent_code: '',
-            status: 'active',
+            title: item.title || '',
+            title_kh: item.title_kh || '',
+            code: item.code || '',
+            order_index: item.order_index?.toString() || '',
+            parent_code: item.parent_code || '',
+            status: item.status || 'active',
         },
     });
 
-    // ===== Start Our Code =====
     const [parents_projects, setParents_projects] = useState([]);
     const [error, setError] = useState(null);
 
@@ -68,7 +67,7 @@ export default function Create() {
             });
     }, []);
 
-    const { post, progress, processing, transform, errors } = inertiaUseForm();
+    const { post, delete: destroy, progress, processing, transform, errors } = inertiaUseForm();
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         // toast(
@@ -81,16 +80,13 @@ export default function Create() {
                 ...values,
                 images: files || null,
             }));
-            post('/admin/projects', {
+            post('/admin/projects/' + item.id + '/update', {
                 preserveScroll: true,
                 onSuccess: () => {
-                    form.reset();
                     setFiles(null);
                 },
-                onError: () => {
-                    toast.error('Error', {
-                        description: 'Failed to create.',
-                    });
+                onError: (e) => {
+                    console.log(e);
                 },
             });
         } catch (error) {
@@ -100,7 +96,10 @@ export default function Create() {
             });
         }
     }
-    // ===== End Our Code =====
+
+    const handleDestroyImage = (id: number) => {
+        destroy('/admin/projects/images/' + id);
+    };
 
     return (
         <Form {...form}>
@@ -193,40 +192,42 @@ export default function Create() {
                                                 >
                                                     {field.value
                                                         ? parents_projects.find((item) => item.code === field.value)?.title
-                                                        : 'Select parent'}
+                                                        : 'Select category'}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                 </Button>
                                             </FormControl>
                                         </PopoverTrigger>
                                         <PopoverContent className="w-[200px] p-0">
                                             <Command>
-                                                <CommandInput placeholder="Search parent..." />
+                                                <CommandInput placeholder="Search category..." />
                                                 <CommandList>
-                                                    <CommandEmpty>No parent found.</CommandEmpty>
+                                                    <CommandEmpty>No category found.</CommandEmpty>
                                                     <CommandGroup>
-                                                        {parents_projects.map((item) => (
-                                                            <CommandItem
-                                                                value={item.title + item.code}
-                                                                key={item.code}
-                                                                onSelect={() => {
-                                                                    form.setValue('parent_code', item.code);
-                                                                }}
-                                                            >
-                                                                <Check
-                                                                    className={cn(
-                                                                        'mr-2 h-4 w-4',
-                                                                        item.code === field.value ? 'opacity-100' : 'opacity-0',
-                                                                    )}
-                                                                />
-                                                                {item.title} 
-                                                            </CommandItem>
-                                                        ))}
+                                                        {parents_projects
+                                                            .filter((parent_item) => parent_item.id !== item.id) // Skip current item
+                                                            .map((parent_item) => (
+                                                                <CommandItem
+                                                                    value={parent_item.title}
+                                                                    key={parent_item.code}
+                                                                    onSelect={() => {
+                                                                        form.setValue('parent_code', parent_item.code);
+                                                                    }}
+                                                                >
+                                                                    <Check
+                                                                        className={cn(
+                                                                            'mr-2 h-4 w-4',
+                                                                            parent_item.code === field.value ? 'opacity-100' : 'opacity-0',
+                                                                        )}
+                                                                    />
+                                                                    {parent_item.title}
+                                                                </CommandItem>
+                                                            ))}
                                                     </CommandGroup>
                                                 </CommandList>
                                             </Command>
                                         </PopoverContent>
                                     </Popover>
-                                    <FormDescription>Select the parent this item belongs to.</FormDescription>
+                                    <FormDescription>Select the main category this item belongs to.</FormDescription>
                                     <FormMessage>{errors.parent_code && <div>{errors.parent_code}</div>}</FormMessage>
                                 </FormItem>
                             )}
@@ -277,7 +278,7 @@ export default function Create() {
                                             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
                                         </div>
                                     </FileInput>
-                                    <FileUploaderContent className="grid grid-cols-3 lg:grid-cols-4 w-full gap-2 rounded-md">
+                                    <FileUploaderContent className="grid grid-cols-3 lg:grid-cols-5 w-full gap-2 rounded-md">
                                         {files?.map((file, i) => (
                                             <FileUploaderItem
                                                 key={i}
@@ -296,6 +297,38 @@ export default function Create() {
                                 </FileUploader>
                             </FormControl>
                             <FormMessage>{errors.images && <div>{errors.images}</div>}</FormMessage>
+
+                            {/* Initial Image */}
+                            {item.images?.length > 0 && (
+                                <div className="mt-4 p-1">
+                                    <FormDescription className='mb-2'>Uploaded Image(s).</FormDescription>
+                                    <div className="grid grid-cols-3 lg:grid-cols-5 w-full gap-2 rounded-md">
+                                        {item.images.map((imageObject) => (
+                                            <span key={imageObject.id} className="group relative w-full h-auto aspect-square overflow-hidden rounded-md border p-0 bg-background">
+                                                <img
+                                                    src={'/assets/images/projects/thumb/' + imageObject.image}
+                                                    alt={imageObject.name}
+                                                    className="w-full h-full object-contain"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="invisible absolute top-1 right-1 cursor-pointer group-hover:visible"
+                                                    disabled={processing}
+                                                    onClick={() => handleDestroyImage(imageObject.id)}
+                                                >
+                                                    <span className="sr-only">remove item</span>
+                                                    <Trash2Icon className={`group-hover:bg-destructive/80 size-6 rounded-sm stroke-white p-0.5 duration-200 ease-in-out group-hover:stroke-white ${processing && 'cursor-not-allowed'}`} />
+                                                </button>
+                                            </span>
+
+                                            // <FileUploaderItem key={i} index={i}>
+                                            //     <Paperclip className="h-4 w-4 stroke-current" />
+                                            //     <span>{file.name}</span>
+                                            // </FileUploaderItem>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </FormItem>
                     )}
                 />
