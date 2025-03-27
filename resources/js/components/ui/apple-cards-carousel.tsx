@@ -203,7 +203,7 @@ export const Card = ({
   <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent z-30" />
 
   {/* Top Text (Category) */}
-  <div className="relative z-40 p-8">
+  <div className="relative z-40 py-2 px-4">
     <motion.p
       layoutId={layout ? `category-${card.category}` : undefined}
       className="text-left text-base font-proxima-nova-regular text-white md:text-2xl"
@@ -215,7 +215,7 @@ export const Card = ({
   {/* Title (Bottom Positioned) */}
   <motion.p
     layoutId={layout ? `title-${card.title}` : undefined}
-    className="relative z-40 p-4 rounded-tr-full text-left font-proxima-nova-regular background text-base text-white md:text-xl [text-wrap:balance] mt-auto"
+    className="relative z-40 py-2 px-4 rounded-tr-full text-left font-proxima-nova-regular background text-base text-white md:text-xl [text-wrap:balance] mt-auto"
   >
     {card.title}
   </motion.p>

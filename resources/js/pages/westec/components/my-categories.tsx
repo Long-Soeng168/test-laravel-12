@@ -1,67 +1,90 @@
-import { Link } from "@inertiajs/react";
+import { AlignLeft, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
+
+const categories = [
+    {
+        name: 'Security & Safety Solutions',
+        count: 102,
+        icon: '🔒',
+        subcategories: [
+            { name: 'Surveillance Cameras', count: 24 },
+            { name: 'Fire Safety', count: 7 },
+            { name: 'Alarm Systems', count: 32 },
+        ],
+    },
+    {
+        name: 'Smart Home & Office Solutions',
+        count: 78,
+        icon: '🏠',
+        subcategories: [
+            { name: 'Smart Lighting', count: 18 },
+            { name: 'Automated Doors', count: 12 },
+        ],
+    },
+    {
+        name: 'Commercial & Residential Equipments',
+        count: 65,
+        icon: '🏢',
+        subcategories: [
+            { name: 'Air Conditioning', count: 20 },
+            { name: 'Office Chairs', count: 10 },
+        ],
+    },
+    {
+        name: 'IT Solutions',
+        count: 91,
+        icon: '💻',
+        subcategories: [
+            { name: 'Networking', count: 25 },
+            { name: 'Data Storage', count: 14 },
+        ],
+    },
+];
 
 const MyCategories = () => {
-    return (
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 md:px-20 mt-10">
-                <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-4 text-nowrap items-center gap-5 ">
-                    <Link href="#" className="flex flex-col items-center gap-2 border p-5 rounded-2xl hover:shadow-lg transition-all duration-500">
-                            <img
-                                alt=" "
-                                src="assets/images/security.png"
-                                decoding="async"
-                                data-nimg="1"
-                                className="mr-1 h-20 w-20 object-cover"
-                                loading="lazy"
-                                style={{ color: 'transparent;' }}
-                                width="16"
-                                height="16"
-                            />
-                            <span className="leading-5 capitalize lg:inline text-base">Security and Safety Solutions</span>
-                    </Link>
-                    <Link href="#" className="flex flex-col items-center gap-2 border p-5 rounded-2xl hover:shadow-lg transition-all duration-500">
-                            <img
-                                alt=" "
-                                src="assets/images/smart-home.png"
-                                decoding="async"
-                                data-nimg="1"
-                                className="mr-1 h-20 w-20 object-cover"
-                                loading="lazy"
-                                style={{ color: 'transparent;' }}
-                                width="16"
-                                height="16"
-                            />
-                            <span className="leading-5 capitalize lg:inline text-base">Smart Home and Office Solutions</span>
-                    </Link>
+    const [openCategory, setOpenCategory] = useState<string | null>(null);
 
-                    <Link href="#" className="flex flex-col items-center gap-2 border p-5 rounded-2xl hover:shadow-lg transition-all duration-500">
-                            <img
-                                alt=" "
-                                src="assets/images/security.png"
-                                decoding="async"
-                                data-nimg="1"
-                                className="mr-1 h-20 w-20 object-cover"
-                                loading="lazy"
-                                style={{ color: 'transparent;' }}
-                                width="16"
-                                height="16"
-                            />
-                            <span className="leading-5 capitalize lg:inline text-base">Security and Safety Solutions</span>
-                    </Link>
-                    <Link href="#" className="flex flex-col items-center gap-2 border p-5 rounded-2xl hover:shadow-lg transition-all duration-500">
-                            <img
-                                alt=" "
-                                src="assets/images/it.png"
-                                decoding="async"
-                                data-nimg="1"
-                                className="mr-1 h-20 w-20 object-cover"
-                                loading="lazy"
-                                style={{ color: 'transparent;' }}
-                                width="16"
-                                height="16"
-                            />
-                            <span className="leading-5 capitalize lg:inline text-base">It Solutions</span>
-                    </Link>
-                </div>
+    return (
+        <div className="w-full overflow-hidden rounded-lg border border-gray-300 bg-white text-black shadow-lg">
+            {/* Header */}
+            <button className="flex w-full items-center justify-between border-b bg-gray-100 p-4 text-lg font-proxima-nova-regular">
+                <span className="flex items-center gap-2">
+                    <AlignLeft className="h-5 w-5 text-gray-700" /> All Solutions
+                </span>
+            </button>
+
+            {/* Category List */}
+            <div >
+                {categories.map((category) => (
+                    <div key={category.name} className="mb-2">
+                        <button
+                            className={`flex w-full items-start gap-4 justify-between px-4 py-3 transition-all duration-200 ${
+                                openCategory === category.name ? 'background text-white' : 'hover:bg-gray-200'
+                            }`}
+                            onClick={() => setOpenCategory(openCategory === category.name ? null : category.name)}
+                        >
+                            <span className="font-proxima-nova-regular flex items-start text-start gap-3 text-[12px]">
+                                <span className="text-base">{category.icon}</span> {category.name}
+                                <span className="font-proxima-nova-regular text-[12px]">({category.count})</span>
+                            </span>
+
+                            {category.subcategories &&
+                                (openCategory === category.name ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />)}
+                        </button>
+
+                        {/* Subcategories */}
+                        {category.subcategories && openCategory === category.name && (
+                            <div className="mt-2 ml-6 space-y-2 border-l border-gray-300 pl-4">
+                                {category.subcategories.map((sub) => (
+                                    <a key={sub.name} href="#" className="block py-2 font-proxima-nova-regular text-[12px] transition-all hover:text-blue-600">
+                                        • {sub.name} ({sub.count})
+                                    </a>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

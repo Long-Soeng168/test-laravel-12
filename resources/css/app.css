@@ -32,6 +32,48 @@
     }
 }
 
+/* Kh */
+
+@font-face {
+    font-family: NotoSansBlack;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-black.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansBold;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-bold.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansExtraBold;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-extra-bold.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansExtraLight;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-extra-light.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansLight;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-light.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansMedium;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-medium.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansRegular;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-regular.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansSemibold;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-semibold.ttf')format('truetype');
+}
+@font-face {
+    font-family: NotoSansThin;
+    src: url('/public/assets/fonts/NotoSansFonts/noto-sans-khmer-thin.ttf')format('truetype');
+}
+
+/* End Kh */
+
+/* En */
 @font-face {
     font-family: ProximaBlack;
     src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-black.otf')format('truetype');
@@ -41,15 +83,35 @@
     src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-regular.otf')format('truetype');
 }
 @font-face {
-    font-family: ProximaBlackItalic;
-    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-black-italic.otf')format('truetype');
+    font-family: ProximaBold;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-bold.otf')format('truetype');
+}
+@font-face {
+    font-family: ProximaBoldItalic;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-bold-italic.otf')format('truetype');
+}
+@font-face {
+    font-family: ProximaExtrabold;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-extrabold.otf')format('truetype');
+}
+@font-face {
+    font-family: ProximaExtraboldItalic;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-bold-italic.otf')format('truetype');
+}
+
+
+@font-face {
+    font-family: ProximaSemibold;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-semibold.otf')format('truetype');
 }
 
 @font-face {
-    font-family: ProximaThin;
-    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-thin.otf')format('truetype');
+    font-family: ProximaSemiboldItalic;
+    src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-semibold-italic.otf')format('truetype');
 
 }
+
+/* End En */
 
 @theme {
     --font-sans:
@@ -58,6 +120,21 @@
     --font-proxima-black-italic: ProximaBlackItalic, 'Poppins';
     --font-proxima-thin: ProximaThin, 'Poppins';
     --font-proxima-nova-regular: NovaRegular, 'Poppins';
+    --font-proxima-nova-bold: ProximaBold, 'Poppins';
+    --font-proxima-nova-bold-italic: ProximaBoldItalic, 'Poppins';
+    --font-proxima-nova-extrabold: ProximaExtrabold, 'Poppins';
+    --font-proxima-nova-extrabold-italic: ProximaExtraboldItalic, 'Poppins';
+    --font-proxima-nova-semibold-italic: ProximaSemiboldItalic, 'Poppins';
+    --font-proxima-nova-semibold: ProximaSemibold, 'Poppins';
+    --font-noto-san-black: NotoSansBlack, 'Poppins';
+    --font-noto-san-bold: NotoSansBold, 'Poppins';
+    --font-noto-san-extra-bold: NotoSansExtraBold, 'Poppins';
+    --font-noto-san-extra-light: NotoSansExtaLight, 'Poppins';
+    --font-noto-san-light: NotoSansLight, 'Poppins';
+    --font-noto-san-semibold: NotoSansSemibold, 'Poppins';
+    --font-noto-san-thin: NotoSansThin, 'Poppins';
+    --font-noto-san-medium: NotoSansMedium, 'Poppins';
+    --font-noto-san-regular: NotoSansRegular, 'Poppins';
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);

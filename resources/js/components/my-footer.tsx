@@ -35,7 +35,7 @@ const MyFooter = () => {
                         <div className="grid w-full grid-cols-1 gap-6 text-sm text-white md:grid-cols-3">
                             {/* About Us */}
                             <div>
-                                <h3 className="inline-block background-dark-blue rounded-md px-4 py-2 text-white">ABOUT US</h3>
+                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">ABOUT US</h3>
                                 <ul className="mt-2 space-y-1">
                                     <li>. What is Westec?</li>
                                     <li>. Mission & Vision</li>
@@ -46,7 +46,7 @@ const MyFooter = () => {
 
                             {/* Solutions */}
                             <div>
-                                <h3 className="inline-block background-dark-blue rounded-md px-4 py-2 text-white">SOLUTIONS</h3>
+                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">SOLUTIONS</h3>
                                 <ul className="mt-2 space-y-1">
                                     <li>. Security & Safety Solutions</li>
                                     <li>. Smart Home & Office Solutions</li>
@@ -57,7 +57,7 @@ const MyFooter = () => {
 
                             {/* Case Studies */}
                             <div>
-                                <h3 className="inline-block background-dark-blue rounded-md px-4 py-2 text-white">CASE STUDIES</h3>
+                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">CASE STUDIES</h3>
                                 <ul className="mt-2 space-y-1">
                                     <li>. Banking</li>
                                     <li>. Embassy</li>
@@ -73,7 +73,7 @@ const MyFooter = () => {
                         <div className="mt-10 flex max-w-[82%] items-start justify-between">
                             {/* Follow Us */}
                             <div>
-                                <h3 className="inline-block background-dark-blue rounded-md px-4 py-2 text-white">FOLLOW US!</h3>
+                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">FOLLOW US!</h3>
                                 <div className="mt-2 flex gap-2">
                                     {[
                                         { name: 'facebook', alt: 'Facebook' },
@@ -94,7 +94,7 @@ const MyFooter = () => {
 
                             {/* Chat With Us */}
                             <div>
-                                <h3 className="inline-block background-dark-blue rounded-md px-4 py-2 text-white">CHAT WITH US!</h3>
+                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">CHAT WITH US!</h3>
                                 <div className="mt-2 flex gap-2">
                                     {[
                                         { name: 'talk', alt: 'Talk' },

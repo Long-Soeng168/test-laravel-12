@@ -1,14 +1,16 @@
+import MyAllFeatureProducts from "./components/my-all-feature-products"
 import MyCategories from "./components/my-categories"
-import { MyFeatureProducts} from "./components/my-feature-products"
 import MyLayout from "./layout/layout"
-import { MySlide } from "@/components/my-slide"
 
 const SolutionsPage = () => {
   return (
    <MyLayout>
-        <MySlide/>
-        <MyCategories/>
-        <MyFeatureProducts/>
+    <div className="bg-white w-full h-[100vh] px-4 sm:px-10 pt-10 flex gap-4">
+        <div className="max-w-2xl"><MyCategories/></div>
+        <div>
+            <MyAllFeatureProducts/>
+        </div>
+    </div>
    </MyLayout>
   )
 }
