@@ -1,12 +1,12 @@
 import DeleteButton from '@/components/delete-button';
 import MyImageGallery from '@/components/my-image-gallery';
+import MyUpdateStatusButton from '@/components/my-update-status-button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { router, usePage } from '@inertiajs/react';
 import { ArrowUpDown } from 'lucide-react';
 import { useState } from 'react';
 import EditButton from './edit-button';
-import StatusButton from './status-button';
 import ViewButton from './view-button';
 
 const MyTableData = () => {
@@ -93,14 +93,14 @@ const MyTableData = () => {
                                             setSelectedImages(item.images);
                                             setIsOpenViewImages(true);
                                         }}
-                                        className='cursor-pointer'
+                                        className="cursor-pointer"
                                     >
                                         <img
                                             src={`/assets/images/projects/thumb/` + item.images[0]?.image}
                                             width={100}
                                             height={100}
                                             alt=""
-                                            className="size-10 object-contain hover:scale-150 transition-all duration-300"
+                                            className="size-10 object-contain transition-all duration-300 hover:scale-150"
                                         />
                                     </button>
                                 ) : (
@@ -113,7 +113,12 @@ const MyTableData = () => {
                             <TableCell>{item.order_index || '---'}</TableCell>
                             <TableCell>{item.parent_code || '---'}</TableCell>
                             <TableCell>
-                                <StatusButton id={item.id} status={item.status} />
+                                <MyUpdateStatusButton
+                                    id={item.id}
+                                    pathName="/admin/projects"
+                                    currentStatus={item.status}
+                                    statuses={['pending', 'active', 'inactive', 'private', 'public']}
+                                />
                             </TableCell>
                             <TableCell>
                                 {item.created_at
