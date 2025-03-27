@@ -45,7 +45,7 @@ Route::get('/normalblade', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+        return Inertia::render('admin/dashboard/Index');
     })->name('dashboard');
     Route::get('items', function () {
         return Inertia::render('admin/items/page');
