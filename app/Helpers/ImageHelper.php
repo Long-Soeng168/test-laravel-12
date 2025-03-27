@@ -8,7 +8,7 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class ImageHelper
 {
-    public static function uploadAndResizeImage($file, $folder = 'projects', $maxWidth = 600)
+    public static function uploadAndResizeImage($file, $folder, $maxWidth = 600)
     {
         if (!$file) {
             return null;
@@ -52,7 +52,7 @@ class ImageHelper
      * @param string $folder The folder where the image is stored.
      * @return bool Returns true if deleted, false otherwise.
      */
-    public static function deleteImage($imageName, $folder = 'projects')
+    public static function deleteImage($imageName, $folder)
     {
         if (!$imageName) {
             return false;

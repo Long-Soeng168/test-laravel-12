@@ -152,7 +152,7 @@ class ProjectController extends Controller
         if ($image_files) {
             try {
                 foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image);
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'projects');
                     ProjectImage::create([
                         'image' => $created_image_name,
                         'project_id' => $project->id,
