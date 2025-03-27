@@ -6,6 +6,8 @@ import { BreadcrumbItem } from '@/types';
 import AddNewButton from './components/add-new-button';
 import { MyFilterButton } from './components/my-filter-button';
 import MyTableData from './components/my-table-data';
+import { MyExportButton } from '@/components/my-export-button';
+import { MyImportButton } from '@/components/my-import-button';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -22,6 +24,8 @@ const Index = () => {
                     <MyFilterButton />
                     <MyRefreshButton />
                     <span className="flex-1"></span>
+                    <MyExportButton />
+                    <MyImportButton />
                     <AddNewButton />
                 </div>
             </div>
