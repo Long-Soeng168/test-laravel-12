@@ -33,7 +33,7 @@ class ProjectController extends Controller
         if ($search) {
             $query->where(function ($sub_query) use ($search) {
                 return $sub_query->where('title', 'LIKE', "%{$search}%")
-                    ->orWhere('title', 'LIKE', "%{$search}%");
+                    ->orWhere('code', 'LIKE', "%{$search}%");
             });
         }
 
