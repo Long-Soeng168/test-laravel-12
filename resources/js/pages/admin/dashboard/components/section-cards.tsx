@@ -25,14 +25,14 @@ export function SectionCards() {
             </Badge>
           </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        {/* <CardFooter className="flex-col items-start gap-1 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
             Trending up this month <TrendingUpIcon className="size-4" />
           </div>
           <div className="text-muted-foreground">
             Visitors for the last 6 months
           </div>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
       <Card className="@container/card">
         <CardHeader className="relative">
@@ -47,14 +47,14 @@ export function SectionCards() {
             </Badge>
           </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        {/* <CardFooter className="flex-col items-start gap-1 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
             Down 20% this period <TrendingDownIcon className="size-4" />
           </div>
           <div className="text-muted-foreground">
             Acquisition needs attention
           </div>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
       <Card className="@container/card">
         <CardHeader className="relative">
@@ -69,12 +69,12 @@ export function SectionCards() {
             </Badge>
           </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        {/* <CardFooter className="flex-col items-start gap-1 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
             Strong user retention <TrendingUpIcon className="size-4" />
           </div>
           <div className="text-muted-foreground">Engagement exceed targets</div>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
       <Card className="@container/card">
         <CardHeader className="relative">
@@ -89,12 +89,12 @@ export function SectionCards() {
             </Badge>
           </div>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1 text-sm">
+        {/* <CardFooter className="flex-col items-start gap-1 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
             Steady performance <TrendingUpIcon className="size-4" />
           </div>
           <div className="text-muted-foreground">Meets growth projections</div>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
     </div>
   )
