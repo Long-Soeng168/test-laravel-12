@@ -10,7 +10,7 @@ import EditButton from './edit-button';
 import ViewButton from './view-button';
 
 const MyTableData = () => {
-    const { projects } = usePage().props;
+    const { tableData } = usePage().props;
     const queryParams = new URLSearchParams(window.location.search);
     const currentPath = window.location.pathname; // Get dynamic path
 
@@ -74,10 +74,10 @@ const MyTableData = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {projects?.data?.map((item: any, index: number) => (
+                    {tableData?.data?.map((item: any, index: number) => (
                         <TableRow key={item.id}>
                             <TableCell className="font-medium">
-                                {projects?.current_page > 1 ? projects?.per_page * (projects?.current_page - 1) + index + 1 : index + 1}
+                                {tableData?.current_page > 1 ? tableData?.per_page * (tableData?.current_page - 1) + index + 1 : index + 1}
                             </TableCell>
                             <TableCell>
                                 <span className="flex h-full items-center justify-start">

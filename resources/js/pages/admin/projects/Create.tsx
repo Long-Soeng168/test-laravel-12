@@ -53,7 +53,7 @@ export default function Create() {
     });
 
     // ===== Start Our Code =====
-    const [parents_projects, setParents_projects] = useState([]);
+    const [parentsTableData, setParentsTableData] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -61,7 +61,7 @@ export default function Create() {
         axios
             .get('/admin/all_projects')
             .then((response) => {
-                setParents_projects(response.data); // Set the data to state
+                setParentsTableData(response.data); // Set the data to state
             })
             .catch((error) => {
                 setError(error); // Handle errors if any
@@ -192,7 +192,7 @@ export default function Create() {
                                                     className={cn('w-full justify-between', !field.value && 'text-muted-foreground')}
                                                 >
                                                     {field.value
-                                                        ? parents_projects.find((item) => item.code === field.value)?.title
+                                                        ? parentsTableData.find((item) => item.code === field.value)?.title
                                                         : 'Select parent'}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                 </Button>
@@ -204,7 +204,7 @@ export default function Create() {
                                                 <CommandList>
                                                     <CommandEmpty>No parent found.</CommandEmpty>
                                                     <CommandGroup>
-                                                        {parents_projects.map((item) => (
+                                                        {parentsTableData.map((item) => (
                                                             <CommandItem
                                                                 value={item.title + item.code}
                                                                 key={item.code}

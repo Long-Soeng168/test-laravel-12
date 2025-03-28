@@ -37,10 +37,10 @@ class ProjectController extends Controller
             });
         }
 
-        $projects = $query->paginate(perPage: 10)->onEachSide(1);
+        $tableData = $query->paginate(perPage: 10)->onEachSide(1);
 
         return Inertia::render('admin/projects/Index', [
-            'projects' => $projects,
+            'tableData' => $tableData,
         ]);
     }
 
