@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ImageHelper;
+use App\Models\PagePosition;
 use App\Models\Project;
 use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 
-class ProjectController extends Controller
+class PagePositionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +22,9 @@ class ProjectController extends Controller
         $sortDirection = $request->input('sortDirection', 'desc');
         $status = $request->input('status');
 
-        $query = Project::query();
+        $query = PagePosition::query();
 
-        $query->with('created_by', 'updated_by', 'images');
+        // $query->with('created_by', 'updated_by');
 
         if ($status) {
             $query->where('status', $status);
@@ -32,15 +33,15 @@ class ProjectController extends Controller
 
         if ($search) {
             $query->where(function ($sub_query) use ($search) {
-                return $sub_query->where('title', 'LIKE', "%{$search}%")
-                    ->orWhere('code', 'LIKE', "%{$search}%");
+                return $sub_query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('name_kh', 'LIKE', "%{$search}%");
             });
         }
 
-        $tableData = $query->paginate(perPage: 10)->onEachSide(1);
+        $page_positions = $query->paginate(perPage: 10)->onEachSide(1);
 
-        return Inertia::render('admin/projects/Index', [
-            'tableData' => $tableData,
+        return Inertia::render('admin/page_positions/Index', [
+            'page_positions' => $page_positions,
         ]);
     }
 

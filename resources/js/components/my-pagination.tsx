@@ -1,8 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
 
 export function MyPagination() {
-    const { projects } = usePage().props;
-    const links = projects?.links || null;
+    const { tableData } = usePage().props;
+    const links = tableData?.links || null;
     const queryParams = new URLSearchParams(window.location.search);
     queryParams.delete('page');
     const queryString = new URLSearchParams(queryParams).toString();

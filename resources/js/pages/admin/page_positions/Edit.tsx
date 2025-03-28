@@ -52,7 +52,7 @@ export default function Edit({ item }: { item: any }) {
         },
     });
 
-    const [parentTableData, setparentTableData] = useState([]);
+    const [parents_projects, setParents_projects] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -60,7 +60,7 @@ export default function Edit({ item }: { item: any }) {
         axios
             .get('/admin/all_projects')
             .then((response) => {
-                setparentTableData(response.data); // Set the data to state
+                setParents_projects(response.data); // Set the data to state
             })
             .catch((error) => {
                 setError(error); // Handle errors if any
@@ -191,7 +191,7 @@ export default function Edit({ item }: { item: any }) {
                                                     className={cn('w-full justify-between', !field.value && 'text-muted-foreground')}
                                                 >
                                                     {field.value
-                                                        ? parentTableData.find((item) => item.code === field.value)?.title
+                                                        ? parents_projects.find((item) => item.code === field.value)?.title
                                                         : 'Select category'}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                 </Button>
@@ -203,7 +203,7 @@ export default function Edit({ item }: { item: any }) {
                                                 <CommandList>
                                                     <CommandEmpty>No category found.</CommandEmpty>
                                                     <CommandGroup>
-                                                        {parentTableData
+                                                        {parents_projects
                                                             .filter((parent_item) => parent_item.id !== item.id) // Skip current item
                                                             .map((parent_item) => (
                                                                 <CommandItem

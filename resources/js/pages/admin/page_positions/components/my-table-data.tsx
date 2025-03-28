@@ -10,7 +10,7 @@ import EditButton from './edit-button';
 import ViewButton from './view-button';
 
 const MyTableData = () => {
-    const { tableData } = usePage().props;
+    const { page_positions } = usePage().props;
     const queryParams = new URLSearchParams(window.location.search);
     const currentPath = window.location.pathname; // Get dynamic path
 
@@ -34,7 +34,7 @@ const MyTableData = () => {
     return (
         <ScrollArea className="w-full rounded-md border">
             <MyImageGallery
-                imagePath="/assets/images/projects/"
+                imagePath="/assets/images/page_positions/"
                 selectedImages={selectedImages}
                 isOpenViewImages={isOpenViewImages}
                 setIsOpenViewImages={setIsOpenViewImages}
@@ -74,29 +74,29 @@ const MyTableData = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {tableData?.data?.map((item: any, index: number) => (
+                    {page_positions?.data?.map((item: any, index: number) => (
                         <TableRow key={item.id}>
                             <TableCell className="font-medium">
-                                {tableData?.current_page > 1 ? tableData?.per_page * (tableData?.current_page - 1) + index + 1 : index + 1}
+                                {page_positions?.current_page > 1 ? page_positions?.per_page * (page_positions?.current_page - 1) + index + 1 : index + 1}
                             </TableCell>
                             <TableCell>
                                 <span className="flex h-full items-center justify-start">
                                     <ViewButton item={item} />
-                                    <DeleteButton deletePath="/admin/projects/" id={item.id} />
+                                    <DeleteButton deletePath="/admin/page_positions/" id={item.id} />
                                     <EditButton item={item} />
                                 </span>
                             </TableCell>
                             <TableCell>
-                                {item.images[0] ? (
+                                {item.image ? (
                                     <button
                                         onClick={() => {
-                                            setSelectedImages(item.images);
+                                            setSelectedImages([item.image]);
                                             setIsOpenViewImages(true);
                                         }}
                                         className="cursor-pointer"
                                     >
                                         <img
-                                            src={`/assets/images/projects/thumb/` + item.images[0]?.image}
+                                            src={`/assets/images/page_positions/thumb/` + item.image}
                                             width={100}
                                             height={100}
                                             alt=""
@@ -107,15 +107,13 @@ const MyTableData = () => {
                                     <img src={`/assets/icons/image-icon.png`} width={100} height={100} alt="" className="size-10 object-contain" />
                                 )}
                             </TableCell>
-                            <TableCell>{item.code || '---'}</TableCell>
                             <TableCell>{item.title || '---'}</TableCell>
                             <TableCell>{item.title_kh || '---'}</TableCell>
-                            <TableCell>{item.order_index || '---'}</TableCell>
-                            <TableCell>{item.parent_code || '---'}</TableCell>
+                            {/* <TableCell>{item.order_index || '---'}</TableCell> */}
                             <TableCell>
                                 <MyUpdateStatusButton
                                     id={item.id}
-                                    pathName="/admin/projects"
+                                    pathName="/admin/page_positions"
                                     currentStatus={item.status}
                                     statuses={['pending', 'active', 'inactive', 'private', 'public']}
                                 />

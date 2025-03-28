@@ -23,6 +23,11 @@ const mainNavItems: NavItem[] = [
         url: '/admin/projects',
         icon: ProjectorIcon,
     },
+    {
+        title: 'Page Position',
+        url: '/admin/page_positions',
+        icon: ProjectorIcon,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
