@@ -144,7 +144,11 @@ const MyTableData = () => {
                     ))}
                 </TableBody>
             </Table>
-
+            {tableData?.data?.length < 1 && (
+                <div className="flex justify-center text-center">
+                    <img src={`/assets/icons/no-data.gif`} alt="" className="w-[100px]" />
+                </div>
+            )}
             <ScrollBar orientation="horizontal" />
         </ScrollArea>
     );

@@ -29,10 +29,6 @@ export default function MyFilter() {
             label: 'Inactive',
             value: 'inactive',
         },
-        {
-            label: 'Pending',
-            value: 'pending',
-        },
     ] as const;
 
     const initialQueryParams = new URLSearchParams(window.location.search);

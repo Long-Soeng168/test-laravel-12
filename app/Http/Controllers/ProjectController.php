@@ -70,7 +70,7 @@ class ProjectController extends Controller
             'parent_code' => 'nullable|string',
             'status' => 'nullable|string',
             'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $validated['created_by'] = $request->user()->id;
@@ -133,7 +133,7 @@ class ProjectController extends Controller
             'parent_code' => 'nullable|string',
             'status' => 'nullable|string',
             'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $validated['updated_by'] = $request->user()->id;

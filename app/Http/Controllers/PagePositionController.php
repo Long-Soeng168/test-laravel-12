@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ImageHelper;
 use App\Models\PagePosition;
-use App\Models\Project;
-use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -24,7 +22,7 @@ class PagePositionController extends Controller
 
         $query = PagePosition::query();
 
-        // $query->with('created_by', 'updated_by');
+        $query->with('created_by', 'updated_by');
 
         if ($status) {
             $query->where('status', $status);
@@ -34,51 +32,41 @@ class PagePositionController extends Controller
         if ($search) {
             $query->where(function ($sub_query) use ($search) {
                 return $sub_query->where('name', 'LIKE', "%{$search}%")
-                    ->orWhere('name_kh', 'LIKE', "%{$search}%");
+                    ->orWhere('name_kh', 'LIKE', "%{$search}%")
+                    ->orWhere('code', 'LIKE', "%{$search}%");
             });
         }
 
-        $page_positions = $query->paginate(perPage: 10)->onEachSide(1);
+        $tableData = $query->paginate(perPage: 10)->onEachSide(1);
 
         return Inertia::render('admin/page_positions/Index', [
-            'page_positions' => $page_positions,
+            'tableData' => $tableData,
         ]);
     }
-
-    public function all_projects()
-    {
-        return response()->json(Project::orderBy('id', 'desc')->get());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return Inertia::render('admin/projects/Create');
-    }
-
+ 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'title_kh' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:projects,code',
-            'order_index' => 'nullable|integer|min:0|max:255',
-            'parent_code' => 'nullable|string',
-            'status' => 'nullable|string',
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|max:255',
+            'name_kh' => 'required|string|max:255',
+            'code' => 'required|string|max:255|unique:page_positions,code',
+            'short_description' => 'nullable|string|max:255',
+            'short_description_kh' => 'nullable|string|max:255',
+            'status' => 'nullable|string|in:active,inactive',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $validated['created_by'] = $request->user()->id;
         $validated['updated_by'] = $request->user()->id;
 
-        $image_files = $request->file('images');
-        unset($validated['images']);
+        $image_file = $request->file('image');
+        $banner_file = $request->file('banner');
+        unset($validated['image']);
+        unset($validated['banner']);
 
         foreach ($validated as $key => $value) {
             if ($value === null || $value === '') {
@@ -86,61 +74,51 @@ class PagePositionController extends Controller
             }
         }
 
-        $created_project = Project::create($validated);
 
-        if ($image_files) {
+        if ($image_file) {
             try {
-                foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'projects', 600);
-                    ProjectImage::create([
-                        'image' => $created_image_name,
-                        'project_id' => $created_project->id,
-                    ]);
-                }
+                $created_image_name = ImageHelper::uploadAndResizeImage($image_file, 'page_positions', 600);
+                $validated['image'] = $created_image_name;
             } catch (\Exception $e) {
-                return redirect()->back()->with('error', 'Failed to upload images: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
+            }
+        }
+        if ($banner_file) {
+            try {
+                $created_image_name = ImageHelper::uploadAndResizeImage($banner_file, 'page_positions', 900);
+                $validated['banner'] = $created_image_name;
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
             }
         }
 
-        return redirect()->back()->with('success', 'Project created successfully!');
-    }
+        PagePosition::create($validated);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Project $project)
-    {
-        //
+        return redirect()->back()->with('success', 'Page position created successfully!');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Project $project)
-    {
-        //
-    }
-
+ 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, PagePosition $pagePosition)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'title_kh' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:projects,code,' . $project->id,
-            'order_index' => 'nullable|integer|min:0|max:255',
-            'parent_code' => 'nullable|string',
-            'status' => 'nullable|string',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|max:255',
+            'name_kh' => 'required|string|max:255',
+            'code' => 'required|string|max:255|unique:page_positions,code,' . $pagePosition->id,
+            'short_description' => 'nullable|string|max:255',
+            'short_description_kh' => 'nullable|string|max:255',
+            'status' => 'nullable|string|in:active,inactive',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $validated['updated_by'] = $request->user()->id;
 
-        $image_files = $request->file('images');
-        unset($validated['images']);
+        $image_file = $request->file('image');
+        $banner_file = $request->file('banner');
+        unset($validated['image']);
+        unset($validated['banner']);
 
         foreach ($validated as $key => $value) {
             if ($value === null || $value === '') {
@@ -148,31 +126,43 @@ class PagePositionController extends Controller
             }
         }
 
-        $project->update($validated);
-
-        if ($image_files) {
+        if ($image_file) {
             try {
-                foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'projects');
-                    ProjectImage::create([
-                        'image' => $created_image_name,
-                        'project_id' => $project->id,
-                    ]);
+                $created_image_name = ImageHelper::uploadAndResizeImage($image_file, 'page_positions', 600);
+                $validated['image'] = $created_image_name;
+
+                if ($pagePosition->image) {
+                    ImageHelper::deleteImage($pagePosition->image, 'page_positions');
                 }
             } catch (\Exception $e) {
-                return redirect('/admin/projects')->with('error', 'Failed to upload images: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
+            }
+        }
+        if ($banner_file) {
+            try {
+                $created_image_name = ImageHelper::uploadAndResizeImage($banner_file, 'page_positions', 900);
+                $validated['banner'] = $created_image_name;
+
+                if ($pagePosition->banner) {
+                    ImageHelper::deleteImage($pagePosition->banner, 'page_positions');
+                }
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
             }
         }
 
-        return redirect()->back()->with('success', 'Project updated successfully!');
+        $pagePosition->update($validated);
+
+
+        return redirect()->back()->with('success', 'Page Position updated successfully!');
     }
 
-    public function update_status(Request $request, Project $project)
+    public function update_status(Request $request, PagePosition $pagePosition)
     {
         $request->validate([
-            'status' => 'required|string|in:active,inactive,pending',
+            'status' => 'required|string|in:active,inactive',
         ]);
-        $project->update([
+        $pagePosition->update([
             'status' => $request->status,
         ]);
 
@@ -181,30 +171,15 @@ class PagePositionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(PagePosition $pagePosition)
     {
-        if (count($project->images) > 0) {
-            foreach ($project->images as $image) {
-                ImageHelper::deleteImage($image->image, 'projects');
-            }
+        if ($pagePosition->image) {
+            ImageHelper::deleteImage($pagePosition->image, 'page_positions');
         }
-        $project->delete();
-        return redirect()->back()->with('success', 'Project deleted successfully.');
-    }
-
-    public function destroy_image(ProjectImage $image)
-    {
-        // Debugging (Check if model is found)
-        if (!$image) {
-            return redirect()->back()->with('error', 'Image not found.');
+        if ($pagePosition->banner) {
+            ImageHelper::deleteImage($pagePosition->banner, 'page_positions');
         }
-
-        // Call helper function to delete image
-        ImageHelper::deleteImage($image->image, 'projects');
-
-        // Delete from DB
-        $image->delete();
-
-        return redirect()->back()->with('success', 'Image deleted successfully.');
+        $pagePosition->delete();
+        return redirect()->back()->with('success', 'Page Position deleted successfully.');
     }
 }

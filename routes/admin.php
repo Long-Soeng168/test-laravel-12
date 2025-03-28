@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PagePositionController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::middleware('auth')->group(function () {
     // Project Route
@@ -16,5 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin/page_positions', PagePositionController::class);
     Route::post('admin/page_positions/{pagePosition}/update', [PagePositionController::class, 'update']);
     Route::post('admin/page_positions/{pagePosition}/update_status', [PagePositionController::class, 'update_status']);
+
+    Route::get('/ckeditor', function(){
+        return Inertia::render('my_ckeditor5/CustomCKEditor');
+    });
+    Route::post('/upload', [FileUploadController::class, 'upload']);
     
 });
