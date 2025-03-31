@@ -15,15 +15,7 @@ const MyFooter = () => {
                                 Phnom Penh City, Kingdom of Cambodia.
                             </p>
 
-                            <div className="mt-6 flex flex-col">
-                                <p>
-                                    <span className="pr-3">Mobile Phone</span>: +855 12 269 661
-                                </p>
-                                <p>
-                                    <span>Landline Phone</span>: +855 16 991 580
-                                </p>
-                                <p>: +855 23 882 580</p>
-                            </div>
+                           
                             <div className="mt-6">
                                 <div className="flex justify-between">
                                     <p>Mobile Phone</p>
