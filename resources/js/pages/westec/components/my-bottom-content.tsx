@@ -129,7 +129,7 @@ export function MyBottomContent() {
                         <h1 className="font-proxima-nova-bold text-end text-2xl leading-[30px] text-white md:mb-4 md:text-3xl md:leading-[30px] lg:text-[35px] lg:leading-[50px]">
                             Do you want a future-ready technology solutions that move your business forward?
                         </h1>
-                        <a href='/contact' className=" font-proxima-nova-regular text-xl text-black  px-4 capitalize py-2 rounded-md border border-black bg-white hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+                        <a href='/contact' className=" font-proxima-nova-regular text-xl text-black  px-4 capitalize py-2  bg-white hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
                             Contact Us Now
                         </a>
 
