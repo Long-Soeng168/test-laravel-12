@@ -1,7 +1,7 @@
 const MyFooter = () => {
     return (
         <>
-            <footer className="background py-10 text-white font-proxima-nova-regular">
+            <footer className="background font-proxima-nova-regular py-10 text-white">
                 <div className="mx-auto grid max-w-[4000px] grid-cols-1 gap-8 px-4 sm:px-10 md:grid-cols-4">
                     {/* Contact Section */}
                     <div className="grid grid-cols-1">
@@ -15,28 +15,51 @@ const MyFooter = () => {
                                 Phnom Penh City, Kingdom of Cambodia.
                             </p>
 
-                            <div className="mt-4 flex flex-col">
-                                <p><span className="pr-3">Mobile Phone</span>: +855 12 269 661</p>
-                                <p><span>Landline Phone</span>: +855 16 991 580</p>
+                            <div className="mt-6 flex flex-col">
+                                <p>
+                                    <span className="pr-3">Mobile Phone</span>: +855 12 269 661
+                                </p>
+                                <p>
+                                    <span>Landline Phone</span>: +855 16 991 580
+                                </p>
                                 <p>: +855 23 882 580</p>
                             </div>
-
-                            <p className="mt-4 underline">contact@westec.com</p>
-
-                            <div className="mt-4">
-                                <p>8:00AM - 5:00PM</p>
-                                <p>Monday - Saturday</p>
+                            <div className="mt-6">
+                                <div className="flex justify-between">
+                                    <p>Mobile Phone</p>
+                                    <p>: +855 12 269 661</p>
+                                </div>
+                                <div className="flex justify-between">
+                                    <p>Landline Phone</p>
+                                    <p className="text-end">
+                                        : +855 16 991 580
+                                        <br className="text-end" />: +855 23 882 580
+                                    </p>
+                                </div>
                             </div>
+
+                            <div className="mt-6  flex justify-between">
+                                    <p>Email</p>
+                                    <p className="text-end ">
+                                        : contact@westec.com
+                                    </p>
+                                </div>
+                            <div className="mt-6  flex justify-between">
+                                    <p>Office Hours</p>
+                                    <p className="text-end ">
+                                        : 8:00AM - 5:00PM <br/> Monday - Saturday
+                                    </p>
+                                </div>
                         </div>
                     </div>
 
                     {/* Footer Links Section */}
-                    <div className="md:col-span-3">
-                        <div className="grid w-full grid-cols-1 gap-6 text-sm text-white md:grid-cols-3">
+                    <div className="md:col-span-3 ml-12">
+                        <div className="grid w-full grid-cols-1 gap-6 text-sm text-white md:grid-cols-4">
                             {/* About Us */}
                             <div>
-                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">ABOUT US</h3>
-                                <ul className="mt-2 space-y-1">
+                                <h3 className="inline-block rounded-md text-xl text-white underline underline-offset-8">About Us</h3>
+                                <ul className="mt-6 space-y-1">
                                     <li>. What is Westec?</li>
                                     <li>. Mission & Vision</li>
                                     <li>. Why Westec</li>
@@ -46,8 +69,18 @@ const MyFooter = () => {
 
                             {/* Solutions */}
                             <div>
-                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">SOLUTIONS</h3>
-                                <ul className="mt-2 space-y-1">
+                                <h3 className="inline-block rounded-md text-xl text-white underline underline-offset-8">Solutions</h3>
+                                <ul className="mt-6 space-y-1">
+                                    <li>. Security & Safety Solutions</li>
+                                    <li>. Smart Home & Office Solutions</li>
+                                    <li>. Commercial & Residential Equipments</li>
+                                    <li>. IT Solutions</li>
+                                </ul>
+                            </div>
+                            {/*Feature Solutions */}
+                            <div>
+                                <h3 className="inline-block rounded-md text-xl text-white underline underline-offset-8 ">Featured Solutions</h3>
+                                <ul className="mt-6 space-y-1">
                                     <li>. Security & Safety Solutions</li>
                                     <li>. Smart Home & Office Solutions</li>
                                     <li>. Commercial & Residential Equipments</li>
@@ -57,8 +90,8 @@ const MyFooter = () => {
 
                             {/* Case Studies */}
                             <div>
-                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">CASE STUDIES</h3>
-                                <ul className="mt-2 space-y-1">
+                                <h3 className="inline-block rounded-md text-xl text-white underline underline-offset-8">Case studies</h3>
+                                <ul className="mt-6 space-y-1">
                                     <li>. Banking</li>
                                     <li>. Embassy</li>
                                     <li>. Microfinance</li>
@@ -73,8 +106,8 @@ const MyFooter = () => {
                         <div className="mt-10 flex max-w-[82%] items-start justify-between">
                             {/* Follow Us */}
                             <div>
-                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">FOLLOW US!</h3>
-                                <div className="mt-2 flex gap-2">
+                                <h3 className="inline-block rounded-md text-xl text-white underline underline-offset-8">Follow Us!</h3>
+                                <div className="mt-6 flex gap-2">
                                     {[
                                         { name: 'facebook', alt: 'Facebook' },
                                         { name: 'instagram', alt: 'Instagram' },
@@ -86,7 +119,7 @@ const MyFooter = () => {
                                             key={index}
                                             src={`/assets/demo-images/${icon.name}.png`}
                                             alt={icon.alt}
-                                            className="h-8 w-8  p-1 hover:scale-125 transition-all duration-500"
+                                            className="h-10 w-10 p-1 transition-all duration-500 hover:scale-125"
                                         />
                                     ))}
                                 </div>
@@ -94,8 +127,8 @@ const MyFooter = () => {
 
                             {/* Chat With Us */}
                             <div>
-                                <h3 className="inline-block underline underline-offset-8 text-xl rounded-md text-white">CHAT WITH US!</h3>
-                                <div className="mt-2 flex gap-2">
+                                <h3 className="inline-block rounded-md text-xl text-white underline underline-offset-8">Chat With US!</h3>
+                                <div className="mt-6 flex gap-2">
                                     {[
                                         { name: 'talk', alt: 'Talk' },
                                         { name: 'telegram', alt: 'Telegram' },
@@ -106,7 +139,7 @@ const MyFooter = () => {
                                             key={index}
                                             src={`/assets/demo-images/${icon.name}.png`}
                                             alt={icon.alt}
-                                            className="h-8 w-8  p-1 hover:scale-125 transition-all duration-500"
+                                            className="h-10 w-10 p-1 transition-all duration-500 hover:scale-125"
                                         />
                                     ))}
                                 </div>

@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Link } from "@inertiajs/react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const transition = {
   type: "spring",
@@ -28,9 +29,9 @@ export const MenuItem = ({
       <motion.a
           href={item.toLowerCase() === "about us" ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-color font-proxima-nova-bold hover:opacity-[0.9] dark:text-white"
+        className="cursor-pointer text-color font-proxima-nova-bold hover:opacity-[0.9] dark:text-white flex gap-0.5 items-center"
       >
-        {item}
+        {item}  <ChevronUp className="h-4 w-4 text-gray-600 dark:text-gray-300 transition-transform duration-300 rotate-180" />
       </motion.a>
       {active !== null && (
         <motion.div
@@ -74,10 +75,9 @@ export const Menu = ({
       className="relative dark:bg-black dark:border-white/[0.2]  bg-white shadow-input flex justify-between items-center space-x-4 px-4 sm:px-10 py-5 "
     >
         <a href="/" className=" w-50">
-             <img src="assets/images/logo.png" />
+             <img src="/assets/images/logo.png" />
         </a>
         <div className="flex justify-between items-center space-x-10 ">
-
         {children}
         </div>
 
@@ -103,7 +103,7 @@ export const ProductItem = ({
         width={140}
         height={70}
         alt={title}
-        className="shrink-0 rounded-md shadow-2xl"
+        className="shrink-0 rounded-md object-cover shadow-xl"
       />
       <div>
         <h4 className="text-xl font-proxima-nova-bold font-bold mb-1 text-black dark:text-white">

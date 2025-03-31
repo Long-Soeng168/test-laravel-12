@@ -12,6 +12,12 @@ Route::get('/contact', function () {
 Route::get('/solutions', function () {
     return Inertia::render('westec/SolutionsPage');
 })->name('solutions');
+Route::get('/detail/{id}', function ($id) {
+
+    return Inertia::render('westec/Detail', [
+        'id' => $id,
+    ]);
+})->name('detail');
 // Route::get('/', function () {
 //     return Inertia::render('welcome');
 // })->name('home');
@@ -21,12 +27,12 @@ Route::get('/blog', function () {
 Route::get('/services', function () {
     return Inertia::render('services');
 })->name('services');
-Route::get('/detail/{id}', function ($id) {
+// Route::get('/detail/{id}', function ($id) {
 
-    return Inertia::render('detail', [
-        'id' => $id,
-    ]);
-})->name('detail');
+//     return Inertia::render('detail', [
+//         'id' => $id,
+//     ]);
+// })->name('detail');
 
 Route::get('/about', function () {
 

@@ -3,104 +3,113 @@ import { Link } from '@inertiajs/react';
 export function MyHeroSection() {
     return (
         <>
+            {/* First Hero Section */}
             <div
-                className="relative mx-auto mt-1 flex aspect-[21/7] w-full flex-col"
+                className="relative mx-auto flex aspect-[21/7] w-full flex-col"
                 style={{
-                    backgroundImage: "url('assets/images/79.png')",
+                    backgroundImage: "url('/assets/demo-images/Artboard2.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}
             >
-                {/* Background overlay */}
-
-                <img src="assets/images/logoBgBlue.png" className="absolute top-10 right-10 w-36" alt="Logo" />
-
-                <div className="grid w-full h-full grid-cols-1 p-10 lg:grid-cols-2 gap-4">
+                <div className="grid h-full w-full grid-cols-2 gap-4">
                     {/* Left Section */}
-                    <div className="flex flex-col text-start md:text-left">
-                        <h1 className="font-proxima-black mb-5 text-2xl leading-[30px] text-white md:mb-10 md:text-3xl md:leading-[30px] lg:text-[40px] lg:leading-[50px]">
+                    <div className="flex flex-col p-4 text-start sm:p-8 md:p-12 md:text-left lg:grid-cols-2">
+                        <h1 className="font-proxima-nova-bold text-2xl leading-[30px] text-white md:mb-4 md:text-3xl md:leading-[30px] lg:text-[40px] lg:leading-[50px]">
                             Security And Safety Solutions
                         </h1>
-                        <p className="text-start text-[12px] leading-5 text-white capitalize mt-2 line-clamp-2 font-proxima-nova-regular">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit corporis itaque voluptate quam voluptates. Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit. Velit corporis itaque voluptate quam voluptates. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Velit corporis itaque voluptate quam voluptates.
+                        <p className="font-proxima-nova-regular text-xl text-white capitalize">
+                            We deliver advanced security and safety solutions that go beyond protection—offering peace of mind.
                         </p>
                     </div>
 
-                    {/* Right Section */}
-                    <div className="justify-end flex flex-col">
-                        <div className="grid grid-cols-5 justify-end gap-4">
+                    {/* Right Section - Feature Icons */}
+                    <div className="mt-auto flex w-full flex-col items-end justify-end p-4">
+                        <div className="flex flex-wrap justify-end gap-4 pr-8 pb-4">
                             {[
-                                { img: 'cctv.png', label: 'CCTV' },
                                 { img: 'access-control.png', label: 'Access Control System' },
-                                { img: 'attendance.png', label: 'Time Attendance System' },
+                                { img: 'access-control.png', label: 'Time Attendance System' },
                                 { img: 'fire-alarm.png', label: 'Fire Alarm' },
-                                { img: 'instrution-alarm.png', label: 'Instruction Alarm' },
+                                { img: 'instrution-alarm.png', label: 'Intrusion Alarm' },
                             ].map((item, index) => (
-                                 <Link
+                                <Link
                                     key={index}
                                     href="#"
-                                    className="size-25 w-32 2xl:size-auto 2xl:w-auto rounded-xl border bg-gray-800 p-2 text-center transition-all duration-500 hover:scale-110 hover:shadow-lg"
+                                    className="flex h-28 w-28 flex-col items-center bg-teal-700/50 p-2 transition-transform duration-300 hover:scale-110"
                                 >
-                                    <div className="flex flex-col items-center">
-                                        <img src={`assets/images/${item.img}`} className="h-12 object-cover" alt={`${item.label} Icon`} />
-                                    </div>
-                                    <p className="text-start text-[12px] leading-5 text-white capitalize mt-2 line-clamp-2 font-proxima-nova-regular">{item.label}</p>
+                                    <img src={`/assets/images/${item.img}`} className="h-14 w-14 object-cover" alt={`${item.label} Icon`} />
+                                    <p className="line-clamp-2 text-center text-sm text-white">{item.label}</p>
                                 </Link>
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Second content */}
             <div
-                className="relative mx-auto mt-1 flex aspect-[21/7] w-full flex-col"
+                className="relative mx-auto flex aspect-[21/7] w-full flex-col"
                 style={{
-                    backgroundImage: "url('assets/demo-images/83.png')",
+                    backgroundImage: "url('/assets/demo-images/Artboard3.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}
             >
-                {/* Background overlay */}
+                <div className="grid h-full w-full grid-cols-2 gap-4">
+                    {/* Left Section */}
+                    <div className="flex flex-col p-4 text-start sm:p-8 md:p-12 md:text-left lg:grid-cols-2">
+                        <h1 className="font-proxima-nova-bold text-2xl leading-[30px] text-white md:mb-4 md:text-3xl md:leading-[30px] lg:text-[40px] lg:leading-[50px]">
+                            Smart Home And Office Solutions
+                        </h1>
+                        <p className="font-proxima-nova-regular text-xl text-white capitalize">
+                            Our smart home and office solutions seamlessly integrate technology to create intelligent spaces that boost comfort,
+                            security, and productivity with just a tap.
+                        </p>
+                    </div>
 
-                <img src="assets/images/logoBgBlue.png" className="absolute top-10 left-10 w-36" alt="Logo" />
-
-                <div className="grid w-full h-full grid-cols-1 p-10 lg:grid-cols-2 gap-4">
-
-
-                    {/* Right Section */}
-                    <div className="justify-end flex flex-col">
-                        <div className="grid grid-cols-5 justify-end gap-4">
+                    {/* Right Section - Feature Icons */}
+                    <div className="flex flex-col items-end justify-end p-4">
+                        <div className="grid grid-cols-2 gap-4 pr-8 pb-4 md:grid-cols-2">
                             {[
-                                { img: 'cctv.png', label: 'CCTV' },
-                                { img: 'access-control.png', label: 'Access Control System' },
-                                { img: 'attendance.png', label: 'Time Attendance System' },
-                                { img: 'fire-alarm.png', label: 'Fire Alarm' },
-                                { img: 'instrution-alarm.png', label: 'Instruction Alarm' },
+                                { img: 'smart-home.png', label: 'Smart Home Automation System' },
+                                { img: 'solar.png', label: 'Smart Solar Energy System' },
                             ].map((item, index) => (
-                                 <Link
+                                <Link
                                     key={index}
                                     href="#"
-                                    className="size-25 w-32 2xl:size-auto 2xl:w-auto rounded-xl border bg-gray-800 p-2 text-center transition-all duration-500 hover:scale-110 hover:shadow-lg"
+                                    className="flex h-32 w-32 flex-col items-center bg-teal-700/50 p-2 transition-transform duration-300 hover:scale-110"
                                 >
-                                    <div className="flex flex-col items-center">
-                                        <img src={`assets/images/${item.img}`} className="h-12 object-cover" alt={`${item.label} Icon`} />
-                                    </div>
-                                    <p className="text-start text-[12px] leading-5 text-white capitalize mt-2 line-clamp-2 font-proxima-nova-regular">{item.label}</p>
+                                    <img src={`/assets/images/${item.img}`} className="h-16 w-16 object-cover" alt={`${item.label} Icon`} />
+                                    <p className="mt-2 line-clamp-2 text-center text-sm text-white">{item.label}</p>
                                 </Link>
                             ))}
                         </div>
                     </div>
-                     {/* Left Section */}
-                     <div className="flex flex-col text-start  md:text-left">
-                        <h1 className="font-proxima-black mb-5 text-2xl leading-[30px] text-white md:mb-10 md:text-3xl md:leading-[30px] lg:text-[40px] lg:leading-[50px]">
-                            Security And Safety Solutions
+                </div>
+            </div>
+
+            {/* Contact */}
+            <div
+                className="relative mx-auto flex aspect-[21/5] w-full flex-col bg-[#008080]"
+                // style={{
+                //     backgroundImage: "url('/assets/demo-images/Artboard3.jpg')",
+                //     backgroundSize: 'cover',
+                //     backgroundPosition: 'center',
+                // }}
+            >
+                <div className="grid h-full w-full grid-cols-2 items-center justify-end gap-4 p-4 text-end">
+                    {/* Left Section */}
+                    <div></div>
+                    <div className="flex flex-col items-end pr-8 pb-4 md:text-left">
+                        <h1 className="font-proxima-nova-bold max-w-[80%] text-end text-2xl leading-[30px] text-white md:mb-4 md:text-3xl md:leading-[30px] lg:text-[39px] lg:leading-[50px]">
+                            Smarter solutions start here! Find out what Westec can do for you.
                         </h1>
-                        <p className="text-start text-[12px] leading-5 text-white capitalize mt-2 line-clamp-2 font-proxima-nova-regular">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit corporis itaque voluptate quam voluptates. Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit. Velit corporis itaque voluptate quam voluptates. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Velit corporis itaque voluptate quam voluptates.
-                        </p>
+                        <a
+                            href="/contact"
+                            className="font-proxima-nova-regular bg-white px-4 py-2 text-xl text-black capitalize transition duration-200 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)]"
+                        >
+                            Contact Us Now
+                        </a>
                     </div>
                 </div>
             </div>
