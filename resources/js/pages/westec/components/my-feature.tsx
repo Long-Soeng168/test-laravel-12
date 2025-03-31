@@ -2,7 +2,7 @@ import { MyClient } from "@/components/my-client";
 
 const MyFeature = () => {
     return (
-        <div className="border-y-2 border-[#273892] mb-10">
+        <div className="border-t-2 border-[#273892] mb-12">
             <div className="mx-auto max-w-[4000px] pt-4 px-4 sm:pt-8 sm:px-8 md:pt-12 md:px-12 bg-white">
             <h1 className="text-2xl font-semibold  text-[#273892]">News & Updates</h1>
                 <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
@@ -13,7 +13,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/NEWS.jpg"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
@@ -37,7 +37,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/NEWS.jpg"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
@@ -61,7 +61,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/NEWS.jpg"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
@@ -85,7 +85,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/NEWS.jpg"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
@@ -114,7 +114,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/Cover.png"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
@@ -136,7 +136,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/Cover.png"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
@@ -158,7 +158,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/Cover.png"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
@@ -180,7 +180,7 @@ const MyFeature = () => {
                                     src="assets/demo-images/Cover.png"
                                     alt="Sunset in the mountains"
                                 />
-                             
+
                             </a>
 
                         <div className="mb-auto px-6 py-4">
