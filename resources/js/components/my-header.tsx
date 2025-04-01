@@ -401,6 +401,7 @@ const MyHeader = () => {
                     </nav> */}
                     <div className='hidden xl:block'>
                     <MyNavbar/>
+
                     </div>
                 </div>
 

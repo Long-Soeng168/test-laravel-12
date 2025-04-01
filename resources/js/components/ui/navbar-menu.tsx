@@ -77,7 +77,7 @@ export const Menu = ({
         <a href="/" className=" w-50">
              <img src="/assets/images/logo.png" />
         </a>
-        <div className="flex justify-between items-center space-x-10 ">
+        <div className="flex justify-between items-center space-x-6 ">
         {children}
         </div>
 
