@@ -2,6 +2,7 @@ import { MyTooltipButton } from '@/components/my-tooltip-button';
 import { CopyIcon, FileIcon, ViewIcon } from 'lucide-react';
 import { useState } from 'react';
 import { ViewImage } from './view-image';
+import { Pagination } from './pagination';
 
 const FileTableData = () => {
     const [selectedImages, setSelectedImages] = useState('');
@@ -80,6 +81,7 @@ const FileTableData = () => {
                     </div>
                 ))}
             </div>
+            <Pagination />
         </div>
     );
 };
