@@ -35,7 +35,7 @@ export function Pagination() {
     const queryString = new URLSearchParams(queryParams).toString();
 
     return (
-        <div className="mt-4 mb-2 flex max-w-[100vw] flex-wrap justify-center gap-2 p-2">
+        <div className="mt-4 mb-2 col-span-4 flex max-w-[100vw] flex-wrap justify-center gap-2 p-2">
             {links?.map((item: any, index: number) => (
                 <Link
                     key={item.label + index}

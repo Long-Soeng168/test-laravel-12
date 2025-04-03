@@ -100,7 +100,7 @@ class PageController extends Controller
         if ($image_files) {
             try {
                 foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'pages', 600);
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'assets/images/pages', 600);
                     PageImage::create([
                         'image' => $created_image_name,
                         'page_id' => $created_project->id,
@@ -144,7 +144,7 @@ class PageController extends Controller
     {
         if (count($page->images) > 0) {
             foreach ($page->images as $image) {
-                ImageHelper::deleteImage($image->image, 'pages');
+                ImageHelper::deleteImage($image->image, 'assets/images/pages');
             }
         }
         $page->delete();

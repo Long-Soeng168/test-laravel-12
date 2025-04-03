@@ -12,8 +12,10 @@ import {
     FolderOpenIcon,
     FolderPenIcon,
     FolderPlusIcon,
+    FoldersIcon,
     FolderXIcon,
     ImageIcon,
+    XIcon,
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -51,6 +53,7 @@ import { AddFiles } from './components/add-files';
 import { AddFolder } from './components/add-folder';
 import { EditFolderName } from './components/edit-folder-name';
 import FileTableData from './components/files-table-data';
+import { useFileManager } from './hooks/FileManagerContext';
 
 const data = {
     tree: [
@@ -92,6 +95,13 @@ export function MyFileManagerDialog() {
         document.addEventListener('keydown', down);
         return () => document.removeEventListener('keydown', down);
     }, []);
+
+    const { getFileData, currentFolder } = useFileManager();
+
+    React.useEffect(() => {
+        getFileData();
+    }, []);
+
     return (
         <>
             <span>
@@ -99,11 +109,20 @@ export function MyFileManagerDialog() {
                 <AddFolder open={openAddFolderDialog} setOpen={setOpenAddFolderDialog} />
                 <AddFiles open={openUploadFileDialog} setOpen={setOpenUploadFileDialog} />
             </span>
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog modal={false} open={open}>
                 <DialogTrigger asChild>
-                    <Button size="sm">Open Dialog</Button>
+                    <span className="border-primary rounded-xl border p-1 transition-all duration-300 hover:m-1 hover:rounded-lg hover:border-white hover:p-0">
+                        <Button onClick={() => setOpen(true)}>
+                            <FoldersIcon />
+                            File Manager
+                        </Button>
+                    </span>
                 </DialogTrigger>
+                {open && <div className="fixed inset-0 z-40 bg-black/80" />}
                 <DialogContent className="h-[85vh] overflow-hidden p-0 md:max-h-[800px] md:max-w-[800px] lg:max-w-[900px]">
+                    <Button className={`absolute top-4 right-4 z-50`} variant={`outline`} size={`icon`} onClick={() => setOpen(false)}>
+                        <XIcon />
+                    </Button>
                     <DialogTitle className="sr-only">Settings</DialogTitle>
                     <DialogDescription className="sr-only">Customize your settings here.</DialogDescription>
                     <SidebarProvider className="items-start">
@@ -139,12 +158,16 @@ export function MyFileManagerDialog() {
                                     <Breadcrumb>
                                         <BreadcrumbList>
                                             <BreadcrumbItem>
-                                                <BreadcrumbLink>Files</BreadcrumbLink>
+                                                <BreadcrumbPage>Files</BreadcrumbPage>
                                             </BreadcrumbItem>
-                                            <BreadcrumbSeparator />
-                                            <BreadcrumbItem>
-                                                <BreadcrumbPage>All Images</BreadcrumbPage>
-                                            </BreadcrumbItem>
+                                            {currentFolder && (
+                                                <>
+                                                    <BreadcrumbSeparator />
+                                                    <BreadcrumbItem>
+                                                        <BreadcrumbPage>{currentFolder.name}</BreadcrumbPage>
+                                                    </BreadcrumbItem>
+                                                </>
+                                            )}
                                         </BreadcrumbList>
                                     </Breadcrumb>
                                 </div>

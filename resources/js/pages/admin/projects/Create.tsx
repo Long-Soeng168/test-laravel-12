@@ -83,9 +83,14 @@ export default function Create() {
             }));
             post('/admin/projects', {
                 preserveScroll: true,
-                onSuccess: () => {
+                onSuccess: (page) => {
                     form.reset();
-                    setFiles(null); 
+                    setFiles(null);
+                    if (page.props.flash?.success) {
+                        toast.success('Success', {
+                            description: page.props.flash.success,
+                        });
+                    }
                 },
                 onError: (e) => {
                     toast.error('Error', {
@@ -218,7 +223,7 @@ export default function Create() {
                                                                         item.code === field.value ? 'opacity-100' : 'opacity-0',
                                                                     )}
                                                                 />
-                                                                {item.title} 
+                                                                {item.title}
                                                             </CommandItem>
                                                         ))}
                                                     </CommandGroup>
@@ -277,15 +282,15 @@ export default function Create() {
                                             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
                                         </div>
                                     </FileInput>
-                                    <FileUploaderContent className="grid grid-cols-3 lg:grid-cols-4 w-full gap-2 rounded-md">
+                                    <FileUploaderContent className="grid w-full grid-cols-3 gap-2 rounded-md lg:grid-cols-4">
                                         {files?.map((file, i) => (
                                             <FileUploaderItem
                                                 key={i}
                                                 index={i}
-                                                className="w-full h-auto aspect-square overflow-hidden rounded-md border p-0 bg-background"
+                                                className="bg-background aspect-square h-auto w-full overflow-hidden rounded-md border p-0"
                                                 aria-roledescription={`file ${i + 1} containing ${file.name}`}
                                             >
-                                                <img src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-contain" />
+                                                <img src={URL.createObjectURL(file)} alt={file.name} className="h-full w-full object-contain" />
                                             </FileUploaderItem>
                                             // <FileUploaderItem key={i} index={i}>
                                             //     <Paperclip className="h-4 w-4 stroke-current" />
