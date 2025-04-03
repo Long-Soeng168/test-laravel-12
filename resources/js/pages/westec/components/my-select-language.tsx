@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Check } from "lucide-react";
-import { Command, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
+import { Check, ChevronUp } from "lucide-react";
+import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 
@@ -18,7 +18,8 @@ export function MyLanguageSelector() {
       <PopoverTrigger asChild>
         <Button variant="outline" className="justify-between border-0 rounded-0">
           <img src={selectedLang.flag} alt={selectedLang.name} className="w-8 h-6 rounded-0" />
-          <span className="mx-1 text-color font-proxima-nova-bold">{selectedLang.name}</span>
+          <span className="text-color font-proxima-nova-bold">{selectedLang.name}</span>
+         <ChevronUp className="h-4 w-4 text-color1 font-extrabold dark:text-gray-300 transition-transform duration-300 rotate-180" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-32 p-0">
