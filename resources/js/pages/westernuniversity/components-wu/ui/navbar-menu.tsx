@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Link } from "@inertiajs/react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import {  ChevronUp } from "lucide-react";
 
 const transition = {
   type: "spring",
@@ -29,9 +29,10 @@ export const MenuItem = ({
       <motion.a
           href={item.toLowerCase() === "about us" ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
         transition={{ duration: 0.3 }}
-        className="bg-[#008080] px-4 py-1 cursor-pointer font-proxima-nova-regular text-white hover:opacity-[0.9] dark:text-white flex gap-0.5 items-center"
+        className="cursor-pointer text-color1 font-noto-san-extra-light font-extrabold hover:opacity-[0.9] dark:text-white flex gap-0.5 items-center justify-center"
       >
-        {item}  <ChevronUp className="h-4 w-4 text-white dark:text-gray-300 transition-transform duration-300 rotate-180" />
+       <p>{item}</p>
+       <ChevronUp className="h-4 w-4 text-color1 mt-0.5 font-extrabold dark:text-gray-300 transition-transform duration-300 rotate-180" />
       </motion.a>
       {active !== null && (
         <motion.div
@@ -72,12 +73,13 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative dark:bg-black dark:border-white/[0.2] bg-white flex justify-between items-center space-x-2 px-6 sm:px-10 py-4 "
+      className="relative dark:bg-black dark:border-white/[0.2]  bg-white shadow-input flex justify-between items-center  py-2 "
     >
-        <a href="/" className=" w-50">
-             <img src="/assets/images/logo.png" />
+        <a href="/" className="w-14  flex gap-2 items-center">
+             <img src="/assets/demo-images/logo-wu.png" />
+             <p className="text-color1 font-noto-san-extra-light font-extrabold text-lg">Western University</p>
         </a>
-        <div className="flex justify-between text-xs items-center space-x-2 ">
+        <div className="flex justify-between items-center space-x-6 ">
         {children}
         </div>
 
@@ -106,7 +108,7 @@ export const ProductItem = ({
         className="shrink-0 rounded-md object-cover shadow-xl"
       />
       <div>
-        <h4 className="text-xl font-proxima-nova-bold font-bold mb-1 text-black dark:text-white">
+        <h4 className="text-xl font-noto-san-extra-light font-extrabold mb-1 text-color1 dark:text-white">
           {title}
         </h4>
         <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
@@ -121,7 +123,7 @@ export const HoveredLink = ({ children, ...rest }: any) => {
   return (
     <Link
       {...rest}
-      className="text-neutral-700 max-w-32 dark:text-neutral-200 hover:text-[#273896] "
+      className="text-neutral-700 max-w-56 dark:text-neutral-200 hover:text-[#273896] "
     >
       {children}
     </Link>

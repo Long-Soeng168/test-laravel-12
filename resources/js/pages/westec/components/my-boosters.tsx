@@ -8,7 +8,7 @@ const MyBoosters = () => {
                         <div className=" flex flex-col gap-6">
                             {/* Section Header */}
                             <div className="max-w-[50%]">
-                                <h2 className="font-proxima-nova-regular mb-6 block bg-[#008080] p-4 text-center text-lg text-white">
+                                <h2 className="font-proxima-nova-regular mb-6 block bg-[#008080] px-4 py-2 text-center text-lg text-white">
                                     Pre-Installation
                                 </h2>
                             </div>
@@ -47,7 +47,7 @@ const MyBoosters = () => {
                         <div className=" flex flex-col gap-6">
                             {/* Section Header */}
                             <div className="max-w-[50%]">
-                                <h2 className="font-proxima-nova-regular mb-6 block bg-[#008080] p-4 text-center text-lg text-white">Installation</h2>
+                                <h2 className="font-proxima-nova-regular mb-6 block bg-[#008080] px-4 py-2 text-center text-lg text-white">Installation</h2>
                             </div>
                             {/* First Item */}
                             <div className="flex items-center gap-6">
@@ -83,7 +83,7 @@ const MyBoosters = () => {
                         <div className=" flex flex-col gap-6">
                             {/* Section Header */}
                             <div className="max-w-[50%]">
-                                <h2 className="font-proxima-nova-regular mb-6 block bg-[#008080] p-4 text-center text-lg text-white">Post-Installation</h2>
+                                <h2 className="font-proxima-nova-regular mb-6 block bg-[#008080] px-4 py-2 text-center text-lg text-white">Post-Installation</h2>
                             </div>
                             {/* First Item */}
                             <div className="flex items-center gap-6">
