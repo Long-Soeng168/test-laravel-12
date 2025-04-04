@@ -26,4 +26,27 @@ class Folder extends Model
     {
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(Folder::class, 'parent_id', 'id');
+    }
+
+    // Accessor to return the path as an array of ancestor folders
+    public function getPathAttribute()
+    {
+        $path = [];
+        $current = $this->parent;
+
+        while ($current) {
+            $path[] = [
+                'id' => $current->id,
+                'name' => $current->name,
+                'parent_id' => $current->parent_id,
+            ];
+            $current = $current->parent;
+        }
+
+        return array_reverse($path);
+    }
 }
