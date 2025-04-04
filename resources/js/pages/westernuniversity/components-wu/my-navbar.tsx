@@ -1,8 +1,11 @@
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { MyLanguageSelector } from '@/pages/westec/components/my-select-language';
-import { HoveredLink, Menu, MenuItem, ProductItem } from './ui/navbar-menu';
+import { HoveredLink, Menu, MenuItem } from './ui/navbar-menu';
 import { Link } from '@inertiajs/react';
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+import { Button } from './ui/button'
+import { Search } from 'lucide-react'
+import { MySearch } from '@/components/my-search'
 
 
 export function MyNavbar() {
@@ -19,8 +22,8 @@ function Navbar({ className }: { className?: string }) {
     const [active, setActive] = useState<string | null>(null);
     return (
         <>
-            <div className={cn(' fixed inset-x-0 top-10 z-50 mx-auto max-w-screen-2xl px-4 sm:px-10 md:px-20', className)}>
-                <div >
+            <div className={cn(' fixed inset-x-0 top-10 bg-white mt-13 z-50', className)}>
+                <div className=' mx-auto max-w-screen-2xl px-4  sm:px-10 md:px-20'>
                     <Menu setActive={setActive}>
                         <MenuItem setActive={setActive} active={active} item="About WU">
                             <div className="flex flex-col space-y-4 text-sm">
@@ -114,9 +117,21 @@ function Navbar({ className }: { className?: string }) {
                                 <HoveredLink href="/">Academic</HoveredLink>
                             </div>
                         </MenuItem>
-                        <Link href='/' className='cursor-pointer text-color1 font-noto-san-extra-light font-extrabold'>Contact Us</Link>
+                        <Link href='/' className='cursor-pointer text-color1 font-proxima-nova-regular font-extrabold'>Contact Us</Link>
                         <div>
-                            <MyLanguageSelector/>
+                        <Sheet>
+                            <SheetTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    className="flex items-center rounded-md text-sm font-medium text-color1 focus:ring-2 focus:outline-none"
+                                >
+                                    <Search size={24} className="h-6 w-6" />
+                                </Button>
+                            </SheetTrigger>
+                            <SheetContent side="top">
+                                <MySearch />
+                            </SheetContent>
+                        </Sheet>
                         </div>
                     </Menu>
                 </div>

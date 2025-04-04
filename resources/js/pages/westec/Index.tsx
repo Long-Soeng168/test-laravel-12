@@ -14,7 +14,9 @@ const Index = () => {
             <MyBottomContent />
             <MyBoosters/>
             <MyPartner/>
+<div>
             <MyFeature/>
+            </div>
         </MyLayout>
     );
 };

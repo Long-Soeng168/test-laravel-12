@@ -29,7 +29,7 @@ export const MenuItem = ({
       <motion.a
           href={item.toLowerCase() === "about us" ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-color1 font-noto-san-extra-light font-extrabold hover:opacity-[0.9] dark:text-white flex gap-0.5 items-center justify-center"
+        className="cursor-pointer text-color1 font-proxima-nova-regular font-extrabold hover:opacity-[0.9] dark:text-white flex gap-0.5 items-center justify-center"
       >
        <p>{item}</p>
        <ChevronUp className="h-4 w-4 text-color1 mt-0.5 font-extrabold dark:text-gray-300 transition-transform duration-300 rotate-180" />

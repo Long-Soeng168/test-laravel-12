@@ -8,6 +8,18 @@
 @custom-variant dark (&:is(.dark *));
 
 
+
+@theme inline {
+    --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+
+    @keyframes scroll {
+      to {
+        transform: translate(calc(-50% - 0.5rem));
+      }
+    }
+  }
+
+
 .toaster .toast::after {
     content: '';
     position: absolute;
@@ -111,6 +123,7 @@
 
 }
 
+
 /* End En */
 
 @theme {
@@ -121,7 +134,7 @@
     --font-proxima-thin: ProximaThin, 'Poppins';
     --font-proxima-nova-regular: NovaRegular, 'Poppins';
     --font-proxima-nova-bold: ProximaBold, 'Poppins';
-    --font-proxima-nova-bold-italic: ProximaBoldItalic, 'Poppins';
+    --font-proxima-nova: ProximaBoldItalic, 'Poppins';
     --font-proxima-nova-extrabold: ProximaExtrabold, 'Poppins';
     --font-proxima-nova-extrabold-italic: ProximaExtraboldItalic, 'Poppins';
     --font-proxima-nova-semibold-italic: ProximaSemiboldItalic, 'Poppins';
