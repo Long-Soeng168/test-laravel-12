@@ -28,7 +28,7 @@ export function ViewImage({
                     </Button>
                     <img
                         className="h-full w-full rounded-lg border-none object-contain"
-                        src={`/assets/files/file_manager/${selectedImage}`}
+                        src={`${selectedImage}`}
                         alt=""
                     />
                     {/* <img

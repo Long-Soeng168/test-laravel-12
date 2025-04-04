@@ -7,6 +7,7 @@ use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreFileRequest;
 use App\Http\Requests\UpdateFileRequest;
 use App\Models\File as FileModel;
+use App\Models\Folder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -20,21 +21,76 @@ class FileController extends Controller
         $search = $request->input('search', '');
         $sortBy = $request->input('sortBy', 'id');
         $sortDirection = $request->input('sortDirection', 'desc');
-
+        $folder_id = $request->input('folder_id', '');
+        $fileType = $request->input('fileType', '');
         $query = FileModel::query();
 
         $query->with('created_by', 'updated_by');
 
-        $query->orderBy($sortBy, $sortDirection);
-
         if ($search) {
-            $query->where(function ($sub_query) use ($search) {
-                return $sub_query->where('title', 'LIKE', "%{$search}%")
-                    ->orWhere('code', 'LIKE', "%{$search}%");
-            });
+            $query->where('name', 'LIKE', "%{$search}%");
         }
 
-        $tableData = $query->paginate(perPage: 20)->onEachSide(1);
+        if ($folder_id) {
+            $query->where('folder_id', $folder_id);
+        }
+
+        $query->orderBy($sortBy, $sortDirection);
+
+        if ($fileType) {
+            switch ($fileType) {
+                case 'image':
+                    $query->where('mime_type', 'LIKE', 'image/%');
+                    break;
+
+                case 'pdf':
+                    $query->where('mime_type', 'application/pdf');
+                    break;
+
+                case 'video':
+                    $query->whereIn('mime_type', [
+                        'video/mp4',
+                        'video/webm',
+                        'video/avi',
+                    ]);
+                    break;
+
+                case 'audio':
+                    $query->whereIn('mime_type', [
+                        'audio/mpeg',    // .mp3
+                        'audio/ogg',     // .ogg
+                        'audio/wav',     // .wav
+                    ]);
+                    break;
+
+                case 'office':
+                    $query->whereIn('mime_type', [
+                        'application/msword', // .doc
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+                        'application/vnd.ms-excel', // .xls
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+                    ]);
+                    break;
+
+                case 'archive':
+                    $query->whereIn('mime_type', [
+                        'application/zip',
+                        'application/x-rar-compressed',
+                    ]);
+                    break;
+
+                case 'text':
+                    $query->whereIn('mime_type', [
+                        'text/plain',   // .txt
+                        'application/json',
+                        'text/csv',
+                    ]);
+                    break;
+            }
+        }
+
+
+        $tableData = $query->paginate(perPage: 24)->onEachSide(1);
 
         return response()->json($tableData);
     }
@@ -55,7 +111,7 @@ class FileController extends Controller
         $validated = $request->validate([
             'folder_id' => 'nullable|integer|max:255|exists:folders,id',
             'files' => 'required|array',
-            'files.*' => 'mimes:jpeg,png,jpg,gif,svg,webp,pdf,doc,docx,xls,xlsx,txt|max:10240', // 10MB
+            'files.*' => 'mimes:jpeg,png,jpg,gif,svg,webp,pdf,doc,docx,xls,xlsx,txt,zip,rar,json,csv,mp4,mp3,ogg,wav,webm,avi|max:10240', // 10MB
         ]);
 
         $files = $request->file('files');
@@ -69,6 +125,16 @@ class FileController extends Controller
 
         $folder = 'assets/files/file_manager';
         $allExistFileNames = [];
+
+        if (isset($validated['folder_id'])) {
+            $currentFolder = Folder::findOrFail($validated['folder_id']);
+            $folderPath = $currentFolder->path;
+            foreach ($folderPath as $path) {
+                $folder = $folder . '/' . $path['name'];
+            }
+            $folder = $folder . '/' . $currentFolder->name;
+            // dd($folder);
+        }
 
         if (count($files) > 0) {
             try {
@@ -159,7 +225,7 @@ class FileController extends Controller
      */
     public function destroy(FileModel $file)
     {
-        $folder = 'assets/files/file_manager';
+        $folder = $file->path;
         FileHelper::deleteFile($file->name, $folder);
         $file->delete();
         return redirect()->back();

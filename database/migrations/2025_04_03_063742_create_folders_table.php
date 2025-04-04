@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('folder_path')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
 
             $table->unsignedBigInteger('created_by')->nullable();

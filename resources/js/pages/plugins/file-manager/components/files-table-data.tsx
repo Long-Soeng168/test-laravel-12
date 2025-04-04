@@ -1,11 +1,31 @@
 import { MyTooltipButton } from '@/components/my-tooltip-button';
-import { FileIcon, ViewIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { DownloadCloudIcon, FileIcon, ViewIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useFileManager } from '../hooks/FileManagerContext';
 import CopyFileUrl from './copy-file-url';
 import DeleteFileButton from './delete-file-button';
 import { Pagination } from './pagination';
 import { ViewImage } from './view-image';
+
+const extensionColors = {
+    pdf: { bg: 'bg-red-400', shadow: 'shadow-red-700/30 dark:shadow-red-100/20' },
+    doc: { bg: 'bg-blue-400', shadow: 'shadow-blue-700/30 dark:shadow-blue-100/20' },
+    docx: { bg: 'bg-blue-400', shadow: 'shadow-blue-700/30 dark:shadow-blue-100/20' },
+    xls: { bg: 'bg-green-600', shadow: 'shadow-green-700/30 dark:shadow-green-100/20' },
+    xlsx: { bg: 'bg-green-600', shadow: 'shadow-green-700/30 dark:shadow-green-100/20' },
+    txt: { bg: 'bg-gray-400', shadow: 'shadow-gray-700/30 dark:shadow-gray-100/20' },
+    csv: { bg: 'bg-amber-500', shadow: 'shadow-amber-700/30 dark:shadow-amber-100/20' },
+    json: { bg: 'bg-lime-500', shadow: 'shadow-lime-700/30 dark:shadow-lime-100/20' },
+    zip: { bg: 'bg-indigo-400', shadow: 'shadow-indigo-700/30 dark:shadow-indigo-100/20' },
+    rar: { bg: 'bg-indigo-500', shadow: 'shadow-indigo-700/30 dark:shadow-indigo-100/20' },
+    mp3: { bg: 'bg-pink-500', shadow: 'shadow-pink-700/30 dark:shadow-pink-100/20' },
+    wav: { bg: 'bg-pink-500', shadow: 'shadow-pink-700/30 dark:shadow-pink-100/20' },
+    mp4: { bg: 'bg-orange-500', shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20' },
+    webm: { bg: 'bg-orange-400', shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20' },
+    avi: { bg: 'bg-orange-600', shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20' },
+    default: { bg: 'bg-gray-400', shadow: 'shadow-gray-700/30 dark:shadow-gray-100/20' },
+};
 
 const FileTableData = () => {
     const [selectedImage, setSelectedImage] = useState('');
@@ -14,8 +34,12 @@ const FileTableData = () => {
     return (
         <div className="overflow-y-auto p-4 pt-2">
             <ViewImage selectedImage={selectedImage} open={isOpenViewImages} setOpen={setIsOpenViewImages} />
+            {fileTableData?.data?.length < 1 && (
+                <div className="flex w-full justify-center text-center">
+                    <img src={`/assets/icons/no-data.gif`} alt="" className="w-[100px]" />
+                </div>
+            )}
             <div className="mt-1 grid grid-cols-3 gap-4 lg:grid-cols-4">
-                {/* PDF */}
                 {fileTableData?.data?.map((item, i) => (
                     <div key={item.id}>
                         <div
@@ -25,22 +49,37 @@ const FileTableData = () => {
                             {item.mime_type.startsWith('image/') ? (
                                 <button
                                     onClick={() => {
-                                        setSelectedImage(item.name);
+                                        setSelectedImage(`/${item.path}/${item.name}`);
                                         setIsOpenViewImages(true);
                                     }}
                                 >
                                     <img
                                         className="cursor-pointer transition-all duration-300 hover:scale-150"
-                                        src={`/assets/files/file_manager/thumb/${item.name}`}
+                                        src={`/${item.path}/thumb/${item.name}`}
                                         alt=""
                                     />
                                 </button>
                             ) : (
                                 <span className="relative">
-                                    <FileIcon size={100} className="stroke-blue-400 stroke-[0.8px]" />
-                                    <p className="absolute bottom-5/12 left-2 translate-y-1/2 rounded border border-white bg-blue-400 px-2 text-center font-semibold text-white uppercase shadow-[3px_3px_0px_0px] shadow-blue-700/30 dark:shadow-blue-100/20">
-                                        {item.extension}
-                                    </p>
+                                    {(() => {
+                                        const ext = item.extension?.toLowerCase();
+                                        const color = extensionColors[ext] || extensionColors.default;
+
+                                        return (
+                                            <>
+                                                <FileIcon size={100} className="text-muted-foreground stroke-current stroke-[0.8px]" />
+                                                <p
+                                                    className={cn(
+                                                        'absolute bottom-5/12 left-2 translate-y-1/2 rounded border border-white px-2 text-center font-semibold text-white uppercase shadow-[3px_3px_0px_0px]',
+                                                        color.bg,
+                                                        color.shadow,
+                                                    )}
+                                                >
+                                                    {item.extension}
+                                                </p>
+                                            </>
+                                        );
+                                    })()}
                                 </span>
                             )}
 
@@ -49,19 +88,19 @@ const FileTableData = () => {
                                 <MyTooltipButton
                                     onClick={() => {
                                         if (item.mime_type.startsWith('image/')) {
-                                            setSelectedImage(item.name);
+                                            setSelectedImage(`/${item.path}/${item.name}`);
                                             setIsOpenViewImages(true);
                                         } else {
-                                            window.open(`/assets/files/file_manager/${item.name}`, '_blank');
+                                            window.open(`/${item.path}/${item.name}`, '_blank');
                                         }
                                     }}
                                     size="icon"
-                                    title="View File"
+                                    title={item.mime_type.startsWith('image/') ? 'View Image' : 'Dowlonad File'}
                                     className="bg-muted/60 h-8 w-8 p-0"
                                 >
-                                    <ViewIcon />
+                                    {item.mime_type.startsWith('image/') ? <ViewIcon /> : <DownloadCloudIcon />}
                                 </MyTooltipButton>
-                                <CopyFileUrl url={`/assets/files/file_manager/${item.name}`} />
+                                <CopyFileUrl url={`/${item.path}/${item.name}`} />
                             </div>
                             {item.mime_type.startsWith('image/') && (
                                 <div className="absolute bottom-1 left-1 gap-1 rounded-tr-md rounded-bl-md bg-white px-2 text-xs text-black transition-all duration-300 group-hover:flex">

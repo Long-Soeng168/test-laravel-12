@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreFolderRequest;
 use App\Http\Requests\UpdateFolderRequest;
 use App\Models\Folder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class FolderController extends Controller
 {
@@ -14,7 +15,12 @@ class FolderController extends Controller
      */
     public function index()
     {
-        //
+        $query = Folder::query();
+        $query->with('parent', 'children');
+        $query->orderBy('created_at', 'desc');
+        $query->where('parent_id', null);
+        $tableData = $query->get();
+        return response()->json($tableData);
     }
 
     /**
@@ -30,15 +36,13 @@ class FolderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $validated = $request->validate([
-            'folder_id' => 'nullable|integer|max:255|exists:folders,id',
-            'files' => 'required|array',
-            'files.*' => 'mimes:jpeg,png,jpg,gif,svg,webp,pdf,doc,docx,xls,xlsx,txt|max:10240', // 10MB
+            'name' => 'required|string|max:255',
+            'parent_id' => 'nullable|numeric|exists:folders,id',
         ]);
 
-        $files = $request->file('files');
-        unset($validated['files']);
+        $validated['created_by'] = $request->user()->id;
+        $validated['updated_by'] = $request->user()->id;
 
         foreach ($validated as $key => $value) {
             if ($value === null || $value === '') {
@@ -47,66 +51,30 @@ class FolderController extends Controller
         }
 
         $folder = 'assets/files/file_manager';
-        $allExistFileNames = [];
 
-        if (count($files) > 0) {
-            try {
-                foreach ($files as $file) {
-                    $mimeType = $file->getMimeType();
-                    $size = $file->getSize(); // Get file size in bytes
-                    $extension = $file->getClientOriginalExtension();
-                    $fileName = $file->getClientOriginalName();
-
-                    // Generate the full file path
-                    $file_path_name = public_path("$folder/$fileName");
-
-                    // Check if the file already exists
-                    if (File::exists($file_path_name)) {
-                        $allExistFileNames[] = $fileName;
-                    } else {
-                        // Determine file type
-                        if (str_starts_with($mimeType, 'image/')) {
-                            $created_file_name = ImageHelper::uploadAndResizeImage($file, $folder, 600, false);
-                            // Get Image Dimensions
-                            [$width, $height] = getimagesize($file);
-                        } else {
-                            $created_file_name = FileHelper::uploadFile($file, $folder);
-
-                            // Non-image files have no dimensions
-                            $width = null;
-                            $height = null;
-                        }
-
-                        $createdItem = FileModel::create([
-                            'name' => $created_file_name,
-                            'path' => $folder,
-                            'mime_type' => $mimeType,
-                            'extension' => $extension,
-                            'size' => round($size / 1024, 2), // Convert bytes to KB
-                            'width' => $width,
-                            'height' => $height,
-                            'folder_id' => $request->folder_id ?? null,
-                            'created_by' => $request->user()->id,
-                            'updated_by' => $request->user()->id,
-                        ]);
-                    }
-                }
-            } catch (\Exception $e) {
-                return redirect()->back()->with('error', 'Failed to upload files: ' . $e->getMessage());
+        if (isset($validated['parent_id'])) {
+            $currentFolder = Folder::findOrFail($validated['parent_id']);
+            $folderPath = $currentFolder->path;
+            foreach ($folderPath as $path) {
+                $folder = $folder . '/' . $path['name'];
             }
+            $folder = $folder . '/' . $currentFolder->name;
+            // dd($folder);
+        }
+        $validated['folder_path'] = $folder;
+
+
+        $findedExistFolder = Folder::whereRaw('LOWER(name) = ?', [Str::lower($validated['name'])])
+            ->where('folder_path', $folder)
+            ->first();
+        if ($findedExistFolder) {
+            return redirect()->back()->with('warning', 'Folder already exists.');
         }
 
-        if (count($allExistFileNames) > 0) {
-            $response = redirect()->back()->with('warning', $allExistFileNames);
 
-            if (count($allExistFileNames) < count($files)) {
-                $response->with('success', 'Some files uploaded successfully.');
-            }
+        $folder = Folder::create($validated);
 
-            return $response;
-        }
-
-        return redirect()->back()->with('success', 'All files uploaded successfully.');
+        return redirect()->back()->with('success', 'Folder created successfully.');
     }
 
     /**
@@ -138,6 +106,13 @@ class FolderController extends Controller
      */
     public function destroy(Folder $folder)
     {
-        //
+        $folderPath = public_path('/' . $folder->folder_path . '/' . $folder->name);
+        if (File::exists($folderPath)) {
+            File::deleteDirectory($folderPath); // this deletes folder + everything inside
+        }
+
+        $folder->delete();
+
+        return redirect()->back()->with('success', 'Folder deleted successfully.');
     }
 }

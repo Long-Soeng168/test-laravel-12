@@ -10,9 +10,10 @@ class Folder extends Model
     /** @use HasFactory<\Database\Factories\FolderFactory> */
     use HasFactory;
     protected $guarded = [];
+    protected $appends = ['path'];
     public function children()
     {
-        return $this->belongsTo(Folder::class, 'parent_id', 'id');
+        return $this->hasMany(Folder::class, 'parent_id', 'id')->with('children');
     }
     public function files()
     {
@@ -43,6 +44,7 @@ class Folder extends Model
                 'id' => $current->id,
                 'name' => $current->name,
                 'parent_id' => $current->parent_id,
+                'path' => $current->path,
             ];
             $current = $current->parent;
         }

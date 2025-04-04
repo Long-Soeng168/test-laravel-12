@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { FileInput, FileUploader, FileUploaderContent, FileUploaderItem } from '@/components/ui/file-upload';
@@ -7,7 +7,7 @@ import { ProgressWithValue } from '@/components/ui/progress-with-value';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm as inertiaUseForm } from '@inertiajs/react';
 import { CloudUpload, Loader, Paperclip } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -35,17 +35,28 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
             'application/vnd.ms-excel': ['.xls'],
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
             'text/plain': ['.txt'],
+            'application/json': ['.json'],
+            'text/csv': ['.csv'],
+            'application/zip': ['.zip'],
+            'application/x-rar-compressed': ['.rar'],
+            'audio/mpeg': ['.mp3'],
+            'audio/wav': ['.wav'],
+            'audio/ogg': ['.ogg'],
+            'video/mp4': ['.mp4'],
+            'video/webm': ['.webm'],
+            'video/x-msvideo': ['.avi'],
         },
     };
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     });
     const { post, progress, processing, transform, errors } = inertiaUseForm();
-    const { getFileData } = useFileManager();
+    const { getFileData, currentFolder } = useFileManager();
     function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             transform(() => ({
                 files: files || null,
+                folder_id: currentFolder?.id || null,
             }));
             post('/api/file_manager/files', {
                 preserveScroll: true,
@@ -56,16 +67,15 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
                             description: page.props.flash.success,
                         });
                     }
-                    
+
                     const warningMessages = page?.props?.flash?.warning;
                     if (warningMessages) {
                         toast.warning('Warning: File(s) Already Exist', {
-                            duration: 5000,
                             description: (
                                 <pre>
                                     {Object.values(warningMessages).map((warn: any, index) => (
                                         <div className="flex" key={index}>
-                                            <span className='text-muted-foreground'>{index + 1}. </span>
+                                            <span className="text-muted-foreground">{index + 1}. </span>
                                             <div className="w-full flex-1 whitespace-normal text-yellow-500">{warn}</div>
                                         </div>
                                     ))}
@@ -73,7 +83,6 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
                             ),
                         });
                     }
-                  
                 },
                 onError: (e) => {
                     toast.error('Error: Upload Failed', {
@@ -117,20 +126,25 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
                         <Breadcrumb>
                             <BreadcrumbList>
                                 <BreadcrumbItem>
-                                    <BreadcrumbLink>Home</BreadcrumbLink>
+                                    <BreadcrumbLink className="cursor-pointer">Files</BreadcrumbLink>
                                 </BreadcrumbItem>
-                                <BreadcrumbSeparator>
-                                    <strong>/</strong>
-                                </BreadcrumbSeparator>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink>All Images</BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator>
-                                    <strong>/</strong>
-                                </BreadcrumbSeparator>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink>About Images</BreadcrumbLink>
-                                </BreadcrumbItem>
+                                {currentFolder?.path?.length > 0 && <BreadcrumbSeparator />}
+                                {currentFolder?.path?.map((item, index) => (
+                                    <React.Fragment key={index}>
+                                        <BreadcrumbItem>
+                                            <BreadcrumbLink className="cursor-pointer">{item.name}</BreadcrumbLink>
+                                        </BreadcrumbItem>
+                                        {index !== currentFolder?.path.length - 1 && <BreadcrumbSeparator />}
+                                    </React.Fragment>
+                                ))}
+                                {currentFolder && (
+                                    <>
+                                        <BreadcrumbSeparator />
+                                        <BreadcrumbItem>
+                                            <BreadcrumbPage>{currentFolder.name}</BreadcrumbPage>
+                                        </BreadcrumbItem>
+                                    </>
+                                )}
                             </BreadcrumbList>
                         </Breadcrumb>
                     </DialogDescription>
@@ -156,7 +170,10 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
                                                         <span className="font-semibold">Click to upload</span>
                                                         &nbsp; or drag and drop
                                                     </p>
-                                                    <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
+                                                    <p className="text-center text-xs text-gray-500 dark:text-gray-400">
+                                                        <strong>Allowed</strong> : PDF, DOC, DOCX, XLS, XLSX, TXT, CSV, ZIP, RAR, MP3, WAV, MP4, WEBM, SVG,
+                                                        PNG, JPG, JPEG, GIF
+                                                    </p>
                                                 </div>
                                             </FileInput>
                                             <FileUploaderContent>
