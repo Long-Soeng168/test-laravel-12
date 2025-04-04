@@ -62,6 +62,17 @@ export const FileManagerProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
+    const handleRefresh = () => {
+        setSearch('');
+        setPage(1);
+        setSortBy('id');
+        setSortDirection('desc');
+        setFileType('');
+        setCurrentFolder(null);
+        getFileData();
+        getFolderData();
+    };
+
     const handleFileType = (fileType: string) => {
         setPage(1);
         setFileType(fileType);
@@ -92,7 +103,8 @@ export const FileManagerProvider = ({ children }: { children: ReactNode }) => {
                 setSortDirection,
                 handleSort,
                 handleFileType,
-                fileType
+                fileType,
+                handleRefresh
             }}
         >
             {children}

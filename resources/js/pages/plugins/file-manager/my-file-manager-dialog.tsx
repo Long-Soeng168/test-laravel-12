@@ -1,9 +1,8 @@
 import { MyTooltipButton } from '@/components/my-tooltip-button';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { FoldersIcon, XIcon } from 'lucide-react';
+import { FoldersIcon, RotateCw, XIcon } from 'lucide-react';
 import * as React from 'react';
 import ActionDropdown from './components/action-dropdown';
 import ActionTop from './components/action-top';
@@ -11,10 +10,11 @@ import { AddFiles } from './components/add-files';
 import { AddFolder } from './components/add-folder';
 import FileTableData from './components/files-table-data';
 import Filter from './components/filter';
+import SearchInput from './components/search-input';
 import SidebarTree from './components/sidebar-tree';
 import TopBreadcrumb from './components/top-breadcrumb';
 import { useFileManager } from './hooks/FileManagerContext';
-import SearchInput from './components/search-input';
+import { Separator } from '@/components/ui/separator';
 
 export function MyFileManagerDialog() {
     const [open, setOpen] = React.useState(true);
@@ -35,6 +35,8 @@ export function MyFileManagerDialog() {
         document.addEventListener('keydown', down);
         return () => document.removeEventListener('keydown', down);
     }, []);
+
+    const { handleRefresh } = useFileManager();
 
     return (
         <>
@@ -82,7 +84,10 @@ export function MyFileManagerDialog() {
                                             setOpenAddFolderDialog={setOpenAddFolderDialog}
                                             setOpenUploadFileDialog={setOpenUploadFileDialog}
                                         />
-
+                                        <span className='bg-gray-400 border-[1px] h-6 rounded-full'></span>
+                                        <MyTooltipButton title="Refresh" variant={`outline`} size={`icon`} onClick={() => handleRefresh()}>
+                                            <RotateCw className="stroke-foreground" />
+                                        </MyTooltipButton>
                                         <MyTooltipButton title="Close" variant={`outline`} size={`icon`} onClick={() => setOpen(false)}>
                                             <XIcon className="stroke-destructive" />
                                         </MyTooltipButton>

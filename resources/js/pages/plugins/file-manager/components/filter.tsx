@@ -12,6 +12,7 @@ import {
     FileArchiveIcon,
     FilesIcon,
     FileSliders,
+    FileSpreadsheet,
     FileTextIcon,
     FileVideoIcon,
     FilterIcon,
@@ -29,7 +30,7 @@ const fileTypeOptions = [
     { type: 'audio', label: 'Audio', icon: MusicIcon },
     { type: 'image', label: 'Images', icon: ImageIcon },
     { type: 'pdf', label: 'PDF', icon: FileTextIcon },
-    { type: 'office', label: 'Microsoft Office', icon: FileSliders },
+    { type: 'office', label: 'Microsoft Office', icon: FileSpreadsheet },
     { type: 'text', label: 'Text Files', icon: NotepadText },
     { type: 'archive', label: 'Archive (.zip, .rar)', icon: FileArchiveIcon },
 ];
