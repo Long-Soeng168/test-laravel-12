@@ -81,6 +81,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import 'ckeditor5/ckeditor5.css';
 
 import '../../../../css/app.css';
+import MyFileManager from '../file-manager/MyFileManager';
 
 /**
  * Create a free account with a trial: https://portal.ckeditor.com/checkout?plan=free
@@ -386,10 +387,39 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
     return (
         <div className="prose max-w-none" ref={editorContainerRef}>
             <div className="editor-container__editor">
-                <div ref={editorRef}>
+                <div ref={editorRef} className="relative bg-transparent p-2">
+                    <div id="toolbar-container" className="relative top-0 z-[10000] bg-transparent text-sm">
+                        {/* Wrap MyFileManager and CKEditor toolbar together */}
+                        <div className=" absolute top-0 right-0">
+                            <MyFileManager />
+                        </div>
+                        {/* Insert CKEditor toolbar position */}
+                        <div id="ckeditor-toolbar-placeholder"></div>
+                    </div>
                     {editorConfig && (
                         <CKEditor
                             data={data}
+                            onReady={(editor) => {
+                                // Move the toolbar into the sticky container
+                                const toolbarElement = editor.ui.view.toolbar.element;
+                                const menubar = editor.ui.view.menuBarView.element;
+                                const placeholder = document.getElementById('ckeditor-toolbar-placeholder');
+
+                                if (placeholder && toolbarElement) {
+                                    // Make sure to append the toolbar after MyFileManager component
+                                    placeholder.appendChild(menubar);
+                                    placeholder.appendChild(toolbarElement);
+                                }
+                            }}
+                            onFocus={(event, editor) => {
+                                // console.log('Focus:', editor);
+                                // Change the toolbar container to sticky on focus
+                                const toolbarContainer = document.getElementById('toolbar-container');
+                                if (toolbarContainer) {
+                                    toolbarContainer.classList.remove('relative'); // Remove relative
+                                    toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
+                                }
+                            }}
                             onChange={(event, editor) => {
                                 setData(editor.getData());
                                 // console.log('Editor Data:', data);

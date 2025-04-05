@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('plugins/ckeditor5/Index');
     });
     Route::get('/admin/my_file_manager', function(){
-        return Inertia::render('plugins/file-manager/Index');
+        return Inertia::render('plugins/file-manager/MyFileManager');
     });
     // Route::post('/upload', [FileUploadController::class, 'upload']);
     

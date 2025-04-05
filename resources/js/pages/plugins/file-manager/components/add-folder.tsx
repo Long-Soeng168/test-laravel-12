@@ -1,6 +1,6 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogTitle } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { ProgressWithValue } from '@/components/ui/progress-with-value';
@@ -64,7 +64,7 @@ export function AddFolder({ open, setOpen }: { open: boolean; setOpen: React.Dis
     }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog modal={true} open={open} onOpenChange={setOpen}>
             {/* <TooltipProvider>
                 <Tooltip delayDuration={300}>
                     <TooltipTrigger asChild>
@@ -79,7 +79,9 @@ export function AddFolder({ open, setOpen }: { open: boolean; setOpen: React.Dis
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider> */}
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogOverlay className='z-10' />
+             {/* {open && <div className="fixed inset-0 z-[100001000000] bg-white/90" />} */}
+            <DialogContent className="sm:max-w-[425px] z-1000002">
                 <DialogHeader>
                     <DialogTitle>Create Folder</DialogTitle>
                     <DialogDescription className="flex">

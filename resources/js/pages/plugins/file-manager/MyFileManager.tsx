@@ -1,15 +1,12 @@
-import AppLayout from '@/layouts/app-layout';
 import { FileManagerProvider } from './hooks/FileManagerContext';
 import { MyFileManagerDialog } from './my-file-manager-dialog';
 
-export default function Page() {
+export default function MyFileManager({className}: { className?: string }) {
     return (
-        <AppLayout>
+        <div className={`${className}`}>
             <FileManagerProvider>
-                <div className="flex h-svh items-center justify-center">
                     <MyFileManagerDialog />
-                </div>
             </FileManagerProvider>
-        </AppLayout>
+        </div>
     );
 }
