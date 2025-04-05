@@ -94,7 +94,7 @@ export function MyFileManagerDialog({ handleInsertMedia }: { handleInsertMedia?:
                                             size={`icon`}
                                             onClick={() => {
                                                 // Keep CKEditor Sticky
-                                                const toolbarContainer = document.getElementById('toolbar-container');
+                                                const toolbarContainer = document.getElementById('ck-toolbar-container');
                                                 if (toolbarContainer) {
                                                     toolbarContainer.classList.remove('relative'); // Remove relative
                                                     toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
