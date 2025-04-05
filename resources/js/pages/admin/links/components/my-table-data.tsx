@@ -11,7 +11,7 @@ import ViewButton from './view-button';
 
 const MyTableData = () => {
     const { tableData } = usePage().props;
-    console.log(tableData);
+
     const queryParams = new URLSearchParams(window.location.search);
     const currentPath = window.location.pathname; // Get dynamic path
 
@@ -31,11 +31,10 @@ const MyTableData = () => {
 
     const [selectedImages, setSelectedImages] = useState([]);
     const [isOpenViewImages, setIsOpenViewImages] = useState(false);
-
     return (
         <ScrollArea className="w-full rounded-md border">
             <MyImageGallery
-                imagePath="/assets/images/projects/"
+                imagePath="/assets/images/links/"
                 selectedImages={selectedImages}
                 isOpenViewImages={isOpenViewImages}
                 setIsOpenViewImages={setIsOpenViewImages}
@@ -46,11 +45,7 @@ const MyTableData = () => {
                         <TableHead className="w-[50px]">No</TableHead>
                         <TableHead className="text-left">Action</TableHead>
                         <TableHead>Image</TableHead>
-                        <TableHead onClick={() => handleSort('code')}>
-                            <span className="flex cursor-pointer items-center">
-                                <ArrowUpDown size={16} /> Code
-                            </span>
-                        </TableHead>
+
                         <TableHead onClick={() => handleSort('title')}>
                             <span className="flex cursor-pointer items-center">
                                 <ArrowUpDown size={16} /> Title
@@ -61,21 +56,15 @@ const MyTableData = () => {
                                 <ArrowUpDown size={16} /> Title Khmer
                             </span>
                         </TableHead>
-                        <TableHead onClick={() => handleSort('order_index')}>
-                            <span className="flex cursor-pointer items-center">
-                                <ArrowUpDown size={16} /> Order Index
-                            </span>
-                        </TableHead>
-                        <TableHead>Parent</TableHead>
-                        <TableHead>Status</TableHead>
+                        <TableHead>link or Content</TableHead>
+                        <TableHead>Types</TableHead>
                         <TableHead>Created At</TableHead>
-                        <TableHead>Created By</TableHead>
                         <TableHead>Last Updated</TableHead>
-                        <TableHead>Updated By</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {tableData?.data?.map((item: any, index: number) => (
+                    {tableData?.map((item: any, index: number) => {
+                        return (
                         <TableRow key={item.id}>
                             <TableCell className="font-medium">
                                 {tableData?.current_page > 1 ? tableData?.per_page * (tableData?.current_page - 1) + index + 1 : index + 1}
@@ -83,21 +72,21 @@ const MyTableData = () => {
                             <TableCell>
                                 <span className="flex h-full items-center justify-start">
                                     <ViewButton item={item} />
-                                    <DeleteButton deletePath="/admin/projects/" id={item.id} />
+                                    <DeleteButton deletePath="/admin/links/" id={item.id} />
                                     <EditButton item={item} />
                                 </span>
                             </TableCell>
                             <TableCell>
-                                {item.images[0] ? (
+                                {item.image?(
                                     <button
                                         onClick={() => {
-                                            setSelectedImages(item.images);
+                                            setSelectedImages(item.image);
                                             setIsOpenViewImages(true);
                                         }}
                                         className="cursor-pointer"
                                     >
                                         <img
-                                            src={`/assets/images/projects/thumb/` + item.images[0]?.image}
+                                            src={`/assets/images/links/thumb/` + item.image}
                                             width={100}
                                             height={100}
                                             alt=""
@@ -108,17 +97,15 @@ const MyTableData = () => {
                                     <img src={`/assets/icons/image-icon.png`} width={100} height={100} alt="" className="size-10 object-contain" />
                                 )}
                             </TableCell>
-                            <TableCell>{item.code || '---'}</TableCell>
                             <TableCell>{item.title || '---'}</TableCell>
                             <TableCell>{item.title_kh || '---'}</TableCell>
-                            <TableCell>{item.order_index || '---'}</TableCell>
-                            <TableCell>{item.parent_code || '---'}</TableCell>
+                            <TableCell>{item.link || '---'}</TableCell>
                             <TableCell>
                                 <MyUpdateStatusButton
                                     id={item.id}
-                                    pathName="/admin/projects"
-                                    currentStatus={item.status}
-                                    statuses={['pending', 'active', 'inactive', 'private', 'public']}
+                                    pathName="/admin/links"
+                                    currentStatus={item.type}
+                                    statuses={['link', 'content']}
                                 />
                             </TableCell>
                             <TableCell>
@@ -130,7 +117,6 @@ const MyTableData = () => {
                                       })
                                     : '---'}
                             </TableCell>
-                            <TableCell>{item.created_by?.name || '---'}</TableCell>
                             <TableCell>
                                 {item.updated_at
                                     ? new Date(item.updated_at).toLocaleDateString('en-UK', {
@@ -140,9 +126,10 @@ const MyTableData = () => {
                                       })
                                     : '---'}
                             </TableCell>
-                            <TableCell>{item.updated_by?.name || '---'}</TableCell>
                         </TableRow>
-                    ))}
+                   ) })}
+
+
                 </TableBody>
             </Table>
 

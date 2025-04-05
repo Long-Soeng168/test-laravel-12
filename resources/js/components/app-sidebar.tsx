@@ -28,6 +28,16 @@ const mainNavItems: NavItem[] = [
         url: '/admin/page_positions',
         icon: ProjectorIcon,
     },
+    {
+        title: 'Links',
+        url: '/admin/links',
+        icon: ProjectorIcon,
+    },
+    {
+        title: 'Website Info',
+        url: '/admin/website_info',
+        icon: ProjectorIcon,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
