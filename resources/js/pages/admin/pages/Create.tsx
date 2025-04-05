@@ -417,7 +417,7 @@ export default function Create() {
                         )}
                     />
                     {/* Start Long Description */}
-                    <MyCkeditor5 data={long_description} setData={setLong_description} />
+                    <MyCkeditor5 key={form} data={long_description} setData={setLong_description} />
                     {/* End Long Description */}
                     {progress && <ProgressWithValue value={progress.percentage} position="start" />}
                     <Button disabled={processing} type="submit">

@@ -9,28 +9,92 @@ import { Pagination } from './pagination';
 import { ViewImage } from './view-image';
 
 const extensionColors = {
-    pdf: { bg: 'bg-red-400', shadow: 'shadow-red-700/30 dark:shadow-red-100/20' },
-    doc: { bg: 'bg-blue-400', shadow: 'shadow-blue-700/30 dark:shadow-blue-100/20' },
-    docx: { bg: 'bg-blue-400', shadow: 'shadow-blue-700/30 dark:shadow-blue-100/20' },
-    xls: { bg: 'bg-green-600', shadow: 'shadow-green-700/30 dark:shadow-green-100/20' },
-    xlsx: { bg: 'bg-green-600', shadow: 'shadow-green-700/30 dark:shadow-green-100/20' },
-    txt: { bg: 'bg-gray-400', shadow: 'shadow-gray-700/30 dark:shadow-gray-100/20' },
-    csv: { bg: 'bg-amber-500', shadow: 'shadow-amber-700/30 dark:shadow-amber-100/20' },
-    json: { bg: 'bg-lime-500', shadow: 'shadow-lime-700/30 dark:shadow-lime-100/20' },
-    zip: { bg: 'bg-indigo-400', shadow: 'shadow-indigo-700/30 dark:shadow-indigo-100/20' },
-    rar: { bg: 'bg-indigo-500', shadow: 'shadow-indigo-700/30 dark:shadow-indigo-100/20' },
-    mp3: { bg: 'bg-pink-500', shadow: 'shadow-pink-700/30 dark:shadow-pink-100/20' },
-    wav: { bg: 'bg-pink-500', shadow: 'shadow-pink-700/30 dark:shadow-pink-100/20' },
-    mp4: { bg: 'bg-orange-500', shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20' },
-    webm: { bg: 'bg-orange-400', shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20' },
-    avi: { bg: 'bg-orange-600', shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20' },
-    default: { bg: 'bg-gray-400', shadow: 'shadow-gray-700/30 dark:shadow-gray-100/20' },
+    pdf: {
+        bg: 'bg-red-400',
+        stroke: 'stroke-red-400',
+        shadow: 'shadow-red-700/30 dark:shadow-red-100/20',
+    },
+    doc: {
+        bg: 'bg-blue-400',
+        stroke: 'stroke-blue-400',
+        shadow: 'shadow-blue-700/30 dark:shadow-blue-100/20',
+    },
+    docx: {
+        bg: 'bg-blue-400',
+        stroke: 'stroke-blue-400',
+        shadow: 'shadow-blue-700/30 dark:shadow-blue-100/20',
+    },
+    xls: {
+        bg: 'bg-green-600',
+        stroke: 'stroke-green-600',
+        shadow: 'shadow-green-700/30 dark:shadow-green-100/20',
+    },
+    xlsx: {
+        bg: 'bg-green-600',
+        stroke: 'stroke-green-600',
+        shadow: 'shadow-green-700/30 dark:shadow-green-100/20',
+    },
+    txt: {
+        bg: 'bg-gray-400',
+        stroke: 'stroke-gray-400',
+        shadow: 'shadow-gray-700/30 dark:shadow-gray-100/20',
+    },
+    csv: {
+        bg: 'bg-amber-500',
+        stroke: 'stroke-amber-500',
+        shadow: 'shadow-amber-700/30 dark:shadow-amber-100/20',
+    },
+    json: {
+        bg: 'bg-lime-500',
+        stroke: 'stroke-lime-500',
+        shadow: 'shadow-lime-700/30 dark:shadow-lime-100/20',
+    },
+    zip: {
+        bg: 'bg-indigo-400',
+        stroke: 'stroke-indigo-400',
+        shadow: 'shadow-indigo-700/30 dark:shadow-indigo-100/20',
+    },
+    rar: {
+        bg: 'bg-indigo-500',
+        stroke: 'stroke-indigo-500',
+        shadow: 'shadow-indigo-700/30 dark:shadow-indigo-100/20',
+    },
+    mp3: {
+        bg: 'bg-pink-500',
+        stroke: 'stroke-pink-500',
+        shadow: 'shadow-pink-700/30 dark:shadow-pink-100/20',
+    },
+    wav: {
+        bg: 'bg-pink-500',
+        stroke: 'stroke-pink-500',
+        shadow: 'shadow-pink-700/30 dark:shadow-pink-100/20',
+    },
+    mp4: {
+        bg: 'bg-orange-500',
+        stroke: 'stroke-orange-500',
+        shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20',
+    },
+    webm: {
+        bg: 'bg-orange-400',
+        stroke: 'stroke-orange-400',
+        shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20',
+    },
+    avi: {
+        bg: 'bg-orange-600',
+        stroke: 'stroke-orange-600',
+        shadow: 'shadow-orange-700/30 dark:shadow-orange-100/20',
+    },
+    default: {
+        bg: 'bg-gray-400',
+        stroke: 'stroke-gray-400',
+        shadow: 'shadow-gray-700/30 dark:shadow-gray-100/20',
+    },
 };
 
-const FileTableData = () => {
+const FileTableData = ({ handleInsertMedia }: { handleInsertMedia?: (type: 'image' | 'file', url: string, fileName?: string) => void }) => {
     const [selectedImage, setSelectedImage] = useState('');
     const [isOpenViewImages, setIsOpenViewImages] = useState(false);
-    const { fileTableData } = useFileManager();
+    const { fileTableData, setIsOpenFileManager } = useFileManager();
     return (
         <div className="overflow-y-auto p-4 pt-2">
             <ViewImage selectedImage={selectedImage} open={isOpenViewImages} setOpen={setIsOpenViewImages} />
@@ -48,10 +112,15 @@ const FileTableData = () => {
                         >
                             {item.mime_type.startsWith('image/') ? (
                                 <button
-                                    onClick={() => {
-                                        setSelectedImage(`/${item.path}/${item.name}`);
-                                        setIsOpenViewImages(true);
+                                    type="button"
+                                    onClick={(e: React.MouseEvent) => {
+                                        handleInsertMedia('image', `/${item.path}/${item.name}`);
+                                        setIsOpenFileManager(false);
                                     }}
+                                    // onClick={() => {
+                                    //     setSelectedImage(`/${item.path}/${item.name}`);
+                                    //     setIsOpenViewImages(true);
+                                    // }}
                                 >
                                     <img
                                         className="cursor-pointer transition-all duration-300 hover:scale-150"
@@ -66,8 +135,17 @@ const FileTableData = () => {
                                         const color = extensionColors[ext] || extensionColors.default;
 
                                         return (
-                                            <>
-                                                <FileIcon size={100} className="text-muted-foreground stroke-current stroke-[0.8px]" />
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    handleInsertMedia('file', `/${item.path}/${item.name}`, item.name);
+                                                    setIsOpenFileManager(false);
+                                                }}
+                                            >
+                                                <FileIcon
+                                                    size={100}
+                                                    className={cn('text-muted-foreground stroke-current stroke-[0.8px]', color.stroke)}
+                                                />
                                                 <p
                                                     className={cn(
                                                         'absolute bottom-5/12 left-2 translate-y-1/2 rounded border border-white px-2 text-center font-semibold text-white uppercase shadow-[3px_3px_0px_0px]',
@@ -77,7 +155,7 @@ const FileTableData = () => {
                                                 >
                                                     {item.extension}
                                                 </p>
-                                            </>
+                                            </button>
                                         );
                                     })()}
                                 </span>

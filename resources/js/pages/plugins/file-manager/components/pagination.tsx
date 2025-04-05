@@ -2,7 +2,7 @@ import { ChevronsLeftIcon, ChevronsRightIcon } from 'lucide-react';
 import { useFileManager } from '../hooks/FileManagerContext';
 
 export function Pagination() {
-    const { fileTableData, getFileData, page, setPage } = useFileManager();
+    const { fileTableData, page, setPage } = useFileManager();
     const links = fileTableData?.links || null;
     const lastPage = fileTableData?.last_page;
 

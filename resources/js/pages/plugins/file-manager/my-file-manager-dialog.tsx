@@ -1,6 +1,6 @@
 import { MyTooltipButton } from '@/components/my-tooltip-button';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogOverlay, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { FoldersIcon, RotateCw, XIcon } from 'lucide-react';
 import * as React from 'react';
@@ -15,8 +15,7 @@ import SidebarTree from './components/sidebar-tree';
 import TopBreadcrumb from './components/top-breadcrumb';
 import { useFileManager } from './hooks/FileManagerContext';
 
-export function MyFileManagerDialog() {
-    const [open, setOpen] = React.useState(false);
+export function MyFileManagerDialog({ handleInsertMedia }: { handleInsertMedia?: (type: 'image' | 'file', url: string, fileName?: string) => void }) {
     const [openUploadFileDialog, setOpenUploadFileDialog] = React.useState(false);
     const [openAddFolderDialog, setOpenAddFolderDialog] = React.useState(false);
     React.useEffect(() => {
@@ -35,7 +34,7 @@ export function MyFileManagerDialog() {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
-    const { handleRefresh } = useFileManager();
+    const { handleRefresh, isOpenFileManager, setIsOpenFileManager } = useFileManager();
 
     return (
         <>
@@ -43,17 +42,22 @@ export function MyFileManagerDialog() {
                 <AddFolder open={openAddFolderDialog} setOpen={setOpenAddFolderDialog} />
                 <AddFiles open={openUploadFileDialog} setOpen={setOpenUploadFileDialog} />
             </span>
-            <Dialog modal={true} open={open}>
+            <Dialog modal={false} open={isOpenFileManager}>
                 {/* Start Trigger Dialog Button */}
                 <DialogTrigger asChild>
-                    <Button onClick={() => setOpen(true)}>
+                    <button
+                        className="hover:bg-primary hover:text-primary-foreground h-full cursor-pointer border px-2 py-[6.5px] transition-all duration-300"
+                        variant="outline"
+                        onClick={() => setIsOpenFileManager(true)}
+                    >
                         <FoldersIcon />
-                        File Manager
-                    </Button>
+                        {/* File Manager */}
+                    </button>
                 </DialogTrigger>
                 {/* End Trigger Dialog Button */}
-                {open && <div className="fixed inset-0 z-[1000000000] bg-black/90" />}
-                <DialogContent className=" h-[85vh] overflow-hidden p-0 md:max-h-[800px] md:max-w-[800px] lg:max-w-[900px]">
+
+                {isOpenFileManager && <div className="fixed inset-0 z-40 bg-black/80" />}
+                <DialogContent className="h-[85vh] overflow-hidden p-0 md:max-h-[800px] md:max-w-[800px] lg:max-w-[900px]">
                     <DialogTitle className="sr-only"></DialogTitle>
                     <DialogDescription className="sr-only"></DialogDescription>
                     <SidebarProvider className="items-start">
@@ -84,7 +88,21 @@ export function MyFileManagerDialog() {
                                         <MyTooltipButton title="Refresh" variant={`outline`} size={`icon`} onClick={() => handleRefresh()}>
                                             <RotateCw className="stroke-foreground" />
                                         </MyTooltipButton>
-                                        <MyTooltipButton title="Close" variant={`outline`} size={`icon`} onClick={() => setOpen(false)}>
+                                        <MyTooltipButton
+                                            title="Close"
+                                            variant={`outline`}
+                                            size={`icon`}
+                                            onClick={() => {
+                                                // Keep CKEditor Sticky
+                                                const toolbarContainer = document.getElementById('toolbar-container');
+                                                if (toolbarContainer) {
+                                                    toolbarContainer.classList.remove('relative'); // Remove relative
+                                                    toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
+                                                }
+                                                // End Keep CKEditor Sticky
+                                                setIsOpenFileManager(false);
+                                            }}
+                                        >
                                             <XIcon className="stroke-destructive" />
                                         </MyTooltipButton>
                                     </div>
@@ -106,7 +124,7 @@ export function MyFileManagerDialog() {
                             {/* Start Search and Action*/}
 
                             {/* Start Table Data */}
-                            <FileTableData />
+                            <FileTableData handleInsertMedia={handleInsertMedia} />
                             {/* End Table Data */}
                         </main>
                         {/* End Right Side */}

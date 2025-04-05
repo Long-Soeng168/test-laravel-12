@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { useFileManager } from '../hooks/FileManagerContext';
 
 const DeleteFileButton = ({ deletePath, id }: { deletePath: string; id: number }) => {
-    const { fileTableData, getFileData } = useFileManager();
+    const { getFileData } = useFileManager();
     const [isOpen, setIsOpen] = useState(false);
     const { delete: destroy, processing } = useForm();
 

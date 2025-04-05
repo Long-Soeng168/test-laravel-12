@@ -80,6 +80,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import 'ckeditor5/ckeditor5.css';
 
+import { Button } from '@/components/ui/button';
 import '../../../../css/app.css';
 import MyFileManager from '../file-manager/MyFileManager';
 
@@ -95,7 +96,6 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
 
     useEffect(() => {
         setIsLayoutReady(true);
-
         return () => setIsLayoutReady(false);
     }, []);
 
@@ -211,6 +211,9 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
                     Mention,
                     MediaEmbed,
                 ],
+                mediaEmbed: {
+                    previewsInData: true, // 👈 IMPORTANT: enables embeds to render in saved data
+                },
                 balloonToolbar: ['bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList'],
                 blockToolbar: [
                     'fontSize',
@@ -384,52 +387,109 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
         };
     }, [isLayoutReady]);
 
-    return (
-        <div className="prose max-w-none" ref={editorContainerRef}>
-            <div className="editor-container__editor">
-                <div ref={editorRef} className="relative bg-transparent p-2">
-                    <div id="toolbar-container" className="relative top-0 z-[10000] bg-transparent text-sm">
-                        {/* Wrap MyFileManager and CKEditor toolbar together */}
-                        <div className=" absolute top-0 right-0">
-                            <MyFileManager />
-                        </div>
-                        {/* Insert CKEditor toolbar position */}
-                        <div id="ckeditor-toolbar-placeholder"></div>
-                    </div>
-                    {editorConfig && (
-                        <CKEditor
-                            data={data}
-                            onReady={(editor) => {
-                                // Move the toolbar into the sticky container
-                                const toolbarElement = editor.ui.view.toolbar.element;
-                                const menubar = editor.ui.view.menuBarView.element;
-                                const placeholder = document.getElementById('ckeditor-toolbar-placeholder');
+    // Handle the CKEditor toolbar and MyFileManager component
+    const handleInsertMedia = (type: 'image' | 'file', url: string, fileName?: string) => {
+        if (!editorRef.current) {
+            console.warn('Editor not initialized');
+            return;
+        }
 
-                                if (placeholder && toolbarElement) {
-                                    // Make sure to append the toolbar after MyFileManager component
-                                    placeholder.appendChild(menubar);
-                                    placeholder.appendChild(toolbarElement);
-                                }
-                            }}
-                            onFocus={(event, editor) => {
-                                // console.log('Focus:', editor);
-                                // Change the toolbar container to sticky on focus
+        editorRef.current.model.change((writer: any) => {
+            const insertPosition = editorRef.current.model.document.selection.getFirstPosition();
+
+            if (type === 'image') {
+                const imageElement = writer.createElement('imageBlock', {
+                    src: url,
+                });
+                editorRef.current.model.insertContent(imageElement, insertPosition);
+            } else if (type === 'file' && fileName) {
+                const linkText = writer.createText(fileName, {
+                    linkHref: url,
+                });
+                editorRef.current.model.insertContent(linkText, insertPosition);
+            }
+        });
+
+        // Keep CKEditor Sticky
+        const toolbarContainer = document.getElementById('toolbar-container');
+        if (toolbarContainer) {
+            toolbarContainer.classList.remove('relative'); // Remove relative
+            toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
+        }
+        // End Keep CKEditor Sticky
+    };
+    // console.log('EditorRef:', editorRef.current);
+    // End Handle the CKEditor toolbar and MyFileManager component
+
+    return (
+        <div className="prose max-w-none">
+            <div id="toolbar-container" className="relative top-0 z-[50] border bg-transparent">
+                {/* Wrap MyFileManager and CKEditor toolbar together */}
+                <div className="absolute top-0 right-0">
+                    <MyFileManager handleInsertMedia={handleInsertMedia} />
+                </div>
+                {/* <Button
+                    type="button"
+                    onClick={() => handleInsertMedia('image', 'https://ckeditor.com/docs/ckeditor5/latest/assets/img/game_boy.jpg')}
+                >
+                    add image
+                </Button>
+                <Button
+                    type="button"
+                    onClick={() => handleInsertMedia('file', 'https://ckeditor.com/docs/ckeditor5/latest/assets/img/game_boy.jpg', 'filename')}
+                >
+                    add file
+                </Button> */}
+                {/* Insert CKEditor toolbar position */}
+                <div id="ckeditor-toolbar-placeholder" className="border-none" />
+            </div>
+            {editorConfig && (
+                <CKEditor
+                    data={data}
+                    onReady={(editor) => {
+                        editorRef.current = editor;
+                        // Move the toolbar into the sticky container
+                        const toolbarElement = editor.ui.view.toolbar.element;
+                        const menubar = editor.ui.view.menuBarView.element;
+                        const placeholder = document.getElementById('ckeditor-toolbar-placeholder');
+
+                        if (placeholder && toolbarElement) {
+                            // Make sure to append the toolbar after MyFileManager component
+                            placeholder.appendChild(menubar);
+                            placeholder.appendChild(toolbarElement);
+                        }
+                    }}
+                    onFocus={(event, editor) => {
+                        // console.log('Focus event triggered');
+                        // Change the toolbar container to sticky on focus
+                        const toolbarContainer = document.getElementById('toolbar-container');
+                        if (toolbarContainer) {
+                            toolbarContainer.classList.remove('relative'); // Remove relative
+                            toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
+                        }
+                    }}
+                    onBlur={(event, editor) => {
+                        setTimeout(() => {
+                            const isEditorFocused = editor.ui.focusTracker.isFocused;
+                            // console.log('Actual isFocused after blur timeout:', isEditorFocused);
+
+                            if (!isEditorFocused) {
                                 const toolbarContainer = document.getElementById('toolbar-container');
                                 if (toolbarContainer) {
-                                    toolbarContainer.classList.remove('relative'); // Remove relative
-                                    toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
+                                    toolbarContainer.classList.remove('sticky', 'top-0');
+                                    toolbarContainer.classList.add('relative');
                                 }
-                            }}
-                            onChange={(event, editor) => {
-                                setData(editor.getData());
-                                // console.log('Editor Data:', data);
-                            }}
-                            editor={ClassicEditor}
-                            config={editorConfig}
-                        />
-                    )}
-                </div>
-            </div>
+                            }
+                        }, 200); // Give it some time to update
+                    }}
+                    onChange={(event, editor) => {
+                        setData(editor.getData());
+                        // console.log('Editor Data:', data);
+                    }}
+                    editor={ClassicEditor}
+                    config={editorConfig}
+                />
+            )}
         </div>
     );
 }

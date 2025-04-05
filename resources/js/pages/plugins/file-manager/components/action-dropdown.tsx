@@ -15,7 +15,7 @@ import { toast } from 'sonner';
 import { useFileManager } from '../hooks/FileManagerContext';
 
 const ActionDropdown = ({ setOpenUploadFileDialog, setOpenAddFolderDialog }) => {
-    const { getFileData, getFolderData, currentFolder, setCurrentFolder, setPage } = useFileManager();
+    const { currentFolder, setCurrentFolder, setPage } = useFileManager();
 
     const { delete: destroy, progress, processing, errors } = inertiaUseForm();
     function handleDeleteCurrentFolder() {
@@ -35,8 +35,6 @@ const ActionDropdown = ({ setOpenUploadFileDialog, setOpenAddFolderDialog }) => 
                 preserveScroll: true,
                 preserveState: true,
                 onSuccess: (page) => {
-                    getFolderData();
-                    getFileData();
                     if (page.props.flash?.success) {
                         toast.success('Success', {
                             description: page.props.flash.success,

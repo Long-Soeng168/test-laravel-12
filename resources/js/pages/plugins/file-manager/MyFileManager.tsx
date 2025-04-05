@@ -1,12 +1,14 @@
 import { FileManagerProvider } from './hooks/FileManagerContext';
 import { MyFileManagerDialog } from './my-file-manager-dialog';
 
-export default function MyFileManager({className}: { className?: string }) {
+export default function MyFileManager({
+    handleInsertMedia,
+}: {
+    handleInsertMedia?: (type: 'image' | 'file', url: string, fileName?: string) => void;
+}) {
     return (
-        <div className={`${className}`}>
-            <FileManagerProvider>
-                    <MyFileManagerDialog />
-            </FileManagerProvider>
-        </div>
+        <FileManagerProvider>
+            <MyFileManagerDialog handleInsertMedia={handleInsertMedia} />
+        </FileManagerProvider>
     );
 }

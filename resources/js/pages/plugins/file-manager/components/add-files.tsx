@@ -51,7 +51,7 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
         resolver: zodResolver(formSchema),
     });
     const { post, progress, processing, transform, errors } = inertiaUseForm();
-    const { getFileData, currentFolder } = useFileManager();
+    const { currentFolder } = useFileManager();
     function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             transform(() => ({
@@ -90,7 +90,6 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
                     });
                 },
                 onFinish: () => {
-                    getFileData();
                     setFiles(null);
                     setOpen(false);
                 },

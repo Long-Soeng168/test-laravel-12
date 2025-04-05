@@ -106,6 +106,7 @@ export default function Edit({ item }: { item: any }) {
     return (
         <Form {...form}>
             <div className="prose max-w-none ck-content" dangerouslySetInnerHTML={{ __html: item.long_description }}></div>
+            <div>{item.long_description}</div> 
 
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 pt-10">
                 <div className="grid grid-cols-12 gap-4">

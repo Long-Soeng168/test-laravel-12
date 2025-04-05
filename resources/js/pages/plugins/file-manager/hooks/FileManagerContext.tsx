@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 const FileManagerContext = createContext(undefined);
 
 export const FileManagerProvider = ({ children }: { children: ReactNode }) => {
+    const [isOpenFileManager, setIsOpenFileManager] = useState(false);
     const [currentFolder, setCurrentFolder] = useState(null);
     const [fileTableData, setFileTableData] = useState<any[]>([]);
     const [folderTableData, setFolderTableData] = useState<any[]>([]);
@@ -84,6 +85,8 @@ export const FileManagerProvider = ({ children }: { children: ReactNode }) => {
     return (
         <FileManagerContext.Provider
             value={{
+                isOpenFileManager,
+                setIsOpenFileManager,
                 fileTableData,
                 getFileData,
                 folderTableData,
