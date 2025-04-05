@@ -10,7 +10,7 @@ import EditButton from './edit-button';
 import ViewButton from './view-button';
 
 const MyTableData = () => {
-    const { page_positions } = usePage().props;
+    const { tableData } = usePage().props;
     const queryParams = new URLSearchParams(window.location.search);
     const currentPath = window.location.pathname; // Get dynamic path
 
@@ -39,45 +39,61 @@ const MyTableData = () => {
                 isOpenViewImages={isOpenViewImages}
                 setIsOpenViewImages={setIsOpenViewImages}
             />
+
             <Table>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[50px]">No</TableHead>
                         <TableHead className="text-left">Action</TableHead>
                         <TableHead>Image</TableHead>
+                        <TableHead>Banner</TableHead>
                         <TableHead onClick={() => handleSort('code')}>
                             <span className="flex cursor-pointer items-center">
                                 <ArrowUpDown size={16} /> Code
                             </span>
                         </TableHead>
-                        <TableHead onClick={() => handleSort('title')}>
+                        <TableHead onClick={() => handleSort('name')}>
                             <span className="flex cursor-pointer items-center">
-                                <ArrowUpDown size={16} /> Title
+                                <ArrowUpDown size={16} /> Name
                             </span>
                         </TableHead>
-                        <TableHead onClick={() => handleSort('title_kh')}>
+                        <TableHead onClick={() => handleSort('name_kh')}>
                             <span className="flex cursor-pointer items-center">
-                                <ArrowUpDown size={16} /> Title Khmer
+                                <ArrowUpDown size={16} /> Name Khmer
                             </span>
                         </TableHead>
-                        <TableHead onClick={() => handleSort('order_index')}>
+                        <TableHead onClick={() => handleSort('status')}>
                             <span className="flex cursor-pointer items-center">
-                                <ArrowUpDown size={16} /> Order Index
+                                <ArrowUpDown size={16} /> Status
                             </span>
                         </TableHead>
-                        <TableHead>Parent</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Created At</TableHead>
-                        <TableHead>Created By</TableHead>
-                        <TableHead>Last Updated</TableHead>
-                        <TableHead>Updated By</TableHead>
+                        <TableHead onClick={() => handleSort('created_at')}>
+                            <span className="flex cursor-pointer items-center">
+                                <ArrowUpDown size={16} /> Created At
+                            </span>
+                        </TableHead>
+                        <TableHead onClick={() => handleSort('created_by')}>
+                            <span className="flex cursor-pointer items-center">
+                                <ArrowUpDown size={16} /> Created By
+                            </span>
+                        </TableHead>
+                        <TableHead onClick={() => handleSort('updated_at')}>
+                            <span className="flex cursor-pointer items-center">
+                                <ArrowUpDown size={16} /> Updated At
+                            </span>
+                        </TableHead>
+                        <TableHead onClick={() => handleSort('updated_by')}>
+                            <span className="flex cursor-pointer items-center">
+                                <ArrowUpDown size={16} /> Updated By
+                            </span>
+                        </TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {page_positions?.data?.map((item: any, index: number) => (
+                    {tableData?.data?.map((item: any, index: number) => (
                         <TableRow key={item.id}>
                             <TableCell className="font-medium">
-                                {page_positions?.current_page > 1 ? page_positions?.per_page * (page_positions?.current_page - 1) + index + 1 : index + 1}
+                                {tableData?.current_page > 1 ? tableData?.per_page * (tableData?.current_page - 1) + index + 1 : index + 1}
                             </TableCell>
                             <TableCell>
                                 <span className="flex h-full items-center justify-start">
@@ -90,7 +106,7 @@ const MyTableData = () => {
                                 {item.image ? (
                                     <button
                                         onClick={() => {
-                                            setSelectedImages([item.image]);
+                                            setSelectedImages([{ image: item.image }]);
                                             setIsOpenViewImages(true);
                                         }}
                                         className="cursor-pointer"
@@ -107,15 +123,38 @@ const MyTableData = () => {
                                     <img src={`/assets/icons/image-icon.png`} width={100} height={100} alt="" className="size-10 object-contain" />
                                 )}
                             </TableCell>
-                            <TableCell>{item.title || '---'}</TableCell>
-                            <TableCell>{item.title_kh || '---'}</TableCell>
+                            <TableCell>
+                                {' '}
+                                {item.banner ? (
+                                    <button
+                                        onClick={() => {
+                                            setSelectedImages([{ image: item.banner }]);
+                                            setIsOpenViewImages(true);
+                                        }}
+                                        className="cursor-pointer"
+                                    >
+                                        <img
+                                            src={`/assets/images/page_positions/thumb/` + item.banner}
+                                            width={100}
+                                            height={100}
+                                            alt=""
+                                            className="size-10 object-contain transition-all duration-300 hover:scale-150"
+                                        />
+                                    </button>
+                                ) : (
+                                    <img src={`/assets/icons/image-icon.png`} width={100} height={100} alt="" className="size-10 object-contain" />
+                                )}
+                            </TableCell>
+                            <TableCell>{item.code || '---'}</TableCell>
+                            <TableCell>{item.name || '---'}</TableCell>
+                            <TableCell>{item.name_kh || '---'}</TableCell>
                             {/* <TableCell>{item.order_index || '---'}</TableCell> */}
                             <TableCell>
                                 <MyUpdateStatusButton
                                     id={item.id}
                                     pathName="/admin/page_positions"
                                     currentStatus={item.status}
-                                    statuses={['pending', 'active', 'inactive', 'private', 'public']}
+                                    statuses={['active', 'inactive']}
                                 />
                             </TableCell>
                             <TableCell>
@@ -142,7 +181,11 @@ const MyTableData = () => {
                     ))}
                 </TableBody>
             </Table>
-
+            {tableData?.data?.length < 1 && (
+                <div className="flex justify-center text-center">
+                    <img src={`/assets/icons/no-data.gif`} alt="" className="w-[100px]" />
+                </div>
+            )}
             <ScrollBar orientation="horizontal" />
         </ScrollArea>
     );

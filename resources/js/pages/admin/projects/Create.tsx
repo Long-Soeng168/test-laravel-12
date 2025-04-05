@@ -87,9 +87,9 @@ export default function Create() {
                     form.reset();
                     setFiles(null);
                 },
-                onError: () => {
+                onError: (e) => {
                     toast.error('Error', {
-                        description: 'Failed to create.',
+                        description: 'Failed to create.' + JSON.stringify(e, null, 2),
                     });
                 },
             });

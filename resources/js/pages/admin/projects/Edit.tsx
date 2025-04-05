@@ -86,7 +86,9 @@ export default function Edit({ item }: { item: any }) {
                     setFiles(null);
                 },
                 onError: (e) => {
-                    console.log(e);
+                    toast.error('Error', {
+                        description: 'Failed to create.' + JSON.stringify(e, null, 2),
+                    });
                 },
             });
         } catch (error) {
@@ -278,15 +280,15 @@ export default function Edit({ item }: { item: any }) {
                                             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
                                         </div>
                                     </FileInput>
-                                    <FileUploaderContent className="grid grid-cols-3 lg:grid-cols-5 w-full gap-2 rounded-md">
+                                    <FileUploaderContent className="grid w-full grid-cols-3 gap-2 rounded-md lg:grid-cols-5">
                                         {files?.map((file, i) => (
                                             <FileUploaderItem
                                                 key={i}
                                                 index={i}
-                                                className="w-full h-auto aspect-square overflow-hidden rounded-md border p-0 bg-background"
+                                                className="bg-background aspect-square h-auto w-full overflow-hidden rounded-md border p-0"
                                                 aria-roledescription={`file ${i + 1} containing ${file.name}`}
                                             >
-                                                <img src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-contain" />
+                                                <img src={URL.createObjectURL(file)} alt={file.name} className="h-full w-full object-contain" />
                                             </FileUploaderItem>
                                             // <FileUploaderItem key={i} index={i}>
                                             //     <Paperclip className="h-4 w-4 stroke-current" />
@@ -301,14 +303,17 @@ export default function Edit({ item }: { item: any }) {
                             {/* Initial Image */}
                             {item.images?.length > 0 && (
                                 <div className="mt-4 p-1">
-                                    <FormDescription className='mb-2'>Uploaded Image(s).</FormDescription>
-                                    <div className="grid grid-cols-3 lg:grid-cols-5 w-full gap-2 rounded-md">
+                                    <FormDescription className="mb-2">Uploaded Image(s).</FormDescription>
+                                    <div className="grid w-full grid-cols-3 gap-2 rounded-md lg:grid-cols-5">
                                         {item.images.map((imageObject) => (
-                                            <span key={imageObject.id} className="group relative w-full h-auto aspect-square overflow-hidden rounded-md border p-0 bg-background">
+                                            <span
+                                                key={imageObject.id}
+                                                className="group bg-background relative aspect-square h-auto w-full overflow-hidden rounded-md border p-0"
+                                            >
                                                 <img
                                                     src={'/assets/images/projects/thumb/' + imageObject.image}
                                                     alt={imageObject.name}
-                                                    className="w-full h-full object-contain"
+                                                    className="h-full w-full object-contain"
                                                 />
                                                 <button
                                                     type="button"
@@ -317,7 +322,9 @@ export default function Edit({ item }: { item: any }) {
                                                     onClick={() => handleDestroyImage(imageObject.id)}
                                                 >
                                                     <span className="sr-only">remove item</span>
-                                                    <Trash2Icon className={`group-hover:bg-destructive/80 size-6 rounded-sm stroke-white p-0.5 duration-200 ease-in-out group-hover:stroke-white ${processing && 'cursor-not-allowed'}`} />
+                                                    <Trash2Icon
+                                                        className={`group-hover:bg-destructive/80 size-6 rounded-sm stroke-white p-0.5 duration-200 ease-in-out group-hover:stroke-white ${processing && 'cursor-not-allowed'}`}
+                                                    />
                                                 </button>
                                             </span>
 
