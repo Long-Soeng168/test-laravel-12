@@ -46,12 +46,14 @@ export function MyFileManagerDialog({ handleInsertMedia }: { handleInsertMedia?:
                 {/* Start Trigger Dialog Button */}
                 <DialogTrigger asChild>
                     <button
-                        className="hover:bg-primary hover:text-primary-foreground h-full cursor-pointer border px-2 py-[6.5px] transition-all duration-300"
+                        className="text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer border-l border-l-primary px-2 py-[7.5px] transition-all duration-300 max-h-10"
                         variant="outline"
                         onClick={() => setIsOpenFileManager(true)}
                     >
-                        <FoldersIcon />
-                        {/* File Manager */}
+                        <span className='flex items-center gap-2 '>
+                            <FoldersIcon />
+                            <span className='hidden lg:inline font-semibold'>File Manager</span>
+                        </span>
                     </button>
                 </DialogTrigger>
                 {/* End Trigger Dialog Button */}

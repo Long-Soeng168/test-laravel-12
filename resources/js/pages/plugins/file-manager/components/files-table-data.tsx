@@ -108,7 +108,7 @@ const FileTableData = ({ handleInsertMedia }: { handleInsertMedia?: (type: 'imag
                     <div key={item.id}>
                         <div
                             key={i}
-                            className="bg-muted group relative flex aspect-square max-w-full items-center justify-center overflow-hidden rounded-lg"
+                            className="bg-muted group relative flex aspect-square max-w-full items-center hover:bg-primary/10 cursor-pointer justify-center overflow-hidden rounded-lg"
                         >
                             {item.mime_type.startsWith('image/') ? (
                                 <button
@@ -186,7 +186,7 @@ const FileTableData = ({ handleInsertMedia }: { handleInsertMedia?: (type: 'imag
                                 </div>
                             )} */}
                             {item.extension && item.mime_type.startsWith('image/') && (
-                                <div className="absolute right-1 bottom-1 gap-1 rounded-tl-md rounded-br-md bg-white px-2 text-xs text-black transition-all duration-300 group-hover:flex">
+                                <div className="absolute right-1 bottom-1 gap-1 rounded-tl-md rounded-br-md bg-white px-2 text-base text-black transition-all duration-300 group-hover:flex">
                                     <span>{`.${item.extension}`}</span>
                                 </div>
                             )}

@@ -411,10 +411,13 @@
 .ck.ck-button.ck-button_with-text .ck-button__label,
 a.ck.ck-button.ck-button_with-text .ck-button__label {
     text-align: start !important; /* Align text to the left */
-    margin-left: 8px; /* Space between icon and label */
-    margin-right: 8px; /* Space between icon and label */
+    margin-left: 8px;
+    margin-right: 8px;
     margin-top: 0;
     margin-bottom: 0;
+}
+.ck.ck-menu-bar__menu.ck-menu-bar__menu_top-level > .ck-menu-bar__menu__button .ck-button__label {
+    margin: 0 !important;
 }
 .ck.ck-menu-bar {
     padding: 1.5px !important;
@@ -427,11 +430,11 @@ a.ck.ck-button.ck-button_with-text .ck-button__label {
 .ck.ck-list-item-button .ck-list-item-button__check-holder {
     display: none !important;
 }
- 
+
 .ck .ck-list__item {
     margin: 0 !important;
     padding: 0 !important;
-}  
+}
 .ck.ck-button.ck-list-item-button {
     margin: 0 !important;
     padding: 10px !important;
@@ -441,7 +444,8 @@ a.ck.ck-button.ck-button_with-text .ck-button__label {
 .ck.ck-list__item.ck-menu-bar__menu__item {
     padding: 0 !important;
 }
-.ck.ck-splitbutton.ck-splitbutton_open > .ck-splitbutton__arrow:not(.ck-disabled)::after, .ck.ck-splitbutton:hover > .ck-splitbutton__arrow:not(.ck-disabled)::after {
+.ck.ck-splitbutton.ck-splitbutton_open > .ck-splitbutton__arrow:not(.ck-disabled)::after,
+.ck.ck-splitbutton:hover > .ck-splitbutton__arrow:not(.ck-disabled)::after {
     left: -1px;
 }
 
