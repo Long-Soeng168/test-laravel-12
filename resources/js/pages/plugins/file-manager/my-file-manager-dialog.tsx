@@ -46,7 +46,7 @@ export function MyFileManagerDialog({ handleInsertMedia }: { handleInsertMedia?:
                 {/* Start Trigger Dialog Button */}
                 <DialogTrigger asChild>
                     <button
-                        className="text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer border-l border-l-primary px-2 py-[7.5px] transition-all duration-300 max-h-10"
+                        className="text-true-primary hover:bg-true-primary hover:text-white cursor-pointer border-l border-l-true-primary px-2 py-[7.5px] transition-all duration-300 max-h-10"
                         variant="outline"
                         onClick={() => setIsOpenFileManager(true)}
                     >
