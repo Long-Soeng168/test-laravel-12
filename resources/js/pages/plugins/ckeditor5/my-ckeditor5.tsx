@@ -48,6 +48,7 @@ import {
     LinkImage,
     List,
     ListProperties,
+    MediaEmbed,
     Mention,
     PageBreak,
     Paragraph,
@@ -207,6 +208,7 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
                     Underline,
                     Emoji,
                     Mention,
+                    MediaEmbed,
                 ],
                 balloonToolbar: ['bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList'],
                 blockToolbar: [

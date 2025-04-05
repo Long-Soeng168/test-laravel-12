@@ -102,14 +102,21 @@ const FileTableData = () => {
                                 </MyTooltipButton>
                                 <CopyFileUrl url={`/${item.path}/${item.name}`} />
                             </div>
-                            {item.mime_type.startsWith('image/') && (
-                                <div className="absolute bottom-1 left-1 gap-1 rounded-tr-md rounded-bl-md bg-white px-2 text-xs text-black transition-all duration-300 group-hover:flex">
+                            {/* {item.mime_type.startsWith('image/') && (
+                                <div className="absolute bottom-1 left-1 max-w-full gap-1 rounded-tr-md rounded-bl-md bg-white px-2 text-xs whitespace-nowrap text-black transition-all duration-300 group-hover:flex">
                                     <span>{`${item.width} x ${item.height}`}</span>
+                                </div>
+                            )} */}
+                            {item.extension && item.mime_type.startsWith('image/') && (
+                                <div className="absolute right-1 bottom-1 gap-1 rounded-tl-md rounded-br-md bg-white px-2 text-xs text-black transition-all duration-300 group-hover:flex">
+                                    <span>{`.${item.extension}`}</span>
                                 </div>
                             )}
                         </div>
                         <p className="max-w-full overflow-hidden pt-1 text-center text-xs overflow-ellipsis">{item.name}</p>
-                        <p className="py-1 text-center text-[10px]">{item.size} Kb</p>
+                        <p className="py-1 text-center text-[10px]">
+                            {item.mime_type.startsWith('image/') && `${item.width} x ${item.height} / `} ({item.size} Kb)
+                        </p>
                     </div>
                 ))}
             </div>
