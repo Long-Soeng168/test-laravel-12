@@ -29,5 +29,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/ckeditor', function(){
         return Inertia::render('my_ckeditor5/CustomCKEditor');
     });
-    Route::post('/upload', [FileUploadController::class, 'upload']);
+    // Route::post('/upload', [FileUploadController::class, 'upload']);
 });
