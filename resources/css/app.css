@@ -430,6 +430,9 @@ a.ck.ck-button.ck-button_with-text .ck-button__label {
     padding-left: 4px !important;
     padding-right: 4px !important;
 }
+.ck.ck-button__label {
+    line-height: 1.5 !important;
+}
 .ck.ck-list-item-button .ck-list-item-button__check-holder {
     display: none !important;
 }

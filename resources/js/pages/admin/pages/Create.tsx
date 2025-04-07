@@ -1,4 +1,3 @@
-import MyCkeditor5 from '@/pages/plugins/ckeditor5/my-ckeditor5';
 import { AutosizeTextarea } from '@/components/ui/autosize-textarea';
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
@@ -10,6 +9,7 @@ import { ProgressWithValue } from '@/components/ui/progress-with-value';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
 import { cn } from '@/lib/utils';
+import MyCkeditor5 from '@/pages/plugins/ckeditor5/my-ckeditor5';
 import { BreadcrumbItem } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm as inertiaUseForm, usePage } from '@inertiajs/react';
@@ -61,6 +61,9 @@ export default function Create() {
     // ===== Start Our Code =====
     const [files, setFiles] = useState<File[] | null>(null);
     const [long_description, setLong_description] = useState('');
+    const [long_description_kh, setLong_description_kh] = useState('');
+    const [editorKey, setEditorKey] = useState(0);
+
     const { parentData, pagePositions } = usePage().props;
     const { post, progress, processing, transform, errors } = inertiaUseForm();
     function onSubmit(values: z.infer<typeof formSchema>) {
@@ -74,6 +77,7 @@ export default function Create() {
             transform(() => ({
                 ...values,
                 long_description: long_description,
+                long_description_kh: long_description_kh,
                 images: files || null,
             }));
             post('/admin/pages', {
@@ -81,6 +85,8 @@ export default function Create() {
                 onSuccess: () => {
                     form.reset();
                     setLong_description('');
+                    setLong_description_kh('');
+                    setEditorKey((prev) => prev + 1);
                     setFiles(null);
                     toast.success('Success', {
                         description: 'Page Created Successfully!',
@@ -417,7 +423,18 @@ export default function Create() {
                         )}
                     />
                     {/* Start Long Description */}
-                    <MyCkeditor5 key={form} data={long_description} setData={setLong_description} />
+                    <div key={editorKey} className="space-y-8">
+                        <div >
+                            <p className="mb-1 text-sm font-medium">Long Description Khmer</p>
+                            <MyCkeditor5 data={long_description_kh} setData={setLong_description_kh} />
+                        </div>
+                        <div >
+                            <p className="mb-1 text-sm font-medium">Long Description</p>
+                            <MyCkeditor5 data={long_description} setData={setLong_description} />
+                        </div>
+                    </div>
+
+                    {/* <MyCkeditor5 key={form} data={long_description} setData={setLong_description} /> */}
                     {/* End Long Description */}
                     {progress && <ProgressWithValue value={progress.percentage} position="start" />}
                     <Button disabled={processing} type="submit">

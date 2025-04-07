@@ -25,7 +25,7 @@ export const FileManagerProvider = ({ children }: { children: ReactNode }) => {
                 `/api/file_manager/files?search=${search}&page=${page}&sortBy=${sortBy}&sortDirection=${sortDirection}&folder_id=${currentFolder?.id || ''}&fileType=${fileType || ''}`,
             )
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 setFileTableData(response.data);
             })
             .catch((error) => {
@@ -39,7 +39,7 @@ export const FileManagerProvider = ({ children }: { children: ReactNode }) => {
         axios
             .get('/api/file_manager/folders')
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 setFolderTableData(response.data); // Set the data to state
             })
             .catch((error) => {

@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, PanelTopIcon, ProjectorIcon, ReplaceIcon } from 'lucide-react';
+import { BookOpen, FilePenLineIcon, Folder, LayoutGrid, PanelTopIcon, ProjectorIcon, ReplaceIcon } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -37,15 +37,15 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'CKEditor',
+        title: 'Sample Content',
         url: '/admin/ckeditor5',
-        icon: BookOpen,
+        icon: FilePenLineIcon,
     },
-    {
-        title: 'File Manager',
-        url: '/admin/my_file_manager',
-        icon: Folder,
-    },
+    // {
+    //     title: 'File Manager',
+    //     url: '/admin/my_file_manager',
+    //     icon: Folder,
+    // },
 ];
 
 export function AppSidebar() {

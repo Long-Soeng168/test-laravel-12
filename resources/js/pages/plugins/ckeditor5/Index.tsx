@@ -1,11 +1,17 @@
 import AppLayout from '@/layouts/app-layout';
+import { BreadcrumbItem } from '@/types';
 import { useState } from 'react';
 import MyCkeditor5 from './my-ckeditor5';
-
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Sample Content',
+        href: '/admin/ckeditor5',
+    },
+];
 export default function Page() {
     const [data, setData] = useState(sampleData);
     return (
-        <AppLayout>
+        <AppLayout breadcrumbs={breadcrumbs}>
             <div className="mx-auto flex h-full max-w-6xl items-center justify-center py-2">
                 <MyCkeditor5 data={data} setData={setData} />
             </div>

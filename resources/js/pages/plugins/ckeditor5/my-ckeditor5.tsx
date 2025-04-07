@@ -76,7 +76,7 @@ import {
     TodoList,
     Underline,
 } from 'ckeditor5';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
 import 'ckeditor5/ckeditor5.css';
 import '../../../../css/app.css';
@@ -88,7 +88,10 @@ import MyFileManager from '../file-manager/MyFileManager';
 const LICENSE_KEY = 'GPL'; // or <YOUR_LICENSE_KEY>.
 
 export default function MyCkeditor5({ data, setData }: { data: string; setData: React.Dispatch<React.SetStateAction<string>> }) {
-    const editorContainerRef = useRef(null);
+    const uniqueId = useId(); // this is supported in React 18+
+    const toolbarContainerId = `ck-toolbar-container-${uniqueId}`;
+    const toolbarPlaceHolderId = `ck-toolbar-placeholder-${uniqueId}`;
+
     const editorRef = useRef(null);
     const [isLayoutReady, setIsLayoutReady] = useState(false);
 
@@ -409,7 +412,7 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
         });
 
         // Keep CKEditor Sticky
-        const toolbarContainer = document.getElementById('ck-toolbar-container');
+        const toolbarContainer = document.getElementById(toolbarContainerId);
         if (toolbarContainer) {
             toolbarContainer.classList.remove('relative'); // Remove relative
             toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
@@ -421,10 +424,10 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
 
     return (
         <div className="prose max-w-none">
-            <div id="ck-toolbar-container" className="relative text-sm top-0 z-[50] border bg-transparent">
+            <div id={toolbarContainerId} className="relative top-0 z-[50] border bg-transparent text-sm">
                 {/* Wrap MyFileManager and CKEditor toolbar together */}
                 <div className="absolute top-0 right-0">
-                    <MyFileManager handleInsertMedia={handleInsertMedia} />
+                    <MyFileManager toolbarContainerId={toolbarContainerId} handleInsertMedia={handleInsertMedia} />
                 </div>
                 {/* <Button
                     type="button"
@@ -439,7 +442,7 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
                     add file
                 </Button> */}
                 {/* Insert CKEditor toolbar position */}
-                <div id="ckeditor-toolbar-placeholder" className="border-none" />
+                <div id={toolbarPlaceHolderId} className="border-none" />
             </div>
             {editorConfig && (
                 <CKEditor
@@ -449,7 +452,7 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
                         // Move the toolbar into the sticky container
                         const toolbarElement = editor.ui.view.toolbar.element;
                         const menubar = editor.ui.view.menuBarView.element;
-                        const placeholder = document.getElementById('ckeditor-toolbar-placeholder');
+                        const placeholder = document.getElementById(toolbarPlaceHolderId);
 
                         if (placeholder && toolbarElement) {
                             // Make sure to append the toolbar after MyFileManager component
@@ -460,7 +463,7 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
                     onFocus={(event, editor) => {
                         // console.log('Focus event triggered');
                         // Change the toolbar container to sticky on focus
-                        const toolbarContainer = document.getElementById('ck-toolbar-container');
+                        const toolbarContainer = document.getElementById(toolbarContainerId);
                         if (toolbarContainer) {
                             toolbarContainer.classList.remove('relative'); // Remove relative
                             toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0
@@ -472,7 +475,7 @@ export default function MyCkeditor5({ data, setData }: { data: string; setData: 
                             // console.log('Actual isFocused after blur timeout:', isEditorFocused);
 
                             if (!isEditorFocused) {
-                                const toolbarContainer = document.getElementById('ck-toolbar-container');
+                                const toolbarContainer = document.getElementById(toolbarContainerId);
                                 if (toolbarContainer) {
                                     toolbarContainer.classList.remove('sticky', 'top-0');
                                     toolbarContainer.classList.add('relative');

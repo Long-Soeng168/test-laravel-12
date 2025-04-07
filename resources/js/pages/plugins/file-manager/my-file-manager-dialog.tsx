@@ -15,7 +15,13 @@ import SidebarTree from './components/sidebar-tree';
 import TopBreadcrumb from './components/top-breadcrumb';
 import { useFileManager } from './hooks/FileManagerContext';
 
-export function MyFileManagerDialog({ handleInsertMedia }: { handleInsertMedia?: (type: 'image' | 'file', url: string, fileName?: string) => void }) {
+export function MyFileManagerDialog({
+    handleInsertMedia,
+    toolbarContainerId,
+}: {
+    handleInsertMedia?: (type: 'image' | 'file', url: string, fileName?: string) => void;
+    toolbarContainerId?: string;
+}) {
     const [openUploadFileDialog, setOpenUploadFileDialog] = React.useState(false);
     const [openAddFolderDialog, setOpenAddFolderDialog] = React.useState(false);
     React.useEffect(() => {
@@ -42,23 +48,23 @@ export function MyFileManagerDialog({ handleInsertMedia }: { handleInsertMedia?:
                 <AddFolder open={openAddFolderDialog} setOpen={setOpenAddFolderDialog} />
                 <AddFiles open={openUploadFileDialog} setOpen={setOpenUploadFileDialog} />
             </span>
-            <Dialog modal={false} open={isOpenFileManager}>
+            <Dialog modal={true} open={isOpenFileManager}>
                 {/* Start Trigger Dialog Button */}
                 <DialogTrigger asChild>
                     <button
-                        className="text-true-primary hover:bg-true-primary hover:text-white cursor-pointer border-l border-l-true-primary px-2 py-[7.5px] transition-all duration-300 max-h-10"
+                        className="text-true-primary hover:bg-true-primary border-l-true-primary max-h-16 cursor-pointer border-l px-2 py-[11px] transition-all duration-300 hover:text-white"
                         variant="outline"
                         onClick={() => setIsOpenFileManager(true)}
                     >
-                        <span className='flex items-center gap-2 '>
+                        <span className="flex items-center gap-2">
                             <FoldersIcon />
-                            <span className='hidden lg:inline font-semibold'>File Manager</span>
+                            <span className="hidden font-semibold lg:inline">File Manager</span>
                         </span>
                     </button>
                 </DialogTrigger>
                 {/* End Trigger Dialog Button */}
 
-                {isOpenFileManager && <div className="fixed inset-0 z-40 bg-black/80" />}
+                {isOpenFileManager && <div className="fixed inset-0 z-50 bg-black/10" />}
                 <DialogContent className="h-[85vh] overflow-hidden p-0 md:max-h-[800px] md:max-w-[800px] lg:max-w-[900px]">
                     <DialogTitle className="sr-only"></DialogTitle>
                     <DialogDescription className="sr-only"></DialogDescription>
@@ -96,7 +102,7 @@ export function MyFileManagerDialog({ handleInsertMedia }: { handleInsertMedia?:
                                             size={`icon`}
                                             onClick={() => {
                                                 // Keep CKEditor Sticky
-                                                const toolbarContainer = document.getElementById('ck-toolbar-container');
+                                                const toolbarContainer = document.getElementById(toolbarContainerId);
                                                 if (toolbarContainer) {
                                                     toolbarContainer.classList.remove('relative'); // Remove relative
                                                     toolbarContainer.classList.add('sticky', 'top-0'); // Add sticky and top-0

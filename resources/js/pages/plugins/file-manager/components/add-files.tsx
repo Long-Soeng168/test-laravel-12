@@ -51,7 +51,7 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
         resolver: zodResolver(formSchema),
     });
     const { post, progress, processing, transform, errors } = inertiaUseForm();
-    const { currentFolder } = useFileManager();
+    const { currentFolder, getFileData } = useFileManager();
     function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             transform(() => ({
@@ -62,6 +62,7 @@ export function AddFiles({ open, setOpen }: { open: boolean; setOpen: React.Disp
                 preserveScroll: true,
                 onSuccess: (page) => {
                     form.reset();
+                    getFileData();
                     if (page.props.flash?.success) {
                         toast.success('Success', {
                             description: page.props.flash.success,
