@@ -3,9 +3,34 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
 Route::get('/', function () {
-    return Inertia::render('LaravelDefaultPage');
+    return Inertia::render('westernuniversity/About');
 })->name('home');
+Route::get('/academic', function () {
+    return Inertia::render('westernuniversity/Academic');
+})->name('academic');
+
+// Route::get('/', function () {
+//     return Inertia::render('westec/Index');
+// })->name('home');
+// Route::get('/contact', function () {
+//     return Inertia::render('westec/Contact');
+// })->name('contact');
+// Route::get('/solutions', function () {
+//     return Inertia::render('westec/SolutionsPage');
+// })->name('solutions');
+// Route::get('/detail/{id}', function ($id) {
+
+//     return Inertia::render('westec/Detail', [
+//         'id' => $id,
+//     ]);
+// })->name('detail');
+// Route::get('/', function () {
+//     return Inertia::render('welcome');
+// })->name('home');
+//    return Inertia::render('LaravelDefaultPage');
+// })->name('home');
 
 // Route::get('/', function () {
 //         return Inertia::render('westec/Index');
@@ -19,23 +44,24 @@ Route::get('/contact', function () {
 Route::get('/solutions', function () {
     return Inertia::render('westec/SolutionsPage');
 })->name('solutions');
+
 Route::get('/blog', function () {
     return Inertia::render('blog');
 })->name('blog');
 Route::get('/services', function () {
     return Inertia::render('services');
 })->name('services');
-Route::get('/detail/{id}', function ($id) {
+// Route::get('/detail/{id}', function ($id) {
 
-    return Inertia::render('detail', [
-        'id' => $id,
-    ]);
-})->name('detail');
+//     return Inertia::render('detail', [
+//         'id' => $id,
+//     ]);
+// })->name('detail');
 
-Route::get('/about', function () {
+// Route::get('/about', function () {
 
-    return Inertia::render('about');
-})->name('about');
+//     return Inertia::render('about');
+// })->name('about');
 // Route::get('/contact', function () {
 //     return Inertia::render('contact');
 // })->name('contact');
