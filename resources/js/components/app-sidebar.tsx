@@ -33,6 +33,16 @@ const mainNavItems: NavItem[] = [
         url: '/admin/pages',
         icon: PanelTopIcon,
     },
+    {
+        title: 'Links',
+        url: '/admin/links',
+        icon: ProjectorIcon,
+    },
+    {
+        title: 'Website Info',
+        url: '/admin/website_info',
+        icon: ProjectorIcon,
+    },
 ];
 
 const footerNavItems: NavItem[] = [

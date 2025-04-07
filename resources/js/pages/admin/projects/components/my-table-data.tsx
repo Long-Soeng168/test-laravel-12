@@ -11,6 +11,7 @@ import ViewButton from './view-button';
 
 const MyTableData = () => {
     const { tableData } = usePage().props;
+    console.log(tableData);
     const queryParams = new URLSearchParams(window.location.search);
     const currentPath = window.location.pathname; // Get dynamic path
 

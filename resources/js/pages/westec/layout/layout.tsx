@@ -13,7 +13,7 @@ const MyLayout = ({ children }: LayoutProps) => {
       <MyHeader/>
       {/* End Header */}
 
-      <main className="min-h-screen background">{children}</main>
+      <main className="min-h-screen background max-w-[2000px] mx-auto">{children}</main>
 
       {/* Footer */}
       <MyFooter/>

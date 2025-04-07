@@ -16,7 +16,6 @@ interface FlashMessages {
 }
 
 const AppLayout = ({ children, breadcrumbs, ...props }: AppLayoutProps) => {
-    
     // const { flash } = usePage<{ flash: FlashMessages }>().props;
     // const successMessage = flash?.success;
     // const errorMessage = flash?.error;

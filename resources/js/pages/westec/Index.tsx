@@ -1,21 +1,22 @@
-    import { MySlide } from '@/components/my-slide';
+import { MySlide } from '@/components/my-slide';
+import { MyBottomContent } from './components/my-bottom-content';
 import { MyHeroSection } from './components/my-hero-section';
 import MyLayout from './layout/layout';
-import { MyBottomContent } from './components/my-bottom-content';
+import MyBoosters from './components/my-boosters';
+import { MyPartner } from '@/components/my-partner';
+import MyFeature from './components/my-feature';
 
 const Index = () => {
     return (
         <MyLayout>
-
-            <img src='assets/images/banner1.png' className='w-full aspect-[21/9]' />
-            <div className='max-w-screen-2xl mx-auto'>
-                <MyHeroSection />
+            <MySlide />
+            <MyHeroSection />
+            <MyBottomContent />
+            <MyBoosters/>
+            <MyPartner/>
+<div>
+            <MyFeature/>
             </div>
-            <MySlide/>
-            <div className='max-w-screen-2xl mx-auto'>
-                <MyBottomContent/>
-            </div>
-            <MySlide/>
         </MyLayout>
     );
 };
