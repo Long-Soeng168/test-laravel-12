@@ -41,5 +41,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/my_file_manager', function(){
         return Inertia::render('plugins/file-manager/MyFileManager');
     });
-    Route::post('/upload', [FileUploadController::class, 'upload']);
 });
