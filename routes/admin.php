@@ -1,10 +1,7 @@
 <?php
 
-<<<<<<< HEAD
 use App\Http\Controllers\LinkController;
-=======
 use App\Http\Controllers\FileUploadController;
->>>>>>> 5cfbfdbc9170379cdc803c750e6e0a2f80aa22ee
 use App\Http\Controllers\PagePositionController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WebInfoController;
@@ -29,12 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/page_positions/{pagePosition}/update', [PagePositionController::class, 'update']);
     Route::post('admin/page_positions/{pagePosition}/update_status', [PagePositionController::class, 'update_status']);
 
-<<<<<<< HEAD
-=======
     Route::get('/ckeditor', function(){
         return Inertia::render('my_ckeditor5/CustomCKEditor');
     });
     Route::post('/upload', [FileUploadController::class, 'upload']);
-    
->>>>>>> 5cfbfdbc9170379cdc803c750e6e0a2f80aa22ee
 });
