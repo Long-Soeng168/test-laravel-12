@@ -29,6 +29,22 @@ Route::get('/academic', function () {
 // Route::get('/', function () {
 //     return Inertia::render('welcome');
 // })->name('home');
+//    return Inertia::render('LaravelDefaultPage');
+// })->name('home');
+
+// Route::get('/', function () {
+//         return Inertia::render('westec/Index');
+//     })->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('welcome');
+// })->name('home');
+Route::get('/contact', function () {
+    return Inertia::render('westec/Contact');
+})->name('contact');
+Route::get('/solutions', function () {
+    return Inertia::render('westec/SolutionsPage');
+})->name('solutions');
+
 Route::get('/blog', function () {
     return Inertia::render('blog');
 })->name('blog');
@@ -55,7 +71,7 @@ Route::get('/normalblade', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+        return Inertia::render('admin/dashboard/Index');
     })->name('dashboard');
     Route::get('items', function () {
         return Inertia::render('admin/items/page');

@@ -52,7 +52,8 @@ export default function Create() {
         },
     });
 
-    const [parents_projects, setParents_projects] = useState([]);
+    // ===== Start Our Code =====
+    const [parentsTableData, setParentsTableData] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -60,7 +61,7 @@ export default function Create() {
         axios
             .get('/admin/all_projects')
             .then((response) => {
-                setParents_projects(response.data); // Set the data to state
+                setParentsTableData(response.data); // Set the data to state
             })
             .catch((error) => {
                 setError(error); // Handle errors if any
@@ -79,35 +80,31 @@ export default function Create() {
             transform(() => ({
                 ...values,
                 images: files || null,
-                // image: files ? files[0] : null,
             }));
             post('/admin/projects', {
                 preserveScroll: true,
                 onSuccess: () => {
-                    toast.success("Success", {
-                        description: "Created successfully",
-                    })
                     form.reset();
                     setFiles(null);
                 },
-                onError: () => {
-                    toast.error("Error", {
-                        description: "Failed to create.",
-                    })
+                onError: (e) => {
+                    toast.error('Error', {
+                        description: 'Failed to create.' + JSON.stringify(e, null, 2),
+                    });
                 },
-                
             });
         } catch (error) {
             console.error('Form submission error', error);
-            toast.error("Error", {
-                description: "Something went wrong!",
-            })
+            toast.error('Error', {
+                description: 'Something went wrong!',
+            });
         }
     }
+    // ===== End Our Code =====
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto max-w-3xl space-y-8 py-10">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 pt-10">
                 <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-6">
                         <FormField
@@ -171,7 +168,7 @@ export default function Create() {
                                         <Input placeholder="ex: 1" type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>Lower number is priority (default = 1)</FormDescription>
-                                    <FormMessage />
+                                    <FormMessage>{errors.order_index && <div>{errors.order_index}</div>}</FormMessage>
                                 </FormItem>
                             )}
                         />
@@ -195,21 +192,21 @@ export default function Create() {
                                                     className={cn('w-full justify-between', !field.value && 'text-muted-foreground')}
                                                 >
                                                     {field.value
-                                                        ? parents_projects.find((item) => item.code === field.value)?.title
-                                                        : 'Select category'}
+                                                        ? parentsTableData.find((item) => item.code === field.value)?.title
+                                                        : 'Select parent'}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                 </Button>
                                             </FormControl>
                                         </PopoverTrigger>
                                         <PopoverContent className="w-[200px] p-0">
                                             <Command>
-                                                <CommandInput placeholder="Search category..." />
+                                                <CommandInput placeholder="Search parent..." />
                                                 <CommandList>
-                                                    <CommandEmpty>No category found.</CommandEmpty>
+                                                    <CommandEmpty>No parent found.</CommandEmpty>
                                                     <CommandGroup>
-                                                        {parents_projects.map((item) => (
+                                                        {parentsTableData.map((item) => (
                                                             <CommandItem
-                                                                value={item.title}
+                                                                value={item.title + item.code}
                                                                 key={item.code}
                                                                 onSelect={() => {
                                                                     form.setValue('parent_code', item.code);
@@ -221,7 +218,7 @@ export default function Create() {
                                                                         item.code === field.value ? 'opacity-100' : 'opacity-0',
                                                                     )}
                                                                 />
-                                                                {item.title}
+                                                                {item.title} 
                                                             </CommandItem>
                                                         ))}
                                                     </CommandGroup>
@@ -229,7 +226,7 @@ export default function Create() {
                                             </Command>
                                         </PopoverContent>
                                     </Popover>
-                                    <FormDescription>Select the main category this item belongs to.</FormDescription>
+                                    <FormDescription>Select the parent this item belongs to.</FormDescription>
                                     <FormMessage>{errors.parent_code && <div>{errors.parent_code}</div>}</FormMessage>
                                 </FormItem>
                             )}
@@ -241,7 +238,7 @@ export default function Create() {
                             control={form.control}
                             name="status"
                             render={({ field }) => (
-                                <FormItem >
+                                <FormItem>
                                     <FormLabel>Status</FormLabel>
                                     <Select key={field.value} onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
@@ -269,12 +266,7 @@ export default function Create() {
                         <FormItem>
                             <FormLabel>Select Images</FormLabel>
                             <FormControl>
-                                <FileUploader
-                                    value={files}
-                                    onValueChange={setFiles}
-                                    dropzoneOptions={dropZoneConfig}
-                                    className="relative p-2"
-                                >
+                                <FileUploader value={files} onValueChange={setFiles} dropzoneOptions={dropZoneConfig} className="relative p-1">
                                     <FileInput id="fileInput" className="outline-1 outline-slate-500 outline-dashed">
                                         <div className="flex w-full flex-col items-center justify-center p-8">
                                             <CloudUpload className="h-10 w-10 text-gray-500" />
@@ -285,35 +277,37 @@ export default function Create() {
                                             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
                                         </div>
                                     </FileInput>
-                                    <FileUploaderContent className="flex w-full flex-row flex-wrap items-center gap-2 overflow-auto rounded-md">
+                                    <FileUploaderContent className="grid grid-cols-3 lg:grid-cols-4 w-full gap-2 rounded-md">
                                         {files?.map((file, i) => (
                                             <FileUploaderItem
                                                 key={i}
                                                 index={i}
-                                                className="size-20 overflow-hidden rounded-md border p-0"
+                                                className="w-full h-auto aspect-square overflow-hidden rounded-md border p-0 bg-background"
                                                 aria-roledescription={`file ${i + 1} containing ${file.name}`}
                                             >
-                                                <img src={URL.createObjectURL(file)} alt={file.name} className="size-20 object-contain" />
+                                                <img src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-contain" />
                                             </FileUploaderItem>
                                             // <FileUploaderItem key={i} index={i}>
                                             //     <Paperclip className="h-4 w-4 stroke-current" />
                                             //     <span>{file.name}</span>
                                             // </FileUploaderItem>
                                         ))}
-                                    </FileUploaderContent> 
+                                    </FileUploaderContent>
                                 </FileUploader>
                             </FormControl>
                             <FormMessage>{errors.images && <div>{errors.images}</div>}</FormMessage>
                         </FormItem>
                     )}
                 />
+                {progress && <ProgressWithValue value={progress.percentage} position="start" />}
                 <Button disabled={processing} type="submit">
-                    {processing && <span className='size-6 animate-spin'><Loader /></span>}
+                    {processing && (
+                        <span className="size-6 animate-spin">
+                            <Loader />
+                        </span>
+                    )}
                     {processing ? 'Submiting...' : 'Submit'}
                 </Button>
-                {progress && (
-                    <ProgressWithValue value={progress.percentage} position="start" />
-                )}
             </form>
         </Form>
     );
