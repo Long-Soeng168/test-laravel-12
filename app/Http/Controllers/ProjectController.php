@@ -90,7 +90,7 @@ class ProjectController extends Controller
         if ($image_files) {
             try {
                 foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'projects', 600);
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'assets/images/projects', 600);
                     ProjectImage::create([
                         'image' => $created_image_name,
                         'project_id' => $created_project->id,
@@ -152,7 +152,7 @@ class ProjectController extends Controller
         if ($image_files) {
             try {
                 foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'projects');
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'assets/images/projects');
                     ProjectImage::create([
                         'image' => $created_image_name,
                         'project_id' => $project->id,
@@ -184,7 +184,7 @@ class ProjectController extends Controller
     {
         if (count($project->images) > 0) {
             foreach ($project->images as $image) {
-                ImageHelper::deleteImage($image->image, 'projects');
+                ImageHelper::deleteImage($image->image, 'assets/images/projects');
             }
         }
         $project->delete();
@@ -199,7 +199,7 @@ class ProjectController extends Controller
         }
 
         // Call helper function to delete image
-        ImageHelper::deleteImage($image->image, 'projects');
+        ImageHelper::deleteImage($image->image, 'assets/images/projects');
 
         // Delete from DB
         $image->delete();

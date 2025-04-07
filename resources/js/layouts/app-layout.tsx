@@ -16,20 +16,19 @@ interface FlashMessages {
 }
 
 const AppLayout = ({ children, breadcrumbs, ...props }: AppLayoutProps) => {
-
-    const { flash } = usePage<{ flash: FlashMessages }>().props;
-    const successMessage = flash?.success;
-    const errorMessage = flash?.error;
-    if (successMessage) {
-        toast.success('Success', {
-            description: successMessage,
-        });
-    }
-    if (errorMessage) {
-        toast.error('Error', {
-            description: errorMessage,
-        });
-    }
+    // const { flash } = usePage<{ flash: FlashMessages }>().props;
+    // const successMessage = flash?.success;
+    // const errorMessage = flash?.error;
+    // if (successMessage) {
+    //     toast.success('Success', {
+    //         description: successMessage,
+    //     });
+    // }
+    // if (errorMessage) {
+    //     toast.error('Error', {
+    //         description: errorMessage,
+    //     });
+    // }
 
     return (
         <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
