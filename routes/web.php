@@ -5,8 +5,11 @@ use Inertia\Inertia;
 
 
 Route::get('/', function () {
-    return Inertia::render('westernuniversity/Index');
+    return Inertia::render('westernuniversity/About');
 })->name('home');
+Route::get('/academic', function () {
+    return Inertia::render('westernuniversity/Academic');
+})->name('academic');
 
 // Route::get('/', function () {
 //     return Inertia::render('westec/Index');
@@ -39,10 +42,10 @@ Route::get('/services', function () {
 //     ]);
 // })->name('detail');
 
-Route::get('/about', function () {
+// Route::get('/about', function () {
 
-    return Inertia::render('about');
-})->name('about');
+//     return Inertia::render('about');
+// })->name('about');
 // Route::get('/contact', function () {
 //     return Inertia::render('contact');
 // })->name('contact');

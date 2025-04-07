@@ -44,6 +44,74 @@
     }
 }
 
+
+/* Western font */
+
+@font-face {
+    font-family: NowBlack;
+    src: url('/public/assets/fonts/NowAlt/Now-Black.otf')format('truetype');
+}
+@font-face {
+    font-family: NowBold;
+    src: url('/public/assets/fonts/NowAlt/Now-Bold.otf')format('truetype');
+}
+@font-face {
+    font-family: NowLight;
+    src: url('/public/assets/fonts/NowAlt/Now-Light.otf')format('truetype');
+}
+@font-face {
+    font-family: NowMedium;
+    src: url('/public/assets/fonts/NowAlt/Now-Medium.otf')format('truetype');
+}
+@font-face {
+    font-family: NowRegular;
+    src: url('/public/assets/fonts/NowAlt/Now-Regular.otf')format('truetype');
+}
+@font-face {
+    font-family: NowThin;
+    src: url('/public/assets/fonts/NowAlt/Now-Thin.otf')format('truetype');
+}
+@font-face {
+    font-family: NowAltBlack;
+    src: url('/public/assets/fonts/NowAlt/NowAlt-Black.otf')format('truetype');
+}
+@font-face {
+    font-family: NowAltBold;
+    src: url('/public/assets/fonts/NowAlt/NowAlt-Bold.otf')format('truetype');
+}
+@font-face {
+    font-family: NowAltLight;
+    src: url('/public/assets/fonts/NowAlt/NowAlt-Light.otf')format('truetype');
+}
+@font-face {
+    font-family: NowAltMedium;
+    src: url('/public/assets/fonts/NowAlt/NowAlt-Medium.otf')format('truetype');
+}
+@font-face {
+    font-family: NowAltRegular;
+    src: url('/public/assets/fonts/NowAlt/NowAlt-Regular.otf')format('truetype');
+}
+@font-face {
+    font-family: NowAltThin;
+    src: url('/public/assets/fonts/NowAlt/NowAlt-Thin.otf')format('truetype');
+}
+@font-face {
+    font-family: MoulRegular;
+    src: url('/public/assets/fonts/Moul/Moul-Regular.ttf')format('truetype');
+}
+
+
+/*End Western font */
+
+
+
+
+
+
+
+
+
+
 /* Kh */
 
 @font-face {
@@ -111,7 +179,6 @@
     src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-bold-italic.otf')format('truetype');
 }
 
-
 @font-face {
     font-family: ProximaSemibold;
     src: url('/public/assets/fonts/ProximaNovaFonts/proxima-nova-semibold.otf')format('truetype');
@@ -129,8 +196,21 @@
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-proxima-black: ProximaBlack, 'Poppins';
-    --font-proxima-black-italic: ProximaBlackItalic, 'Poppins';
+    --font-moul-regular: MoulRegular;
+    --font-now-black: NowBlack, 'Poppins';
+    --font-now-bold: NowBold, 'Poppins';
+    --font-now-light: NowLight, 'Poppins';
+    --font-now-medium: NowMedium, 'Poppins';
+    --font-now-regular: NowRegular, 'Poppins';
+    --font-now-thin: NowThin, 'Poppins';
+    --font-now-alt-black: NowAltBlack, 'Poppins';
+    --font-now-alt-bold: NowAltBold, 'Poppins';
+    --font-now-alt-light: NowAltLight, 'Poppins';
+    --font-now-alt-medium: NowAltMedium, 'Poppins';
+    --font-now-alt-regular: NowAltRegular, 'Poppins';
+    --font-now-alt-thin: NowAltThin, 'Poppins';
+    --font-now-black: ProximaBlack, 'Poppins';
+    --font-now-black-italic: ProximaBlackItalic, 'Poppins';
     --font-proxima-thin: ProximaThin, 'Poppins';
     --font-proxima-nova-regular: NovaRegular, 'Poppins';
     --font-proxima-nova-bold: ProximaBold, 'Poppins';
