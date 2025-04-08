@@ -18,7 +18,7 @@ export function MyNavbar() {
 
 function Navbar({ className }: { className?: string }) {
     const [active, setActive] = useState<string | null>(null);
-    return (
+    return
         <>
             <div className={cn(' fixed inset-x-0 top-10 z-50 mx-auto max-w-screen-2xl px-4 sm:px-10 md:px-20', className)}>
                 <div >
