@@ -29,9 +29,9 @@ export const MenuItem = ({
       <motion.a
           href={item.toLowerCase() === "about us" ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-color font-proxima-nova-bold hover:opacity-[0.9] dark:text-white flex gap-0.5 items-center"
+        className="bg-[#008080] px-4 py-1 cursor-pointer font-proxima-nova-regular text-white hover:opacity-[0.9] dark:text-white flex gap-0.5 items-center"
       >
-        {item}  <ChevronUp className="h-4 w-4 text-gray-600 dark:text-gray-300 transition-transform duration-300 rotate-180" />
+        {item}  <ChevronUp className="h-4 w-4 text-white dark:text-gray-300 transition-transform duration-300 rotate-180" />
       </motion.a>
       {active !== null && (
         <motion.div
@@ -72,12 +72,12 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative dark:bg-black dark:border-white/[0.2]  bg-white shadow-input flex justify-between items-center space-x-4 px-4 sm:px-10 py-5 "
+      className="relative dark:bg-black dark:border-white/[0.2] bg-white flex justify-between items-center space-x-2 px-6 sm:px-10 py-4 "
     >
         <a href="/" className=" w-50">
              <img src="/assets/images/logo.png" />
         </a>
-        <div className="flex justify-between items-center space-x-6 ">
+        <div className="flex justify-between text-xs items-center space-x-2 ">
         {children}
         </div>
 

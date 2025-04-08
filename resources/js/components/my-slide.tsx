@@ -10,7 +10,7 @@ export function MySlide() {
         { id: '2', image: '/assets/demo-images/Quotes2.jpg', alt: 'Slide 2', short: 'Your safety starts at the door—let an <strong>Access Control System</strong> decide who comes through.', bg: '#008080' },
         { id: '3', image: '/assets/demo-images/Quotes3.jpg', alt: 'Slide 3', short: 'Peace of mind begins with protection—<strong>Intrusion Alarms</strong> ensure you sleep soundly.', bg: '#36454f' },
         { id: '4', image: '/assets/demo-images/Quotes4.jpg', alt: 'Slide 4', short: 'The sun never send a bill—<strong>Smart Solar Energy System</strong> turn its power savings.', bg: '#008080' },
-        { id: '4', image: '/assets/demo-images/Quotes5.jpg', alt: 'Slide 4', short: 'A smart home isn"t just about convenice—it"s about control.Automate your world with a <strong>Smart Home Automation System</strong>.', bg: '#273896' },
+        { id: '5', image: '/assets/demo-images/Quotes5.jpg', alt: 'Slide 5', short: 'A smart home isn"t just about convenice—it"s about control.Automate your world with a <strong>Smart Home Automation System</strong>.', bg: '#273896' },
     ];
 
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -43,7 +43,7 @@ export function MySlide() {
                 </div>
             </div>
             {/* Dot Navigation */}
-            <div className="absolute bottom-2 sm:bottom-4 left-1/2 flex -translate-x-1/2 transform space-x-2">
+            {/* <div className="absolute bottom-2 sm:bottom-4 left-1/2 flex -translate-x-1/2 transform space-x-2">
                 {images?.map((_, index) => (
                     <button
                         key={index}
@@ -51,7 +51,7 @@ export function MySlide() {
                         onClick={() => emblaApi && emblaApi.scrollTo(index)}
                     />
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 }
