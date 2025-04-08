@@ -72,7 +72,7 @@ class LinkController extends Controller
         if ($image_files) {
             try {
                 foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'links', 600);
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'assets/images/links', 600);
                     $validated['image'] = $created_image_name;
                     break; // Stop after the first image
                 }

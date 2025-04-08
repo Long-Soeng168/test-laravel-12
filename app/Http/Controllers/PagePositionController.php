@@ -43,7 +43,7 @@ class PagePositionController extends Controller
             'tableData' => $tableData,
         ]);
     }
- 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -77,7 +77,7 @@ class PagePositionController extends Controller
 
         if ($image_file) {
             try {
-                $created_image_name = ImageHelper::uploadAndResizeImage($image_file, 'page_positions', 600);
+                $created_image_name = ImageHelper::uploadAndResizeImage($image_file, 'assets/images/page_positions', 600);
                 $validated['image'] = $created_image_name;
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
@@ -85,7 +85,7 @@ class PagePositionController extends Controller
         }
         if ($banner_file) {
             try {
-                $created_image_name = ImageHelper::uploadAndResizeImage($banner_file, 'page_positions', 900);
+                $created_image_name = ImageHelper::uploadAndResizeImage($banner_file, 'assets/images/page_positions', 900);
                 $validated['banner'] = $created_image_name;
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
@@ -96,7 +96,7 @@ class PagePositionController extends Controller
 
         return redirect()->back()->with('success', 'Page position created successfully!');
     }
- 
+
     /**
      * Update the specified resource in storage.
      */
@@ -128,11 +128,11 @@ class PagePositionController extends Controller
 
         if ($image_file) {
             try {
-                $created_image_name = ImageHelper::uploadAndResizeImage($image_file, 'page_positions', 600);
+                $created_image_name = ImageHelper::uploadAndResizeImage($image_file, 'assets/images/page_positions', 600);
                 $validated['image'] = $created_image_name;
 
                 if ($pagePosition->image) {
-                    ImageHelper::deleteImage($pagePosition->image, 'page_positions');
+                    ImageHelper::deleteImage($pagePosition->image, 'assets/images/page_positions');
                 }
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
@@ -140,11 +140,11 @@ class PagePositionController extends Controller
         }
         if ($banner_file) {
             try {
-                $created_image_name = ImageHelper::uploadAndResizeImage($banner_file, 'page_positions', 900);
+                $created_image_name = ImageHelper::uploadAndResizeImage($banner_file, 'assets/images/page_positions', 900);
                 $validated['banner'] = $created_image_name;
 
                 if ($pagePosition->banner) {
-                    ImageHelper::deleteImage($pagePosition->banner, 'page_positions');
+                    ImageHelper::deleteImage($pagePosition->banner, 'assets/images/page_positions');
                 }
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Failed to upload image: ' . $e->getMessage());
@@ -174,10 +174,10 @@ class PagePositionController extends Controller
     public function destroy(PagePosition $pagePosition)
     {
         if ($pagePosition->image) {
-            ImageHelper::deleteImage($pagePosition->image, 'page_positions');
+            ImageHelper::deleteImage($pagePosition->image, 'assets/images/page_positions');
         }
         if ($pagePosition->banner) {
-            ImageHelper::deleteImage($pagePosition->banner, 'page_positions');
+            ImageHelper::deleteImage($pagePosition->banner, 'assets/images/page_positions');
         }
         $pagePosition->delete();
         return redirect()->back()->with('success', 'Page Position deleted successfully.');
