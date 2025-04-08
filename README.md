@@ -8,3 +8,7 @@ How to setup project
 - php artisan key:generate
 - php artisan migrate
 - composer run dev
+
+- command pull branch in githug is: 
+    - git branch -a
+    -git checkout your branch name

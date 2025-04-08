@@ -1,6 +1,7 @@
 const MyFooter = () => {
     return (
         <>
+ 
             <footer className="w-full">
                 <div className="mx-auto max-w-screen-2xl px-4 sm:px-10 md:px-20">
                     <div className="flex gap-20 py-14">

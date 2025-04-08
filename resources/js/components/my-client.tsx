@@ -68,7 +68,7 @@ export function MyClient() {
                     </div>
                 </div>
                 {/* Dot Navigation */}
-                <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 transform space-x-2 sm:bottom-4">
+                {/* <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 transform space-x-2 sm:bottom-4">
                     {images?.map((_, index) => (
                         <button
                             key={index}
@@ -76,7 +76,7 @@ export function MyClient() {
                             onClick={() => emblaApi && emblaApi.scrollTo(index)}
                         />
                     ))}
-                </div>
+                </div> */}
             </div>
         </>
     );

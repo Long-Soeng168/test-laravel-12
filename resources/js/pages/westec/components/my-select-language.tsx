@@ -1,20 +1,21 @@
+// import { Check, ChevronUp } from "lucide-react";
+// import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
+// import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+// import { Button } from "@/components/ui/button";
 import * as React from "react";
-import { Check, ChevronUp } from "lucide-react";
-import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
 
-const languages = [
-  { id: "en", name: "English", flag: "assets/demo-images/usa.png" },
-  { id: "kh", name: "Khmer", flag: "assets/demo-images/kh.png" },
-];
+// const languages = [
+//   { id: "en", name: "English", flag: "assets/demo-images/usa.png" },
+//   { id: "kh", name: "Khmer", flag: "assets/demo-images/kh.png" },
+// ];
 
 export function MyLanguageSelector() {
-  const [selectedLang, setSelectedLang] = React.useState(languages[0]); // Default: English
-  const [open, setOpen] = React.useState(false);
+    //   const [selectedLang, setSelectedLang] = React.useState(languages[0]); // Default: English
+    //   const [open, setOpen] = React.useState(false);
 
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
+    return (
+        <div className="flex gap-2 items-center justify-center">
+            {/* <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className="justify-between border-0 rounded-0">
           <img src={selectedLang.flag} alt={selectedLang.name} className="w-8 h-6 rounded-0" />
@@ -42,6 +43,14 @@ export function MyLanguageSelector() {
           </CommandGroup>
         </Command>
       </PopoverContent>
-    </Popover>
-  );
+    </Popover> */}
+
+            <div className="w-10 aspect-video object-cover">
+                <img src="assets/demo-images/usa.png" className="w-10 h-6" />
+            </div>
+            <div className="w-10 aspect-video object-cover">
+                <img src="assets/demo-images/kh.png" className="w-10 h-6" />
+            </div>
+        </div>
+    );
 }
