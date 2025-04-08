@@ -13,27 +13,27 @@ class WebInfoController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    $search = $request->input('search', '');
-    $sortBy = $request->input('sortBy', 'id');
-    $sortDirection = $request->input('sortDirection', 'desc');
+    {
+        $search = $request->input('search', '');
+        $sortBy = $request->input('sortBy', 'id');
+        $sortDirection = $request->input('sortDirection', 'desc');
 
-    $query = WebInfo::query();
+        $query = WebInfo::query();
 
-    if ($search) {
-        $query->where(function ($sub_query) use ($search) {
-            $sub_query->where('address', 'LIKE', "%{$search}%");
-        });
+        if ($search) {
+            $query->where(function ($sub_query) use ($search) {
+                $sub_query->where('address', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $query->orderBy($sortBy, $sortDirection);
+
+        $tableData = WebInfo::get();
+
+        return Inertia::render('admin/web_info/Index', [
+            'tableData' => $tableData,
+        ]);
     }
-
-    $query->orderBy($sortBy, $sortDirection);
-
-    $tableData = WebInfo::get();
-
-    return Inertia::render('admin/web_info/Index', [
-        'tableData' => $tableData,
-    ]);
-}
 
 
 
@@ -73,7 +73,7 @@ class WebInfoController extends Controller
         if ($image_files) {
             try {
                 foreach ($image_files as $image) {
-                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'website_info', 600);
+                    $created_image_name = ImageHelper::uploadAndResizeImage($image, 'assets/images/website_info', 600);
                     $validated['image'] = $created_image_name;
                     break; // Stop after the first image
                 }

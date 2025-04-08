@@ -3,8 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/', function () {
+    // return Inertia::render('welcome');
+   return Inertia::render('LaravelDefaultPage');
+})->name('home');
+
 // === Client ===
-// require __DIR__ . '/western_university.php';
+require __DIR__ . '/western_university.php';
 // require __DIR__ . '/westec.php';
 // require __DIR__ . '/vectorasoft.php';
 
@@ -14,7 +19,4 @@ require __DIR__ . '/file_manager.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';
 
-Route::get('/', function () {
-    // return Inertia::render('welcome');
-   return Inertia::render('LaravelDefaultPage');
-})->name('home');
+
