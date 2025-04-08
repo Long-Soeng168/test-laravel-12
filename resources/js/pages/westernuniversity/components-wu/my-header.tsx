@@ -2,7 +2,8 @@ import { AlignRight } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { Button } from './ui/button';
 import { MyNavbar } from './my-navbar';
-
+import { MyNavbar } from './my-navbar';
+import MyTopSection from './my-top-section';
 
 const MyHeader = () => {
     return (
@@ -10,11 +11,14 @@ const MyHeader = () => {
             <header className="sticky top-0 z-50 ">
                 <div className="flex max-w-screen-2xl mx-auto items-center justify-between px-4 sm:px-10 md:px-20">
                     {/* Logo */}
+            <MyTopSection/>
+                <div className="flex max-w-screen-2xl mx-auto items-center justify-between px-4 sm:px-10 md:px-20">
+                    {/* Logo
                     <a href="/" className="text-primary hover:text-secondary flex w-50 items-center">
                         <img src="assets/images/logo-wu.png" />
                     </a>
-
                     {/* Mobile Menu Button */}
+                    {/* Mobile Menu Button
                     <div className="xl:hidden">
                         <Sheet>
                             <SheetTrigger asChild className="ml-4 flex items-center xl:hidden">
@@ -65,7 +69,11 @@ const MyHeader = () => {
 
                     <div className='hidden xl:block'>
                     <MyNavbar/>
+                    </div> */}
 
+
+                    <div className='hidden xl:block bg-white'>
+                    <MyNavbar/>
                     </div>
                 </div>
 

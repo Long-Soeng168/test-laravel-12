@@ -8,17 +8,22 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class ImageHelper
 {
-    public static function uploadAndResizeImage($file, $folder = 'projects', $maxWidth = 600)
+    public static function uploadAndResizeImage($file, $folder = 'assets/images/projects', $maxWidth = 600, $timePrefixFileName = true)
     {
         if (!$file) {
             return null;
         }
 
-        $image_file_name = time() . '_' . $file->getClientOriginalName();
+        if ($timePrefixFileName) {
+            $image_file_name = time() . '_' . $file->getClientOriginalName();
+        } else {
+            $image_file_name = $file->getClientOriginalName();
+        }
+
 
         // Define paths
-        $file_path = public_path("assets/images/$folder/");
-        $file_thumb_path = public_path("assets/images/$folder/thumb/");
+        $file_path = public_path("$folder/");
+        $file_thumb_path = public_path("$folder/thumb/"); 
 
         // Create directories if they don't exist
         if (!File::exists($file_path)) {
@@ -29,7 +34,7 @@ class ImageHelper
         }
 
         // Store Original Image
-        $file->storeAs("assets/images/$folder", $image_file_name, 'real_public');
+        $file->storeAs($folder, $image_file_name, 'real_public');
 
         // Resize and store thumbnail
         try {
@@ -37,7 +42,7 @@ class ImageHelper
             if ($image->width() > $maxWidth) {
                 $image->scale(width: $maxWidth)->save($file_thumb_path . $image_file_name);
             } else {
-                $file->storeAs("assets/images/$folder/thumb", $image_file_name, 'real_public');
+                $file->storeAs("$folder/thumb", $image_file_name, 'real_public');
             }
             return $image_file_name;
         } catch (\Exception $e) {
@@ -45,21 +50,21 @@ class ImageHelper
         }
     }
 
-     /**
+    /**
      * Delete an image and its thumbnail from storage.
      *
      * @param string|null $imageName The name of the image file.
      * @param string $folder The folder where the image is stored.
      * @return bool Returns true if deleted, false otherwise.
      */
-    public static function deleteImage($imageName, $folder = 'projects')
+    public static function deleteImage($imageName, $folder = 'assets/images/projects')
     {
         if (!$imageName) {
             return false;
         }
 
-        $file_path = public_path("assets/images/$folder/$imageName");
-        $file_thumb_path = public_path("assets/images/$folder/thumb/$imageName");
+        $file_path = public_path("$folder/$imageName");
+        $file_thumb_path = public_path("$folder/thumb/$imageName");
 
         // Delete main image
         if (File::exists($file_path)) {

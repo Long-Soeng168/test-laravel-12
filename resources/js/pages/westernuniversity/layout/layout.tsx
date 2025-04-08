@@ -13,8 +13,8 @@ const MyLayoutWestern = ({ children }: LayoutProps) => {
       {/* Header */}
       <MyHeader/>
       {/* End Header */}
-
       <main className="min-h-screen  max-w-screen-2xl mx-auto">{children}</main>
+      <main className="min-h-screen mx-auto">{children}</main>
 
       {/* Footer */}
       <MyFooter/>

@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, ProjectorIcon } from 'lucide-react';
+import { BookOpen, FilePenLineIcon, Folder, LayoutGrid, PanelTopIcon, ProjectorIcon, ReplaceIcon } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -23,19 +23,39 @@ const mainNavItems: NavItem[] = [
         url: '/admin/projects',
         icon: ProjectorIcon,
     },
+    {
+        title: 'Page Position',
+        url: '/admin/page_positions',
+        icon: ReplaceIcon,
+    },
+    {
+        title: 'Page',
+        url: '/admin/pages',
+        icon: PanelTopIcon,
+    },
+    {
+        title: 'Links',
+        url: '/admin/links',
+        icon: ProjectorIcon,
+    },
+    {
+        title: 'Website Info',
+        url: '/admin/website_info',
+        icon: ProjectorIcon,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        url: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'Sample Content',
+        url: '/admin/ckeditor5',
+        icon: FilePenLineIcon,
     },
-    {
-        title: 'Documentation',
-        url: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
-    },
+    // {
+    //     title: 'File Manager',
+    //     url: '/admin/my_file_manager',
+    //     icon: Folder,
+    // },
 ];
 
 export function AppSidebar() {
